@@ -1,0 +1,391 @@
+[11-Aug-2026 08:33:54 UTC] PHP Warning:  require_once(/home/jtrivium/public_html/api-campaign/vendor/autoload.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 3
+[11-Aug-2026 08:33:54 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jtrivium/public_html/api-campaign/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 3
+[11-Aug-2026 08:34:05 UTC] PHP Warning:  require_once(/home/jtrivium/public_html/api-campaign/vendor/autoload.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 3
+[11-Aug-2026 08:34:05 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jtrivium/public_html/api-campaign/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 3
+[11-Aug-2026 09:35:01 UTC] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/vendor/composer/autoload_real.php(25): require()
+#1 /home/jtrivium/public_html/api-campaign/vendor/autoload.php(22): ComposerAutoloaderInit0f63f75ef7df2bec5f0f9f751e38caea::getLoader()
+#2 /home/jtrivium/public_html/api-campaign/ga4-dashboard.php(3): require_once('/home/jtrivium/...')
+#3 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php on line 22
+[11-Aug-2026 09:37:03 UTC] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/vendor/composer/autoload_real.php(25): require()
+#1 /home/jtrivium/public_html/api-campaign/vendor/autoload.php(22): ComposerAutoloaderInit0f63f75ef7df2bec5f0f9f751e38caea::getLoader()
+#2 /home/jtrivium/public_html/api-campaign/ga4-dashboard.php(3): require_once('/home/jtrivium/...')
+#3 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php on line 22
+[11-Aug-2026 09:44:50 UTC] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/vendor/composer/autoload_real.php(25): require()
+#1 /home/jtrivium/public_html/api-campaign/vendor/autoload.php(22): ComposerAutoloaderInit27e0b11f6f86fe9b4b39b986a6b404b6::getLoader()
+#2 /home/jtrivium/public_html/api-campaign/ga4-dashboard.php(3): require_once('/home/jtrivium/...')
+#3 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php on line 22
+[11-Aug-2026 09:45:23 UTC] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/vendor/composer/autoload_real.php(25): require()
+#1 /home/jtrivium/public_html/api-campaign/vendor/autoload.php(22): ComposerAutoloaderInit27e0b11f6f86fe9b4b39b986a6b404b6::getLoader()
+#2 /home/jtrivium/public_html/api-campaign/ga4-dashboard.php(3): require_once('/home/jtrivium/...')
+#3 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php on line 22
+[11-Aug-2026 09:45:31 UTC] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/vendor/composer/autoload_real.php(25): require()
+#1 /home/jtrivium/public_html/api-campaign/vendor/autoload.php(22): ComposerAutoloaderInit27e0b11f6f86fe9b4b39b986a6b404b6::getLoader()
+#2 /home/jtrivium/public_html/api-campaign/ga4-dashboard.php(3): require_once('/home/jtrivium/...')
+#3 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php on line 22
+[11-Aug-2026 09:47:14 UTC] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/vendor/composer/autoload_real.php(25): require()
+#1 /home/jtrivium/public_html/api-campaign/vendor/autoload.php(22): ComposerAutoloaderInit27e0b11f6f86fe9b4b39b986a6b404b6::getLoader()
+#2 /home/jtrivium/public_html/api-campaign/ga4-dashboard.php(3): require_once('/home/jtrivium/...')
+#3 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php on line 22
+[11-Aug-2026 09:47:18 UTC] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/vendor/composer/autoload_real.php(25): require()
+#1 /home/jtrivium/public_html/api-campaign/vendor/autoload.php(22): ComposerAutoloaderInit27e0b11f6f86fe9b4b39b986a6b404b6::getLoader()
+#2 /home/jtrivium/public_html/api-campaign/ga4-dashboard.php(3): require_once('/home/jtrivium/...')
+#3 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php on line 22
+[11-Aug-2026 09:47:31 UTC] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/vendor/composer/autoload_real.php(25): require()
+#1 /home/jtrivium/public_html/api-campaign/vendor/autoload.php(22): ComposerAutoloaderInit27e0b11f6f86fe9b4b39b986a6b404b6::getLoader()
+#2 /home/jtrivium/public_html/api-campaign/ga4-dashboard.php(3): require_once('/home/jtrivium/...')
+#3 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php on line 22
+[11-Aug-2026 09:51:06 UTC] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/vendor/composer/autoload_real.php(25): require()
+#1 /home/jtrivium/public_html/api-campaign/vendor/autoload.php(22): ComposerAutoloaderInit27e0b11f6f86fe9b4b39b986a6b404b6::getLoader()
+#2 /home/jtrivium/public_html/api-campaign/ga4-dashboard.php(3): require_once('/home/jtrivium/...')
+#3 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/vendor/composer/platform_check.php on line 22
+[12-Aug-2026 14:56:42 UTC] PHP Deprecated:  Implicit conversion from float 146.20874533333333 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[12-Aug-2026 14:57:07 UTC] PHP Deprecated:  Implicit conversion from float 146.20874533333333 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[12-Aug-2026 14:57:48 UTC] PHP Deprecated:  Implicit conversion from float 146.20874533333333 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[12-Aug-2026 15:00:31 UTC] PHP Deprecated:  Implicit conversion from float 146.20874533333333 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[12-Aug-2026 15:03:06 UTC] PHP Deprecated:  Implicit conversion from float 146.20874533333333 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[12-Aug-2026 18:26:19 UTC] PHP Deprecated:  Implicit conversion from float 144.8554420487805 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[12-Aug-2026 18:26:38 UTC] PHP Deprecated:  Implicit conversion from float 144.8554420487805 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[12-Aug-2026 18:29:29 UTC] PHP Deprecated:  Implicit conversion from float 144.8554420487805 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[13-Aug-2026 05:38:11 UTC] PHP Deprecated:  Implicit conversion from float 79.94254554651162 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[17-Aug-2026 09:34:50 UTC] PHP Deprecated:  Implicit conversion from float 41.80965404006411 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[18-Aug-2026 08:01:36 UTC] PHP Deprecated:  Implicit conversion from float 41.96140658883248 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[18-Aug-2026 09:31:21 UTC] PHP Deprecated:  Implicit conversion from float 41.70670430062893 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[18-Aug-2026 09:41:12 UTC] PHP Warning:  Undefined variable $accessToken in /home/jtrivium/public_html/api-campaign/linkedin_cre.php on line 16
+[26-Aug-2026 05:52:05 UTC] PHP Deprecated:  Implicit conversion from float 48.72959367165194 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[26-Aug-2026 09:49:37 UTC] PHP Deprecated:  Implicit conversion from float 49.9074034367893 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[27-Aug-2026 05:52:15 UTC] PHP Deprecated:  Implicit conversion from float 50.46766409368901 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[28-Aug-2026 04:45:42 UTC] PHP Deprecated:  Implicit conversion from float 48.7464695396376 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[28-Aug-2026 04:46:24 UTC] PHP Deprecated:  Implicit conversion from float 48.7464695396376 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[30-Aug-2026 18:20:10 UTC] PHP Deprecated:  Implicit conversion from float 36.13439624859638 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[30-Aug-2026 19:16:46 UTC] PHP Deprecated:  Implicit conversion from float 35.362300144295304 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[30-Aug-2026 19:20:04 UTC] PHP Deprecated:  Implicit conversion from float 35.362300144295304 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[30-Aug-2026 19:24:59 UTC] PHP Deprecated:  Implicit conversion from float 35.363310848124435 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[30-Aug-2026 19:28:30 UTC] PHP Deprecated:  Implicit conversion from float 35.363310848124435 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[30-Aug-2026 19:29:53 UTC] PHP Deprecated:  Implicit conversion from float 35.363310848124435 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[30-Aug-2026 19:29:57 UTC] PHP Deprecated:  Implicit conversion from float 35.363310848124435 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[30-Aug-2026 19:31:18 UTC] PHP Deprecated:  Implicit conversion from float 35.363310848124435 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[30-Aug-2026 19:31:34 UTC] PHP Deprecated:  Implicit conversion from float 35.363310848124435 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[30-Aug-2026 20:43:20 UTC] PHP Deprecated:  Implicit conversion from float 35.348066610907985 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[30-Aug-2026 20:43:21 UTC] PHP Deprecated:  Implicit conversion from float 35.348066610907985 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[31-Aug-2026 04:55:17 UTC] PHP Deprecated:  Implicit conversion from float 34.876163179509895 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[31-Aug-2026 05:39:31 UTC] PHP Deprecated:  Implicit conversion from float 34.876163179509895 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[03-Sep-2026 05:33:32 UTC] PHP Deprecated:  Implicit conversion from float 34.723383075128325 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[03-Sep-2026 06:46:28 UTC] PHP Deprecated:  Implicit conversion from float 34.723383075128325 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[03-Sep-2026 06:50:11 UTC] PHP Deprecated:  Implicit conversion from float 34.723383075128325 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[07-Sep-2026 13:07:36 UTC] PHP Deprecated:  Implicit conversion from float 35.49610026071775 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[07-Sep-2026 13:16:05 UTC] PHP Deprecated:  Implicit conversion from float 35.46681140503876 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[08-Sep-2026 06:46:36 UTC] PHP Deprecated:  Implicit conversion from float 36.202479606176134 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[08-Sep-2026 06:52:23 UTC] PHP Deprecated:  Implicit conversion from float 36.202479606176134 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[08-Sep-2026 06:54:04 UTC] PHP Deprecated:  Implicit conversion from float 36.202479606176134 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 145
+[08-Sep-2026 07:21:14 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 27
+[08-Sep-2026 07:21:30 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 27
+[08-Sep-2026 07:24:06 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 27
+[08-Sep-2026 07:25:36 UTC] PHP Deprecated:  Implicit conversion from float 37.64785813239974 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 146
+[08-Sep-2026 07:26:24 UTC] PHP Deprecated:  Implicit conversion from float 45.610095311546836 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 146
+[08-Sep-2026 07:27:55 UTC] PHP Deprecated:  Implicit conversion from float 36.12374376208178 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 146
+[08-Sep-2026 07:28:09 UTC] PHP Deprecated:  Implicit conversion from float 8.185995571428572 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 146
+[08-Sep-2026 07:32:26 UTC] PHP Deprecated:  Implicit conversion from float 8.185995571428572 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 07:33:28 UTC] PHP Deprecated:  Implicit conversion from float 8.6888615 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 07:33:45 UTC] PHP Deprecated:  Implicit conversion from float 38.920534640404036 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 07:34:14 UTC] PHP Deprecated:  Implicit conversion from float 38.920534640404036 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 07:34:23 UTC] PHP Deprecated:  Implicit conversion from float 38.920534640404036 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 07:36:05 UTC] PHP Deprecated:  Implicit conversion from float 38.920534640404036 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 07:36:22 UTC] PHP Deprecated:  Implicit conversion from float 38.920534640404036 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 07:39:53 UTC] PHP Deprecated:  Implicit conversion from float 38.920534640404036 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 07:52:22 UTC] PHP Deprecated:  Implicit conversion from float 8.561549555555555 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 07:53:24 UTC] PHP Deprecated:  Implicit conversion from float 37.61254742720916 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 07:59:14 UTC] PHP Deprecated:  Implicit conversion from float 8.561549555555555 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 08:05:22 UTC] PHP Deprecated:  Implicit conversion from float 7.7053946 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 08:07:01 UTC] PHP Deprecated:  Implicit conversion from float 7.7053946 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 08:24:30 UTC] PHP Deprecated:  Implicit conversion from float 7.537277636363637 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 08:31:22 UTC] PHP Deprecated:  Implicit conversion from float 7.537277636363637 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 08:33:41 UTC] PHP Deprecated:  Implicit conversion from float 7.537277636363637 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 08:34:05 UTC] PHP Deprecated:  Implicit conversion from float 7.537277636363637 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 08:40:35 UTC] PHP Deprecated:  Implicit conversion from float 7.537277636363637 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 08:41:52 UTC] PHP Deprecated:  Implicit conversion from float 7.537277636363637 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 08:59:31 UTC] PHP Deprecated:  Implicit conversion from float 6.377696461538462 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 09:02:39 UTC] PHP Deprecated:  Implicit conversion from float 6.377696461538462 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 09:03:21 UTC] PHP Deprecated:  Implicit conversion from float 50.2323313125 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 09:09:06 UTC] PHP Deprecated:  Implicit conversion from float 6.377696461538462 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 09:13:12 UTC] PHP Deprecated:  Implicit conversion from float 6.377696461538462 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 09:14:31 UTC] PHP Deprecated:  Implicit conversion from float 37.520858091946735 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 10:20:18 UTC] PHP Deprecated:  Implicit conversion from float 39.88728857142858 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 10:22:38 UTC] PHP Deprecated:  Implicit conversion from float 30.503333739178384 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 10:22:51 UTC] PHP Deprecated:  Implicit conversion from float 34.48150579683377 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 11:04:51 UTC] PHP Deprecated:  Implicit conversion from float 36.56362391666667 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 11:05:07 UTC] PHP Deprecated:  Implicit conversion from float 58.436755733009704 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 12:07:28 UTC] PHP Deprecated:  Implicit conversion from float 37.83731064173476 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 12:08:13 UTC] PHP Deprecated:  Implicit conversion from float 37.83731064173476 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 12:08:42 UTC] PHP Deprecated:  Implicit conversion from float 42.756848999999995 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[08-Sep-2026 12:10:45 UTC] PHP Deprecated:  Implicit conversion from float 36.15980663782658 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 148
+[09-Sep-2026 11:57:41 UTC] PHP Deprecated:  Implicit conversion from float 99.55402054800936 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 150
+[09-Sep-2026 11:58:26 UTC] PHP Warning:  Undefined array key "start_date" in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 82
+[09-Sep-2026 11:58:26 UTC] PHP Warning:  Undefined array key "end_date" in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 83
+[09-Sep-2026 11:59:18 UTC] PHP Deprecated:  Implicit conversion from float 100.12062145800932 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 150
+[09-Sep-2026 11:59:36 UTC] PHP Deprecated:  Implicit conversion from float 79.70241458193131 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 150
+[09-Sep-2026 12:06:30 UTC] PHP Deprecated:  Implicit conversion from float 137.9940130980392 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 151
+[09-Sep-2026 12:08:51 UTC] PHP Deprecated:  Implicit conversion from float 35.12964847508306 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-dashboard.php on line 151
+[09-Sep-2026 12:41:52 UTC] PHP Deprecated:  Implicit conversion from float 99.55402054800936 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 12:43:49 UTC] PHP Deprecated:  Implicit conversion from float 35.12964847508305 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 12:44:07 UTC] PHP Deprecated:  Implicit conversion from float 100.12062145800932 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 12:44:30 UTC] PHP Deprecated:  Implicit conversion from float 103.11714798892648 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 13:49:03 UTC] PHP Deprecated:  Implicit conversion from float 112.43963795544553 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 13:49:22 UTC] PHP Deprecated:  Implicit conversion from float 92.43641546666666 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 13:50:24 UTC] PHP Deprecated:  Implicit conversion from float 103.46968900950823 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 14:18:25 UTC] PHP Deprecated:  Implicit conversion from float 112.43963795544553 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 14:35:31 UTC] PHP Deprecated:  Implicit conversion from float 20.93230716108654 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 14:35:34 UTC] PHP Deprecated:  Implicit conversion from float 20.93230716108654 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 14:35:35 UTC] PHP Deprecated:  Implicit conversion from float 20.93230716108654 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 14:38:39 UTC] PHP Deprecated:  Implicit conversion from float 9.235680727272728 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 14:39:35 UTC] PHP Deprecated:  Implicit conversion from float 112.43963795544553 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 14:41:49 UTC] PHP Deprecated:  Implicit conversion from float 20.93230716108654 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 14:42:05 UTC] PHP Deprecated:  Implicit conversion from float 9.235680727272728 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 14:43:51 UTC] PHP Deprecated:  Implicit conversion from float 84.74006684848486 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 14:56:18 UTC] PHP Deprecated:  Implicit conversion from float 125.48427771354166 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 14:56:39 UTC] PHP Deprecated:  Implicit conversion from float 20.744501000000003 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 14:58:14 UTC] PHP Deprecated:  Implicit conversion from float 20.93230716108654 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 14:58:34 UTC] PHP Deprecated:  Implicit conversion from float 7.649773136054421 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 14:59:08 UTC] PHP Deprecated:  Implicit conversion from float 26.08013044995932 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 15:22:40 UTC] PHP Deprecated:  Implicit conversion from float 82.2838895882353 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 15:23:13 UTC] PHP Deprecated:  Implicit conversion from float 112.57636080073802 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 15:25:28 UTC] PHP Deprecated:  Implicit conversion from float 20.93230716108654 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 15:25:37 UTC] PHP Deprecated:  Implicit conversion from float 7.85649882208589 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 15:25:57 UTC] PHP Deprecated:  Implicit conversion from float 125.48427771354166 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 15:26:00 UTC] PHP Deprecated:  Implicit conversion from float 125.48427771354166 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 15:26:13 UTC] PHP Deprecated:  Implicit conversion from float 129.82555863398693 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 15:26:40 UTC] PHP Deprecated:  Implicit conversion from float 112.59535126572008 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 15:31:18 UTC] PHP Deprecated:  Implicit conversion from float 112.43963795544553 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 15:54:05 UTC] PHP Deprecated:  Implicit conversion from float 20.93230716108654 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 16:15:43 UTC] PHP Deprecated:  Implicit conversion from float 20.93230716108654 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 16:16:02 UTC] PHP Deprecated:  Implicit conversion from float 125.48427771354166 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 16:55:26 UTC] PHP Deprecated:  Implicit conversion from float 112.43963795544553 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 17:07:59 UTC] PHP Deprecated:  Implicit conversion from float 71.013294876107 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 17:09:40 UTC] PHP Deprecated:  Implicit conversion from float 47.04616212881356 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 17:10:11 UTC] PHP Deprecated:  Implicit conversion from float 96.6987267599278 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 17:19:39 UTC] PHP Deprecated:  Implicit conversion from float 46.55818942475551 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 17:19:48 UTC] PHP Deprecated:  Implicit conversion from float 46.55818942475551 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 17:29:28 UTC] PHP Deprecated:  Implicit conversion from float 99.10475356756756 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 17:29:37 UTC] PHP Deprecated:  Implicit conversion from float 103.17801721801284 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 17:55:40 UTC] PHP Deprecated:  Implicit conversion from float 103.17801721801284 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 17:59:25 UTC] PHP Deprecated:  Implicit conversion from float 103.17801721801284 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 18:08:40 UTC] PHP Deprecated:  Implicit conversion from float 16.13461188888889 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 18:08:59 UTC] PHP Deprecated:  Implicit conversion from float 91.02046964705882 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 18:09:46 UTC] PHP Deprecated:  Implicit conversion from float 112.59535126572008 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 18:10:53 UTC] PHP Deprecated:  Implicit conversion from float 46.58013243319182 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[09-Sep-2026 18:35:38 UTC] PHP Deprecated:  Implicit conversion from float 71.03438357956723 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 18:36:20 UTC] PHP Deprecated:  Implicit conversion from float 96.62559950946799 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[09-Sep-2026 18:42:04 UTC] PHP Deprecated:  Implicit conversion from float 103.17801721801284 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[09-Sep-2026 18:42:35 UTC] PHP Deprecated:  Implicit conversion from float 95.2188955586461 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[10-Sep-2026 05:52:28 UTC] PHP Deprecated:  Implicit conversion from float 103.17801721801284 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[11-Sep-2026 05:44:01 UTC] PHP Deprecated:  Implicit conversion from float 96.72761969402319 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[11-Sep-2026 05:46:21 UTC] PHP Deprecated:  Implicit conversion from float 103.17801721801284 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[13-Sep-2026 11:16:21 UTC] PHP Deprecated:  Implicit conversion from float 71.4394980402696 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[13-Sep-2026 11:16:30 UTC] PHP Deprecated:  Implicit conversion from float 103.17801721801284 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[15-Sep-2026 05:18:42 UTC] PHP Deprecated:  Implicit conversion from float 94.5074948990545 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[15-Sep-2026 05:19:06 UTC] PHP Deprecated:  Implicit conversion from float 135.05369824615383 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[15-Sep-2026 05:19:16 UTC] PHP Deprecated:  Implicit conversion from float 119.792936605042 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[15-Sep-2026 05:20:11 UTC] PHP Deprecated:  Implicit conversion from float 4.400088971830986 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[15-Sep-2026 05:20:46 UTC] PHP Deprecated:  Implicit conversion from float 5.242441679329608 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[15-Sep-2026 05:21:00 UTC] PHP Deprecated:  Implicit conversion from float 7.893355666307857 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[15-Sep-2026 05:21:50 UTC] PHP Deprecated:  Implicit conversion from float 96.72761969402319 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[15-Sep-2026 05:58:38 UTC] PHP Deprecated:  Implicit conversion from float 80.71560492133278 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[15-Sep-2026 06:02:19 UTC] PHP Deprecated:  Implicit conversion from float 118.48360814285715 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[15-Sep-2026 06:13:03 UTC] PHP Deprecated:  Implicit conversion from float 103.17801721801284 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[15-Sep-2026 06:13:34 UTC] PHP Deprecated:  Implicit conversion from float 311.1302616666667 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[15-Sep-2026 07:13:48 UTC] PHP Deprecated:  Implicit conversion from float 35.42607696794872 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[15-Sep-2026 07:16:07 UTC] PHP Deprecated:  Implicit conversion from float 35.42607696794872 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[15-Sep-2026 08:56:46 UTC] PHP Deprecated:  Implicit conversion from float 46.4199495235141 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[15-Sep-2026 11:31:54 UTC] PHP Deprecated:  Implicit conversion from float 39.90019045454545 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[16-Sep-2026 11:12:56 UTC] PHP Deprecated:  Implicit conversion from float 35.42607696794872 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[16-Sep-2026 13:58:30 UTC] PHP Deprecated:  Implicit conversion from float 35.42607696794872 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[18-Sep-2026 09:58:06 UTC] PHP Deprecated:  Implicit conversion from float 35.42607696794872 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[18-Sep-2026 09:58:12 UTC] PHP Deprecated:  Implicit conversion from float 98.41024306993006 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 10:39:07 UTC] PHP Deprecated:  Implicit conversion from float 98.41024306993006 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 10:40:50 UTC] PHP Deprecated:  Implicit conversion from float 108.07690917610063 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 10:40:53 UTC] PHP Deprecated:  Implicit conversion from float 108.07690917610063 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 10:55:54 UTC] PHP Deprecated:  Implicit conversion from float 102.17325958564103 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 10:56:10 UTC] PHP Deprecated:  Implicit conversion from float 102.17325958564105 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 10:57:12 UTC] PHP Deprecated:  Implicit conversion from float 102.17325958564105 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:03:25 UTC] PHP Deprecated:  Implicit conversion from float 109.60463472336065 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:04:02 UTC] PHP Deprecated:  Implicit conversion from float 109.60463472336065 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:12:32 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:14:27 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:14:52 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:15:04 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:17:19 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:27:35 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:30:06 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:36:05 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:37:19 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:39:30 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:41:52 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:42:53 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:44:57 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:47:09 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:49:41 UTC] PHP Deprecated:  Implicit conversion from float 96.72761969402319 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[18-Sep-2026 11:50:07 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 11:54:33 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 12:00:41 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 12:02:04 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 12:02:51 UTC] PHP Deprecated:  Implicit conversion from float 110.41635869042769 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 12:26:33 UTC] PHP Deprecated:  Implicit conversion from float 110.19193519715446 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 12:27:35 UTC] PHP Deprecated:  Implicit conversion from float 110.19193519715446 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 12:28:20 UTC] PHP Deprecated:  Implicit conversion from float 15.589609762738235 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[18-Sep-2026 12:28:39 UTC] PHP Deprecated:  Implicit conversion from float 98.41024306993006 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 12:33:59 UTC] PHP Deprecated:  Implicit conversion from float 119.34285380232558 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[18-Sep-2026 12:34:59 UTC] PHP Deprecated:  Implicit conversion from float 119.34285380232558 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[18-Sep-2026 12:35:11 UTC] PHP Deprecated:  Implicit conversion from float 110.19193519715446 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[18-Sep-2026 12:35:41 UTC] PHP Deprecated:  Implicit conversion from float 15.589609762738235 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[18-Sep-2026 12:36:02 UTC] PHP Deprecated:  Implicit conversion from float 110.19193519715446 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 05:37:55 UTC] PHP Deprecated:  Implicit conversion from float 35.42607696794872 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[19-Sep-2026 05:38:54 UTC] PHP Deprecated:  Implicit conversion from float 105.65559615428572 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 05:39:12 UTC] PHP Deprecated:  Implicit conversion from float 105.65559615428572 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 06:08:42 UTC] PHP Deprecated:  Implicit conversion from float 135.6606662795699 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[19-Sep-2026 06:30:31 UTC] PHP Deprecated:  Implicit conversion from float 102.56287863012643 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 06:35:57 UTC] PHP Deprecated:  Implicit conversion from float 102.56287863012643 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 06:36:00 UTC] PHP Deprecated:  Implicit conversion from float 102.56287863012643 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 06:36:02 UTC] PHP Deprecated:  Implicit conversion from float 102.56287863012643 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 06:37:22 UTC] PHP Deprecated:  Implicit conversion from float 102.56287863012643 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 06:59:33 UTC] PHP Deprecated:  Implicit conversion from float 105.59930886527513 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 06:59:59 UTC] PHP Deprecated:  Implicit conversion from float 14.570625446048632 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[19-Sep-2026 07:01:33 UTC] PHP Deprecated:  Implicit conversion from float 135.6606662795699 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[19-Sep-2026 07:34:12 UTC] PHP Deprecated:  Implicit conversion from float 135.6606662795699 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[19-Sep-2026 07:34:18 UTC] PHP Deprecated:  Implicit conversion from float 135.6606662795699 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[19-Sep-2026 07:34:53 UTC] PHP Deprecated:  Implicit conversion from float 135.6606662795699 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[19-Sep-2026 07:40:15 UTC] PHP Deprecated:  Implicit conversion from float 135.6606662795699 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[19-Sep-2026 07:40:34 UTC] PHP Deprecated:  Implicit conversion from float 135.6606662795699 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[19-Sep-2026 07:40:39 UTC] PHP Deprecated:  Implicit conversion from float 135.6606662795699 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[19-Sep-2026 07:40:43 UTC] PHP Deprecated:  Implicit conversion from float 135.6606662795699 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[19-Sep-2026 07:40:47 UTC] PHP Deprecated:  Implicit conversion from float 135.6606662795699 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[19-Sep-2026 07:41:41 UTC] PHP Deprecated:  Implicit conversion from float 14.565091596657805 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[19-Sep-2026 07:41:49 UTC] PHP Deprecated:  Implicit conversion from float 104.56465650844278 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 10:09:30 UTC] PHP Deprecated:  Implicit conversion from float 107.53518866479402 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 10:34:22 UTC] PHP Deprecated:  Implicit conversion from float 107.535188664794 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 10:34:28 UTC] PHP Deprecated:  Implicit conversion from float 107.535188664794 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 10:39:06 UTC] PHP Deprecated:  Implicit conversion from float 107.535188664794 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[19-Sep-2026 10:46:41 UTC] PHP Deprecated:  Implicit conversion from float 14.559561949126802 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[19-Sep-2026 10:46:47 UTC] PHP Deprecated:  Implicit conversion from float 135.6606662795699 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[19-Sep-2026 10:48:02 UTC] PHP Deprecated:  Implicit conversion from float 13.08918244484305 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[21-Sep-2026 06:18:47 UTC] PHP Deprecated:  Implicit conversion from float 14.252058641332193 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[21-Sep-2026 06:18:48 UTC] PHP Deprecated:  Implicit conversion from float 151.16716885294116 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[21-Sep-2026 06:19:23 UTC] PHP Deprecated:  Implicit conversion from float 14.252058641332193 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[21-Sep-2026 06:19:44 UTC] PHP Deprecated:  Implicit conversion from float 110.5151718888889 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[21-Sep-2026 06:19:48 UTC] PHP Deprecated:  Implicit conversion from float 110.5151718888889 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[21-Sep-2026 07:39:06 UTC] PHP Deprecated:  Implicit conversion from float 123.48953468450186 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[21-Sep-2026 07:39:15 UTC] PHP Deprecated:  Implicit conversion from float 123.48953468450186 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[21-Sep-2026 07:51:38 UTC] PHP Deprecated:  Implicit conversion from float 15.580839596915379 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[21-Sep-2026 07:51:50 UTC] PHP Deprecated:  Implicit conversion from float 15.580839596915379 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[21-Sep-2026 07:52:06 UTC] PHP Deprecated:  Implicit conversion from float 15.580839596915379 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[21-Sep-2026 07:52:27 UTC] PHP Deprecated:  Implicit conversion from float 145.30408545205478 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[21-Sep-2026 07:52:41 UTC] PHP Deprecated:  Implicit conversion from float 145.30408545205478 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[21-Sep-2026 07:52:45 UTC] PHP Deprecated:  Implicit conversion from float 145.30408545205478 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[21-Sep-2026 08:07:11 UTC] PHP Deprecated:  Implicit conversion from float 123.64423704036696 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[21-Sep-2026 08:32:52 UTC] PHP Deprecated:  Implicit conversion from float 102.56287863012643 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[23-Sep-2026 10:20:02 UTC] PHP Deprecated:  Implicit conversion from float 168.7156019888889 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[24-Sep-2026 08:44:47 UTC] PHP Deprecated:  Implicit conversion from float 124.83235308146965 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[24-Sep-2026 08:44:50 UTC] PHP Deprecated:  Implicit conversion from float 17.979303641501815 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[24-Sep-2026 10:22:40 UTC] PHP Deprecated:  Implicit conversion from float 96.72761969402319 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[24-Sep-2026 10:22:42 UTC] PHP Deprecated:  Implicit conversion from float 96.72761969402319 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[24-Sep-2026 11:49:14 UTC] PHP Deprecated:  Implicit conversion from float 46.4199495235141 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[24-Sep-2026 11:49:25 UTC] PHP Deprecated:  Implicit conversion from float 46.4199495235141 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[24-Sep-2026 11:49:31 UTC] PHP Deprecated:  Implicit conversion from float 46.4199495235141 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[24-Sep-2026 11:49:51 UTC] PHP Deprecated:  Implicit conversion from float 46.4199495235141 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[24-Sep-2026 11:54:02 UTC] PHP Deprecated:  Implicit conversion from float 74.28855106717198 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[24-Sep-2026 11:54:05 UTC] PHP Deprecated:  Implicit conversion from float 74.28855106717198 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[24-Sep-2026 12:05:30 UTC] PHP Deprecated:  Implicit conversion from float 108.84240032214491 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[24-Sep-2026 12:05:36 UTC] PHP Deprecated:  Implicit conversion from float 74.28855106717198 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[24-Sep-2026 12:05:42 UTC] PHP Deprecated:  Implicit conversion from float 108.84240032214491 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[24-Sep-2026 12:05:44 UTC] PHP Deprecated:  Implicit conversion from float 74.28855106717198 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[25-Sep-2026 09:01:23 UTC] PHP Deprecated:  Implicit conversion from float 38.89372989995428 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[25-Sep-2026 09:01:40 UTC] PHP Deprecated:  Implicit conversion from float 24.762865488407567 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[25-Sep-2026 09:06:18 UTC] PHP Deprecated:  Implicit conversion from float 110.13627221376221 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[25-Sep-2026 09:06:28 UTC] PHP Deprecated:  Implicit conversion from float 74.67280058519749 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[25-Sep-2026 09:07:06 UTC] PHP Deprecated:  Implicit conversion from float 168.7156019888889 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[25-Sep-2026 09:08:07 UTC] PHP Deprecated:  Implicit conversion from float 168.7156019888889 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[28-Sep-2026 06:22:33 UTC] PHP Deprecated:  Implicit conversion from float 112.8756895509365 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[28-Sep-2026 06:22:39 UTC] PHP Deprecated:  Implicit conversion from float 74.90351277908009 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[28-Sep-2026 06:23:04 UTC] PHP Deprecated:  Implicit conversion from float 116.75433223655914 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[28-Sep-2026 06:23:11 UTC] PHP Deprecated:  Implicit conversion from float 99.31866564029363 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[29-Sep-2026 05:21:49 UTC] PHP Deprecated:  Implicit conversion from float 124.83235308146965 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[29-Sep-2026 05:22:29 UTC] PHP Deprecated:  Implicit conversion from float 124.83235308146965 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[29-Sep-2026 05:22:37 UTC] PHP Deprecated:  Implicit conversion from float 124.83235308146965 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[29-Sep-2026 11:09:01 UTC] PHP Deprecated:  Implicit conversion from float 117.91827456716418 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[30-Sep-2026 06:09:19 UTC] PHP Deprecated:  Implicit conversion from float 93.69251934146342 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[30-Sep-2026 06:12:21 UTC] PHP Deprecated:  Implicit conversion from float 38.67292162484701 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[30-Sep-2026 06:13:06 UTC] PHP Deprecated:  Implicit conversion from float 116.81456651531728 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[30-Sep-2026 07:10:04 UTC] PHP Deprecated:  Implicit conversion from float 39.45172827791262 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[30-Sep-2026 07:10:10 UTC] PHP Deprecated:  Implicit conversion from float 93.69251934146342 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[30-Sep-2026 07:15:04 UTC] PHP Deprecated:  Implicit conversion from float 39.45172827791262 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[30-Sep-2026 07:15:09 UTC] PHP Deprecated:  Implicit conversion from float 93.69251934146342 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[30-Sep-2026 08:02:28 UTC] PHP Deprecated:  Implicit conversion from float 116.8412744240437 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[30-Sep-2026 08:02:37 UTC] PHP Deprecated:  Implicit conversion from float 39.45172827791262 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[30-Sep-2026 08:02:54 UTC] PHP Deprecated:  Implicit conversion from float 93.69251934146342 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[01-Oct-2026 05:23:24 UTC] PHP Deprecated:  Implicit conversion from float 104.80715145456726 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[02-Oct-2026 05:00:08 UTC] PHP Deprecated:  Implicit conversion from float 131.60310656994818 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[02-Oct-2026 05:00:15 UTC] PHP Deprecated:  Implicit conversion from float 41.77938050113122 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[02-Oct-2026 05:00:22 UTC] PHP Deprecated:  Implicit conversion from float 117.43780151136365 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[05-Oct-2026 07:15:20 UTC] PHP Deprecated:  Implicit conversion from float 121.73411785862785 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[05-Oct-2026 07:19:38 UTC] PHP Deprecated:  Implicit conversion from float 121.73411785862785 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[05-Oct-2026 07:21:10 UTC] PHP Deprecated:  Implicit conversion from float 121.73411785862785 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[05-Oct-2026 07:24:15 UTC] PHP Deprecated:  Implicit conversion from float 37.55612384152689 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[05-Oct-2026 07:24:47 UTC] PHP Deprecated:  Implicit conversion from float 460.81641014110426 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[05-Oct-2026 07:26:13 UTC] PHP Deprecated:  Implicit conversion from float 121.73411785862785 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[05-Oct-2026 07:43:49 UTC] PHP Deprecated:  Implicit conversion from float 37.53441509942196 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[05-Oct-2026 07:49:51 UTC] PHP Deprecated:  Implicit conversion from float 37.53441509942197 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[05-Oct-2026 08:07:23 UTC] PHP Deprecated:  Implicit conversion from float 121.48155744813278 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[05-Oct-2026 08:08:34 UTC] PHP Deprecated:  Implicit conversion from float 121.48155744813278 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[05-Oct-2026 08:08:52 UTC] PHP Deprecated:  Implicit conversion from float 37.53441509942196 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[05-Oct-2026 08:09:09 UTC] PHP Deprecated:  Implicit conversion from float 460.81641014110426 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[05-Oct-2026 08:10:16 UTC] PHP Deprecated:  Implicit conversion from float 460.81641014110426 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[05-Oct-2026 08:10:24 UTC] PHP Deprecated:  Implicit conversion from float 37.53441509942196 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[05-Oct-2026 08:10:31 UTC] PHP Deprecated:  Implicit conversion from float 121.48155744813278 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[05-Oct-2026 08:28:43 UTC] PHP Deprecated:  Implicit conversion from float 37.53441509942196 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[05-Oct-2026 08:33:14 UTC] PHP Deprecated:  Implicit conversion from float 37.53441509942196 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-eurekii.php on line 151
+[05-Oct-2026 08:33:53 UTC] PHP Deprecated:  Implicit conversion from float 121.3556698238342 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[05-Oct-2026 08:33:59 UTC] PHP Deprecated:  Implicit conversion from float 460.81641014110426 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[07-Oct-2026 06:49:09 UTC] PHP Deprecated:  Implicit conversion from float 72.57043910803147 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[07-Oct-2026 06:49:12 UTC] PHP Deprecated:  Implicit conversion from float 117.91249048808946 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[07-Oct-2026 06:49:24 UTC] PHP Deprecated:  Implicit conversion from float 72.57043910803147 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[07-Oct-2026 09:48:56 UTC] PHP Deprecated:  Implicit conversion from float 117.74385473300971 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[07-Oct-2026 09:54:41 UTC] PHP Deprecated:  Implicit conversion from float 293.7220998205128 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-triviumCTE.php on line 151
+[07-Oct-2026 09:55:28 UTC] PHP Deprecated:  Implicit conversion from float 72.51307525143955 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[07-Oct-2026 09:55:30 UTC] PHP Deprecated:  Implicit conversion from float 117.69602568219311 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[07-Oct-2026 10:16:12 UTC] PHP Deprecated:  Implicit conversion from float 72.51307525143955 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[07-Oct-2026 10:16:13 UTC] PHP Deprecated:  Implicit conversion from float 117.63894710523763 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[07-Oct-2026 11:04:23 UTC] PHP Deprecated:  Implicit conversion from float 72.51307525143955 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[07-Oct-2026 11:04:24 UTC] PHP Deprecated:  Implicit conversion from float 117.63894710523763 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[07-Oct-2026 11:04:30 UTC] PHP Deprecated:  Implicit conversion from float 117.63894710523763 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151
+[07-Oct-2026 11:04:35 UTC] PHP Deprecated:  Implicit conversion from float 72.51307525143955 to int loses precision in /home/jtrivium/public_html/api-campaign/ga4-trivium.php on line 151

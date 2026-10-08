@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Analytics — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#241B3A; --indigo:#2E2260; --indigo-deep:#1E1745;
+    --coral:#EF4060; --orange:#F4813E; --mist:#F3F1FA;
+    --card:#FFFFFF; --muted:#6B7085; --line:#E7E5F0;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--mist);color:var(--ink);font:14px/1.5 -apple-system,Segoe UI,Arial,sans-serif;}
+  h1,h2,.num{font-family:Poppins,-apple-system,Segoe UI,Arial,sans-serif;}
+  a{color:inherit;}
+
+  header{background:linear-gradient(135deg,var(--indigo),var(--indigo-deep));color:#fff;
+    padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  header h1{margin:0;font-size:19px;font-weight:700;}
+  header p{margin:2px 0 0;font-size:12px;color:#B9B4DA;}
+  #refresh{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;
+    padding:8px 16px;border-radius:8px;font:600 12.5px Poppins,sans-serif;cursor:pointer;}
+  #refresh:hover{background:rgba(255,255,255,.22);}
+  #refresh:disabled{opacity:.6;cursor:default;}
+
+  main{max-width:1080px;margin:0 auto;padding:26px 20px 60px;}
+
+  #kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:28px;}
+  .kpi{background:var(--card);border-radius:12px;padding:16px;border:1px solid var(--line);}
+  .kpi .num{font-size:24px;font-weight:800;color:var(--indigo);}
+  .kpi .lbl{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .kpi.accent .num{color:var(--coral);}
+
+  section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:22px;}
+  section h2{margin:0 0 4px;font-size:15px;}
+  .sub{color:var(--muted);font-size:12px;margin:0 0 16px;}
+
+  .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
+  .bar-row .name{width:180px;font-size:12px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .bar-track{flex:1;background:var(--mist);border-radius:5px;height:10px;overflow:hidden;}
+  .bar-fill{height:100%;background:linear-gradient(90deg,var(--coral),var(--orange));border-radius:5px;}
+  .bar-pct{width:48px;text-align:right;font-size:12px;font-weight:700;color:var(--ink);}
+
+  #search{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;font-size:13px;margin-bottom:14px;}
+
+  table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  th{text-align:left;font-size:10.5px;text-transform:none;color:var(--muted);font-weight:700;
+     padding:8px 10px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap;}
+  th.num,td.num{text-align:right;}
+  td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tr.campaign-row{cursor:pointer;}
+  tr.campaign-row:hover{background:var(--mist);}
+  .status{display:inline-block;padding:2px 9px;border-radius:100px;font-size:10.5px;font-weight:700;}
+  .status.completed{background:#E9F7EF;color:#1E8449;}
+  .status.active{background:#FBEAE5;color:var(--coral);}
+  .status.other{background:var(--mist);color:var(--muted);}
+
+  .detail td{background:#FAF9FD;padding:0;}
+  .detail-inner{padding:16px 20px;}
+  .contact{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);}
+  .contact:last-child{border-bottom:none;}
+  .avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--coral),var(--orange));
+    color:#fff;font:700 11px Poppins,sans-serif;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .contact .name{font-weight:700;font-size:12.5px;}
+  .contact .meta{font-size:11.5px;color:var(--muted);}
+
+  #state{padding:40px;text-align:center;color:var(--muted);}
+  #state button{margin-top:10px;background:var(--indigo);color:#fff;border:none;padding:9px 18px;
+    border-radius:8px;font:600 12.5px Poppins,sans-serif;cursor:pointer;}
+
+  @media(max-width:720px){ #kpis{grid-template-columns:repeat(2,1fr);} .bar-row .name{width:110px;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Campaign analytics</h1>
+    <p id="synced">Loading…</p>
+  </div>
+  <button id="refresh">Refresh</button>
+</header>
+
+<main>
+  <div id="state"></div>
+
+  <div id="content" style="display:none;">
+    <div id="kpis"></div>
+
+    <section>
+      <h2>Open rate by campaign</h2>
+      <p class="sub">Highest first</p>
+      <div id="bars"></div>
+    </section>
+
+    <section>
+      <h2>Campaigns</h2>
+      <p class="sub">Click a row for engaged contact details</p>
+      <input id="search" type="text" placeholder="Search campaigns…">
+      <table>
+        <thead>
+          <tr>
+            <th data-key="name">Name</th>
+            <th data-key="status">Status</th>
+            <th data-key="start">Sent on</th>
+            <th class="num" data-key="sent">Sent</th>
+            <th class="num" data-key="openRate">Open %</th>
+            <th class="num" data-key="clickRate">Click %</th>
+            <th class="num" data-key="ctor">CTOR %</th>
+            <th class="num" data-key="optOutRate">Opt-out %</th>
+            <th class="num" data-key="engaged">Engaged</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </section>
+  </div>
+</main>
+
+<script>
+// If this file lives next to the API on the same domain, the relative path
+// below just works. If it lives elsewhere, point this at the full API URL —
+// the API's server will then need to send an Access-Control-Allow-Origin
+// header for this page's domain, or the browser will block the request.
+const API_URL = '../campaign-dashboard.php';
+
+let campaigns = [];
+let sortKey = 'start', sortDir = -1;
+
+const $ = (s) => document.querySelector(s);
+const stateEl = $('#state'), contentEl = $('#content');
+
+function fmtDate(raw){
+  if(!raw) return '—';
+  const d = new Date(raw);
+  return isNaN(d) ? raw : d.toLocaleDateString(undefined,{day:'2-digit',month:'short',year:'numeric'});
+}
+function initials(name){
+  const p = (name||'').trim().split(/\s+/).filter(Boolean);
+  if(!p.length) return '?';
+  return (p[0][0] + (p.length>1 ? p[p.length-1][0] : '')).toUpperCase();
+}
+function statusClass(s){
+  s = (s||'').toLowerCase();
+  if(s.includes('complete')) return 'completed';
+  if(s.includes('active') || s.includes('sending')) return 'active';
+  return 'other';
+}
+
+async function load(){
+  stateEl.innerHTML = 'Loading campaign data…';
+  stateEl.style.display = 'block';
+  contentEl.style.display = 'none';
+  $('#refresh').disabled = true;
+  try{
+    const res = await fetch(API_URL, {cache:'no-store'});
+    const data = await res.json();
+    if(!data.success) throw new Error(data.message || 'API returned an error');
+
+    campaigns = data.campaigns.map(c => ({
+      ...c,
+      openRate: c.rates.openRate, clickRate: c.rates.clickRate,
+      ctor: c.rates.ctor, optOutRate: c.rates.optOutRate,
+      sent: c.summary.sent, engaged: (c.contacts||[]).length,
+    }));
+
+    renderKpis(data.summary);
+    renderBars();
+    renderTable();
+
+    $('#synced').textContent = 'Last synced ' + new Date().toLocaleTimeString();
+    stateEl.style.display = 'none';
+    contentEl.style.display = 'block';
+  }catch(err){
+    stateEl.innerHTML = "Couldn't load campaign data. Check that the API is reachable, then try again.<br><button id='retry'>Retry</button>";
+    stateEl.querySelector('#retry').onclick = load;
+  }finally{
+    $('#refresh').disabled = false;
+  }
+}
+
+function renderKpis(s){
+  const cards = [
+    [s.sent, 'Sent'],
+    [s.rates.openRate.toFixed(1)+'%', 'Open rate', true],
+    [s.rates.clickRate.toFixed(1)+'%', 'Click rate'],
+    [s.rates.ctor.toFixed(1)+'%', 'Click-to-open'],
+    [s.rates.optOutRate.toFixed(1)+'%', 'Opt-out rate'],
+  ];
+  $('#kpis').innerHTML = cards.map(([num,lbl,accent]) =>
+    `<div class="kpi${accent?' accent':''}"><div class="num">${num}</div><div class="lbl">${lbl}</div></div>`
+  ).join('');
+}
+
+function renderBars(){
+  const sorted = [...campaigns].sort((a,b) => b.openRate - a.openRate).slice(0,10);
+  const max = Math.max(1, ...sorted.map(c => c.openRate));
+  $('#bars').innerHTML = sorted.map(c => `
+    <div class="bar-row">
+      <div class="name" title="${c.name}">${c.name}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(c.openRate/max*100).toFixed(1)}%"></div></div>
+      <div class="bar-pct">${c.openRate.toFixed(1)}%</div>
+    </div>`).join('');
+}
+
+function renderTable(){
+  const q = $('#search').value.trim().toLowerCase();
+  let rows = campaigns.filter(c => c.name.toLowerCase().includes(q));
+  rows.sort((a,b) => {
+    const av = a[sortKey], bv = b[sortKey];
+    if(typeof av === 'string') return sortDir * av.localeCompare(bv);
+    return sortDir * ((av||0) - (bv||0));
+  });
+
+  $('#rows').innerHTML = rows.map(c => `
+    <tr class="campaign-row" data-id="${c.id}">
+      <td>${c.name}</td>
+      <td><span class="status ${statusClass(c.status)}">${c.status}</span></td>
+      <td>${fmtDate(c.start)}</td>
+      <td class="num">${c.sent}</td>
+      <td class="num">${c.openRate.toFixed(1)}%</td>
+      <td class="num">${c.clickRate.toFixed(1)}%</td>
+      <td class="num">${c.ctor.toFixed(1)}%</td>
+      <td class="num">${c.optOutRate.toFixed(1)}%</td>
+      <td class="num">${c.engaged}</td>
+    </tr>
+    <tr class="detail" data-detail-for="${c.id}" style="display:none;"><td colspan="9"></td></tr>
+  `).join('');
+
+  document.querySelectorAll('.campaign-row').forEach(tr => {
+    tr.addEventListener('click', () => toggleDetail(tr.dataset.id));
+  });
+}
+
+function toggleDetail(id){
+  const row = document.querySelector(`.detail[data-detail-for="${id}"]`);
+  const open = row.style.display !== 'none';
+  document.querySelectorAll('.detail').forEach(r => r.style.display = 'none');
+  if(open) return;
+
+  const c = campaigns.find(c => String(c.id) === String(id));
+  const contacts = c.contacts || [];
+  const inner = contacts.length
+    ? contacts.map(ct => `
+        <div class="contact">
+          <div class="avatar">${initials(ct.name)}</div>
+          <div>
+            <div class="name">${ct.name || 'Unknown contact'}</div>
+            <div class="meta">${ct.org || '—'} ${ct.email ? '· '+ct.email : ''} ${ct.phone ? '· '+ct.phone : ''}</div>
+          </div>
+        </div>`).join('')
+    : '<p class="sub" style="margin:0;">No contacts have clicked yet.</p>';
+
+  row.querySelector('td').innerHTML = `<div class="detail-inner">${inner}</div>`;
+  row.style.display = 'table-row';
+}
+
+document.querySelectorAll('th[data-key]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.key;
+    sortDir = (sortKey === key) ? -sortDir : -1;
+    sortKey = key;
+    renderTable();
+  });
+});
+$('#search').addEventListener('input', renderTable);
+$('#refresh').addEventListener('click', load);
+
+load();
+</script>
+</body>
+</html>

@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Campaign Analytics — Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --pink:#EF4060; --orange:#F4813E;
+    --grad: linear-gradient(90deg, var(--pink) 0%, var(--orange) 100%);
+    --indigo:#2E2260; --indigo-2:#1E1745; --indigo-3:#3A2E7A;
+    --ink:#2B2740; --slate:#6B7085; --slate-soft:#9CA0B3;
+    --bg:#F0EFF5; --surface:#FFFFFF; --peach:#FBEAE5; --lav:#EFEDFA;
+    --border:#E7E5F0; --red:#E24B4B; --red-light:#FBE7E7;
+    --amber:#C98A1F; --amber-light:#FBF0DC;
+    --radius-lg:20px; --radius-md:14px; --radius-sm:10px;
+    --shadow: 0 10px 30px rgba(46,34,96,0.08);
+    --shadow-sm: 0 4px 14px rgba(46,34,96,0.06);
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3{ font-family:'Poppins',sans-serif; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px 70px; }
+  button{ font-family:'Inter'; cursor:pointer; }
+
+  /* ---------- TOP BAR ---------- */
+  header.topbar{
+    background: radial-gradient(1100px 420px at 85% -10%, rgba(244,129,62,0.32), transparent 60%),
+                linear-gradient(160deg, var(--indigo) 0%, var(--indigo-2) 100%);
+    color:#fff; padding:28px 32px 22px; position:relative; overflow:hidden;
+  }
+  header.topbar::before{
+    content:""; position:absolute; left:-80px; bottom:-120px; width:320px; height:320px;
+    border-radius:50%; background:radial-gradient(circle, rgba(239,64,96,0.26), transparent 70%);
+  }
+  .topbar-inner{ max-width:1180px; margin:0 auto; position:relative; z-index:2; }
+  .topbar-row{ display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:18px; }
+  .eyebrow{ font-family:'Poppins'; font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#C9C3E8; margin:0 0 8px; }
+  h1.brand-title{ font-weight:800; font-size:clamp(24px,3.4vw,34px); margin:0; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+  .date-filter{ display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); border-radius:100px; padding:7px 9px 7px 16px; }
+  .date-filter label{ font-size:11px; color:#C9C3E8; font-weight:600; }
+  .date-filter input[type=date]{
+    background:transparent; border:none; color:#fff; font-family:'Inter'; font-size:12.5px; font-weight:600;
+    color-scheme:dark; outline:none;
+  }
+  .date-filter .sep{ color:#7A72A6; }
+  .date-filter button{
+    border:none; border-radius:100px; padding:7px 15px; font-size:12px; font-weight:700;
+  }
+  .btn-apply{ background:var(--grad); color:#fff; }
+  .btn-reset{ background:rgba(255,255,255,0.1); color:#C9C3E8; }
+  .filter-note{ font-size:11.5px; color:#AFA8D2; margin-top:8px; }
+
+  /* ---------- NAV PILLS ---------- */
+  .campaign-nav{
+    display:flex; gap:8px; padding:14px 32px; background:#F5F4FA; border-bottom:1px solid var(--border);
+    overflow-x:auto; max-width:1180px; margin:0 auto;
+  }
+  .nav-pill{
+    border:1px solid var(--border); background:#fff; color:var(--slate); border-radius:100px;
+    padding:8px 16px; font-size:12.5px; font-weight:600; white-space:nowrap; transition:.15s;
+  }
+  .nav-pill.active{ background:var(--indigo); color:#fff; border-color:var(--indigo); }
+  .nav-pill:not(.active):not(.dim):hover{ border-color:var(--pink); color:var(--pink); }
+  .nav-pill.dim{ opacity:.4; cursor:not-allowed; }
+  .nav-pill .status-dot{ display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+
+  /* ---------- SECTIONS / CARDS (shared) ---------- */
+  .section{ margin-top:34px; }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap; gap:10px; }
+  .section-head h2{ font-weight:700; font-size:18px; margin:0; color:var(--indigo); }
+  .section-head .sub{ font-size:12.5px; color:var(--slate); }
+  .card{ background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:22px 24px; }
+
+  /* ---------- SUMMARY: KPI ROW ---------- */
+  .kpi-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:22px; }
+  @media(max-width:900px){ .kpi-grid{ grid-template-columns:repeat(2,1fr); } }
+  .kpi-card{ background:var(--surface); border-radius:var(--radius-md); box-shadow:var(--shadow-sm); padding:16px 18px; }
+  .kpi-card .l{ font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--slate); font-weight:700; }
+  .kpi-card .n{ font-family:'Poppins'; font-weight:800; font-size:24px; margin-top:6px; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+  /* ---------- SUMMARY: campaign table ---------- */
+  .table-card{ background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow); overflow:hidden; }
+  table{ width:100%; border-collapse:collapse; }
+  thead th{
+    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--slate);
+    padding:14px 22px; border-bottom:1px solid var(--border); cursor:pointer; user-select:none; white-space:nowrap; font-weight:700;
+  }
+  thead th:hover{ color:var(--pink); }
+  thead th .arrow{ font-size:10px; margin-left:4px; opacity:.5; }
+  tbody td{ padding:15px 22px; border-bottom:1px solid var(--border); font-size:13.5px; vertical-align:middle; }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr{ cursor:pointer; transition:.12s; }
+  tbody tr:hover{ background:var(--bg); }
+  .camp-name{ font-weight:700; color:var(--indigo); }
+  .camp-period{ font-size:11.5px; color:var(--slate-soft); margin-top:2px; }
+  .status-chip{ display:inline-flex; align-items:center; gap:6px; padding:4px 11px; border-radius:100px; font-size:11px; font-weight:700; }
+  .status-chip.completed{ background:var(--peach); color:var(--pink); }
+  .status-chip.progress{ background:var(--amber-light); color:var(--amber); }
+  .status-chip .dot{ width:6px; height:6px; border-radius:50%; background:currentColor; }
+  .view-link{ color:var(--pink); font-weight:700; font-size:12.5px; }
+
+  /* ---------- CAMPAIGN DASHBOARD ---------- */
+  .camp-header{ display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:22px; }
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:var(--slate);
+    text-decoration:none; margin-bottom:10px; background:none; border:none; padding:0;
+  }
+  .back-link:hover{ color:var(--pink); }
+  .back-link svg{ width:14px; height:14px; }
+  h1.camp-title{ font-weight:800; font-size:26px; margin:0 0 4px; color:var(--indigo); }
+  .camp-period{ font-size:13px; color:var(--slate); font-weight:500; }
+  .status-pill{
+    display:inline-flex; align-items:center; gap:8px; color:#fff; padding:9px 18px; border-radius:100px;
+    font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap;
+  }
+  .status-pill.completed{ background:var(--grad); box-shadow:0 8px 20px rgba(239,64,96,0.3); }
+  .status-pill.progress{ background:linear-gradient(90deg,#C98A1F,#E0AB4E); box-shadow:0 8px 20px rgba(201,138,31,0.28); }
+  .status-pill .dot{ width:7px; height:7px; border-radius:50%; background:#fff; }
+
+  .kpi-row{ display:flex; gap:12px; margin-bottom:28px; flex-wrap:wrap; }
+  .kpi-chip{ background:var(--surface); border-radius:var(--radius-sm); padding:12px 16px; box-shadow:var(--shadow-sm); min-width:112px; }
+  .kpi-chip .n{ font-family:'Poppins'; font-weight:800; font-size:20px; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .kpi-chip .l{ font-size:10.5px; color:var(--slate); font-weight:600; margin-top:1px; }
+
+  /* funnel */
+  .funnel-card{ background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:24px 24px 22px; }
+  .funnel-wrap{ position:relative; }
+  .fn-row{ display:flex; align-items:stretch; gap:0; }
+  .fn-tile{
+    position:relative; background:var(--surface); border:1.5px solid var(--border); border-radius:var(--radius-sm);
+    padding:16px 14px; text-align:center; cursor:pointer; opacity:0; transform:translateY(14px); min-width:0;
+    transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+  }
+  .fn-tile.in{ animation: fnPop .55s cubic-bezier(.2,.7,.3,1.15) forwards; }
+  @keyframes fnPop{ to{ opacity:1; transform:translateY(0); } }
+  .fn-tile:hover{ box-shadow:0 14px 30px rgba(46,34,96,0.14); transform:translateY(-3px); border-color:transparent; z-index:3; }
+  .fn-tile .fn-label{ font-family:'Inter'; font-weight:600; font-size:12px; color:var(--slate); }
+  .fn-tile .fn-value{ font-family:'Poppins'; font-weight:800; font-size:24px; margin-top:5px; line-height:1; color:var(--indigo); }
+  .fn-tile .fn-badge{
+    display:inline-block; margin-top:7px; font-family:'Poppins'; font-weight:700; font-size:10.5px;
+    padding:2px 9px; border-radius:100px; background:var(--peach); color:var(--pink); opacity:0; transition:opacity .2s;
+  }
+  .fn-tile:hover .fn-badge{ opacity:1; }
+  .fn-tile.sent{ background:var(--lav); border-color:transparent; }
+  .fn-tile.sent .fn-label{ color:var(--indigo-3); }
+  .fn-tile.opted{ background:var(--red-light); border-color:transparent; }
+  .fn-tile.opted .fn-value, .fn-tile.opted .fn-label{ color:var(--red); }
+  .fn-tile.clicked{ background:var(--peach); border-color:transparent; }
+  .fn-tile.clicked .fn-value{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .fn-tile.clicked .fn-label{ color:var(--pink); }
+  .fn-connector{ flex:0 0 58px; position:relative; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s; }
+  .fn-connector.in{ opacity:1; }
+  .fn-connector::before{
+    content:""; position:absolute; left:2px; right:2px; top:50%; height:2px; transform:translateY(-50%);
+    background:linear-gradient(90deg, var(--border), var(--pink) 50%, var(--border)); border-radius:2px;
+  }
+  .fn-connector .chip{
+    position:relative; z-index:2; background:#fff; border:1px solid var(--border); border-radius:100px;
+    padding:4px 9px; font-family:'Poppins'; font-weight:700; font-size:10.5px; color:var(--pink);
+    box-shadow:0 4px 10px rgba(46,34,96,0.07); white-space:nowrap;
+  }
+  .fn-branch{ display:flex; align-items:center; gap:12px; margin:18px 0; opacity:0; transition:opacity .35s; }
+  .fn-branch.in{ opacity:1; }
+  .fn-branch::before{ content:""; flex:0 0 44px; height:1px; background:var(--border); }
+  .fn-branch::after{ content:""; flex:1; height:1px; background:var(--border); }
+  .fn-branch .chip{
+    display:inline-flex; align-items:center; gap:7px; background:var(--indigo); color:#fff; border-radius:100px;
+    padding:7px 16px; font-family:'Poppins'; font-weight:700; font-size:11.5px; box-shadow:0 8px 18px rgba(46,34,96,0.18); white-space:nowrap;
+  }
+  .fn-branch .chip svg{ width:13px; height:13px; }
+
+  .tooltip{
+    position:absolute; pointer-events:none; background:var(--indigo-2); color:#fff; padding:10px 14px; border-radius:10px;
+    font-size:12px; line-height:1.5; font-family:'Inter'; box-shadow:0 14px 28px rgba(30,23,69,0.35); z-index:50;
+    opacity:0; transition:opacity .12s; max-width:220px;
+  }
+  .tooltip b{ font-family:'Poppins'; color:#FFC9AE; }
+  .tooltip.show{ opacity:1; }
+
+  /* insight charts */
+  .insight-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:14px; }
+  @media(max-width:800px){ .insight-grid{ grid-template-columns:1fr; } }
+  .insight-card{ background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:20px 22px; }
+  .insight-card .card-title{ font-family:'Poppins'; font-weight:700; font-size:13.5px; color:var(--indigo); }
+  .chart-box{ height:200px; margin-top:6px; }
+  .chart-box.donut{ display:flex; align-items:center; gap:16px; height:170px; }
+  .donut-wrap{ position:relative; width:110px; height:110px; flex-shrink:0; }
+  .donut-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none; }
+  .donut-center .n{ font-family:'Poppins'; font-weight:800; font-size:17px; color:var(--indigo); }
+  .donut-center .l{ font-size:9px; color:var(--slate); font-weight:600; }
+  .legend{ display:flex; flex-direction:column; gap:9px; flex:1; }
+  .legend-item{ display:flex; align-items:center; gap:8px; font-size:12.5px; }
+  .legend-item .sw{ width:9px; height:9px; border-radius:3px; flex-shrink:0; }
+  .legend-item .lbl{ color:var(--slate); }
+  .legend-item .val{ font-weight:700; color:var(--indigo); margin-left:auto; padding-left:10px; }
+
+  /* contacts */
+  .contacts-card{ background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow); overflow:hidden; }
+  .contacts-toolbar{ display:flex; justify-content:space-between; align-items:center; padding:20px 24px; border-bottom:1px solid var(--border); gap:16px; flex-wrap:wrap; }
+  .search-box{ display:flex; align-items:center; gap:8px; border:1px solid var(--border); border-radius:100px; padding:9px 16px; background:var(--bg); min-width:230px; }
+  .search-box svg{ width:15px; height:15px; color:var(--slate-soft); flex-shrink:0; }
+  .search-box input{ border:none; background:transparent; outline:none; font-family:'Inter'; font-size:13px; width:100%; color:var(--ink); }
+  .count-badge{ font-family:'Poppins'; font-size:12px; font-weight:600; color:var(--slate); }
+  .contact-avatar{
+    width:34px; height:34px; border-radius:50%; background:var(--grad); color:#fff; font-family:'Poppins';
+    font-weight:700; font-size:13px; display:inline-flex; align-items:center; justify-content:center; margin-right:10px; flex-shrink:0;
+  }
+  .contact-name-row{ display:flex; align-items:center; }
+  .contact-name{ font-weight:700; color:var(--indigo); }
+  .contact-org{ font-size:12px; color:var(--slate); margin-top:2px; }
+  a.email-link, a.phone-link{ color:var(--pink); text-decoration:none; font-weight:600; font-size:12.5px; }
+  a.email-link:hover, a.phone-link:hover{ text-decoration:underline; }
+  .tag-genuine{ display:inline-flex; align-items:center; gap:6px; background:var(--peach); color:var(--pink); padding:5px 12px; border-radius:100px; font-size:11px; font-weight:700; }
+  .tag-genuine::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--pink); }
+
+  footer.page-footer{ margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--slate-soft); }
+  .placeholder-note{
+    display:flex; align-items:center; gap:8px; background:var(--amber-light); color:var(--amber); border-radius:10px;
+    padding:10px 16px; font-size:12px; font-weight:600; margin-bottom:20px;
+  }
+
+  @media (prefers-reduced-motion:reduce){ *{ transition:none !important; animation:none !important; } }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-row">
+      <div>
+        <p class="eyebrow">Campaign Analytics</p>
+        <h1 class="brand-title">Portfolio Overview</h1>
+      </div>
+      <div>
+        <div class="date-filter">
+          <label>From</label>
+          <input type="date" id="dateFrom">
+          <span class="sep">–</span>
+          <label>To</label>
+          <input type="date" id="dateTo">
+          <button class="btn-apply" id="applyFilter">Apply</button>
+          <button class="btn-reset" id="resetFilter">Reset</button>
+        </div>
+        <p class="filter-note" id="filterNote"></p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="campaign-nav" id="campaignNav"></nav>
+
+<div class="wrap" id="app"></div>
+
+<script>
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.color = '#6B7085';
+
+/* ============== SAMPLE PORTFOLIO DATA ==============
+   Only "CTE & Technology Contacts" is real. The other three are
+   placeholder campaigns so the multi-campaign framework can be
+   demoed end-to-end — swap their objects out for real data any time.
+=================================================== */
+// const campaigns = [
+//   {
+//     id:'cte-tech', name:'CTE & Technology Contacts', status:'completed',
+//     start:'2026-07-13', end:'2026-07-14',
+//     funnel:{
+//       mailer:[
+//         { key:'sent', label:'Sent', value:122, rate:null },
+//         { key:'opened', label:'Opened', value:68, rate:0.557 },
+//         { key:'clicked', label:'Clicked', value:5, rate:0.041 },
+//         { key:'optout', label:'Opted out', value:0, rate:0.0 },
+//       ],
+//       fu:[
+//         { key:'fusent', label:'FU Sent', value:68, rate:null },
+//         { key:'fuopened', label:'FU Opened', value:58, rate:0.853 },
+//         { key:'fuclicked', label:'FU Clicked', value:1, rate:0.015 },
+//       ]
+//     },
+//     rates:[
+//       { label:'Mailer Open %', value:55.7, kind:'good' },
+//       { label:'Mailer Click %', value:4.1, kind:'' },
+//       { label:'Mailer CTOR %', value:7.4, kind:'' },
+//       { label:'Follow-up Open %', value:85.3, kind:'good' },
+//       { label:'Follow-up Click %', value:1.5, kind:'' },
+//       { label:'Opt-out %', value:0.0, kind:'warn' },
+//     ],
+//     clicks:[
+//       { name:'LinkedIn', count:1, color:'#0A66C2' },
+//       { name:'Calendar / Calendly', count:1, color:'#F4813E' },
+//       { name:'Flyer (PDF)', count:5, color:'#2E2260' },
+//     ],
+//     contacts:[
+//       { sent:'2026-07-13', clicked:'2026-07-13', name:'Lori Johnson', org:'Academics Plus', title:'Liaison for Homeless Coordinator', email:'lori.johnson@academicsplus.org', phone:'1 501 803 0066' }
+//     ]
+//   },
+//   {
+//     id:'health-outreach', name:'Healthcare Staffing Outreach', status:'completed',
+//     start:'2026-07-20', end:'2026-07-22', placeholder:true,
+//     funnel:{
+//       mailer:[
+//         { key:'sent', label:'Sent', value:210, rate:null },
+//         { key:'opened', label:'Opened', value:132, rate:0.629 },
+//         { key:'clicked', label:'Clicked', value:14, rate:0.067 },
+//         { key:'optout', label:'Opted out', value:2, rate:0.010 },
+//       ],
+//       fu:[
+//         { key:'fusent', label:'FU Sent', value:132, rate:null },
+//         { key:'fuopened', label:'FU Opened', value:101, rate:0.765 },
+//         { key:'fuclicked', label:'FU Clicked', value:6, rate:0.045 },
+//       ]
+//     },
+//     rates:[
+//       { label:'Mailer Open %', value:62.9, kind:'good' },
+//       { label:'Mailer Click %', value:6.7, kind:'' },
+//       { label:'Mailer CTOR %', value:10.6, kind:'' },
+//       { label:'Follow-up Open %', value:76.5, kind:'good' },
+//       { label:'Follow-up Click %', value:4.5, kind:'' },
+//       { label:'Opt-out %', value:1.0, kind:'warn' },
+//     ],
+//     clicks:[
+//       { name:'LinkedIn', count:5, color:'#0A66C2' },
+//       { name:'Calendar / Calendly', count:4, color:'#F4813E' },
+//       { name:'Flyer (PDF)', count:5, color:'#2E2260' },
+//     ],
+//     contacts:[
+//       { sent:'2026-07-20', clicked:'2026-07-21', name:'Maria Gutierrez', org:'Riverside Health Network', title:'Talent Acquisition Lead', email:'maria.gutierrez@riversidehealth.org', phone:'1 214 555 0142' },
+//       { sent:'2026-07-20', clicked:'2026-07-22', name:'Daniel Osei', org:'Coastal Med Staffing', title:'HR Director', email:'daniel.osei@coastalmed.com', phone:'1 617 555 0198' }
+//     ]
+//   },
+//   {
+//     id:'k12-curriculum', name:'K-12 Curriculum Partners', status:'progress',
+//     start:'2026-08-01', end:'2026-08-03', placeholder:true,
+//     funnel:{
+//       mailer:[
+//         { key:'sent', label:'Sent', value:95, rate:null },
+//         { key:'opened', label:'Opened', value:40, rate:0.421 },
+//         { key:'clicked', label:'Clicked', value:3, rate:0.032 },
+//         { key:'optout', label:'Opted out', value:1, rate:0.011 },
+//       ],
+//       fu:[
+//         { key:'fusent', label:'FU Sent', value:40, rate:null },
+//         { key:'fuopened', label:'FU Opened', value:22, rate:0.550 },
+//         { key:'fuclicked', label:'FU Clicked', value:0, rate:0.0 },
+//       ]
+//     },
+//     rates:[
+//       { label:'Mailer Open %', value:42.1, kind:'good' },
+//       { label:'Mailer Click %', value:3.2, kind:'' },
+//       { label:'Mailer CTOR %', value:7.5, kind:'' },
+//       { label:'Follow-up Open %', value:55.0, kind:'good' },
+//       { label:'Follow-up Click %', value:0.0, kind:'' },
+//       { label:'Opt-out %', value:1.1, kind:'warn' },
+//     ],
+//     clicks:[
+//       { name:'LinkedIn', count:1, color:'#0A66C2' },
+//       { name:'Calendar / Calendly', count:0, color:'#F4813E' },
+//       { name:'Flyer (PDF)', count:2, color:'#2E2260' },
+//     ],
+//     contacts:[
+//       { sent:'2026-08-01', clicked:'2026-08-02', name:'Priya Nair', org:'Lakeview School District', title:'Curriculum Coordinator', email:'priya.nair@lakeviewsd.edu', phone:'1 312 555 0176' }
+//     ]
+//   },
+//   {
+//     id:'higher-ed', name:'Higher Ed Assessment Services', status:'completed',
+//     start:'2026-06-18', end:'2026-06-20', placeholder:true,
+//     funnel:{
+//       mailer:[
+//         { key:'sent', label:'Sent', value:150, rate:null },
+//         { key:'opened', label:'Opened', value:98, rate:0.653 },
+//         { key:'clicked', label:'Clicked', value:9, rate:0.060 },
+//         { key:'optout', label:'Opted out', value:0, rate:0.0 },
+//       ],
+//       fu:[
+//         { key:'fusent', label:'FU Sent', value:98, rate:null },
+//         { key:'fuopened', label:'FU Opened', value:81, rate:0.827 },
+//         { key:'fuclicked', label:'FU Clicked', value:3, rate:0.031 },
+//       ]
+//     },
+//     rates:[
+//       { label:'Mailer Open %', value:65.3, kind:'good' },
+//       { label:'Mailer Click %', value:6.0, kind:'' },
+//       { label:'Mailer CTOR %', value:9.2, kind:'' },
+//       { label:'Follow-up Open %', value:82.7, kind:'good' },
+//       { label:'Follow-up Click %', value:3.1, kind:'' },
+//       { label:'Opt-out %', value:0.0, kind:'warn' },
+//     ],
+//     clicks:[
+//       { name:'LinkedIn', count:3, color:'#0A66C2' },
+//       { name:'Calendar / Calendly', count:2, color:'#F4813E' },
+//       { name:'Flyer (PDF)', count:4, color:'#2E2260' },
+//     ],
+//     contacts:[
+//       { sent:'2026-06-18', clicked:'2026-06-19', name:'Owen Blackwood', org:'Merrick State University', title:'Assessment Program Manager', email:'owen.blackwood@merrickstate.edu', phone:'1 480 555 0121' },
+//       { sent:'2026-06-18', clicked:'2026-06-20', name:'Sofia Reyes', org:'Palmetto Community College', title:'Dean of Institutional Research', email:'sofia.reyes@palmettocc.edu', phone:'1 803 555 0114' }
+//     ]
+//   }
+// ];
+let campaigns = [];
+async function loadCampaigns() {
+    try {
+
+        const response = await fetch("campaign-dashboard.php"); // Change to your API path
+        const data = await response.json();
+        if (!data.success) {
+            console.error(data.message);
+            return;
+        }
+
+        campaigns = data.campaigns.map(campaign => ({
+
+            id: campaign.id,
+
+            name: campaign.name,
+
+            status: campaign.status.toLowerCase() === "active"
+                ? "progress"
+                : "completed",
+
+            start: campaign.start,
+
+            end: campaign.start,
+
+            placeholder: false,
+
+            funnel: {
+
+                mailer: [
+                    {
+                        key: "sent",
+                        label: "Sent",
+                        value: Number(campaign.summary.sent),
+                        rate: null
+                    },
+                    {
+                        key: "opened",
+                        label: "Opened",
+                        value: Number(campaign.summary.opened),
+                        rate: campaign.summary.sent > 0
+                            ? campaign.summary.opened / campaign.summary.sent
+                            : 0
+                    },
+                    {
+                        key: "clicked",
+                        label: "Clicked",
+                        value: Number(campaign.summary.clicked),
+                        rate: campaign.summary.sent > 0
+                            ? campaign.summary.clicked / campaign.summary.sent
+                            : 0
+                    },
+                    {
+                        key: "optout",
+                        label: "Opted out",
+                        value: Number(campaign.summary.optOut),
+                        rate: campaign.summary.sent > 0
+                            ? campaign.summary.optOut / campaign.summary.sent
+                            : 0
+                    }
+                ],
+
+                fu: [
+                    {
+                        key: "fusent",
+                        label: "FU Sent",
+                        value: Number(campaign.summary.opened),
+                        rate: null
+                    },
+                    {
+                        key: "fuopened",
+                        label: "FU Opened",
+                        value: Number(campaign.summary.opened),
+                        rate: 1
+                    },
+                    {
+                        key: "fuclicked",
+                        label: "FU Clicked",
+                        value: Number(campaign.summary.clicked),
+                        rate: campaign.summary.opened > 0
+                            ? campaign.summary.clicked / campaign.summary.opened
+                            : 0
+                    }
+                ]
+            },
+
+            rates: [
+                {
+                    label: "Mailer Open %",
+                    value: Number(campaign.rates.openRate),
+                    kind: "good"
+                },
+                {
+                    label: "Mailer Click %",
+                    value: Number(campaign.rates.clickRate),
+                    kind: ""
+                },
+                {
+                    label: "Mailer CTOR %",
+                    value: Number(campaign.rates.ctor),
+                    kind: ""
+                },
+                {
+                    label: "Follow-up Open %",
+                    value: Number(campaign.rates.openRate),
+                    kind: "good"
+                },
+                {
+                    label: "Follow-up Click %",
+                    value: Number(campaign.rates.clickRate),
+                    kind: ""
+                },
+                {
+                    label: "Opt-out %",
+                    value: Number(campaign.rates.optOutRate),
+                    kind: "warn"
+                }
+            ],
+
+            clicks: [
+                {
+                    name: "Email Clicks",
+                    count: Number(campaign.summary.clicked),
+                    color: "#EF4060"
+                }
+            ],
+
+            contacts: campaign.contacts.map(contact => ({
+
+                sent: contact.sent,
+
+                clicked: contact.clicked,
+
+                name: contact.name || "",
+
+                org: contact.org || "",
+
+                title: contact.title || "",
+
+                email: contact.email || "",
+
+                phone: contact.phone || ""
+
+            }))
+
+        }));
+
+        // Update date filter
+
+        const allStarts = campaigns.map(c => c.start).sort();
+        const allEnds = campaigns.map(c => c.end).sort();
+
+        state.dateFrom = allStarts[0];
+        state.dateTo = allEnds[allEnds.length - 1];
+
+        document.getElementById("dateFrom").value = state.dateFrom;
+        document.getElementById("dateTo").value = state.dateTo;
+        console.log(campaigns);
+        render();
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+loadCampaigns();
+
+/* ============== STATE ============== */
+const allStarts = campaigns.map(c=>c.start).sort();
+const allEnds = campaigns.map(c=>c.end).sort();
+const state = {
+  view:'summary',
+  dateFrom: allStarts[0],
+  dateTo: allEnds[allEnds.length-1],
+  sortKey:'start', sortDir:1
+};
+
+document.getElementById('dateFrom').value = state.dateFrom;
+document.getElementById('dateTo').value = state.dateTo;
+
+function inRange(c){
+  return c.end >= state.dateFrom && c.start <= state.dateTo;
+}
+// function fmtDate(d){
+//   const dt = new Date(d+'T00:00:00');
+//   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+//   return `${String(dt.getDate()).padStart(2,'0')} ${months[dt.getMonth()]} '${String(dt.getFullYear()).slice(2)}`;
+// }
+function fmtDate(d) {
+
+    if (!d) return "-";
+
+    // Convert MySQL datetime to ISO format
+    const dt = new Date(d.replace(' ', 'T'));
+
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    return `${String(dt.getDate()).padStart(2,'0')} ${months[dt.getMonth()]} '${String(dt.getFullYear()).slice(2)}`;
+
+}
+function fmtPct(r){ return r===null || r===undefined ? '—' : (r*100).toFixed(1)+'%'; }
+
+/* ============== NAV ============== */
+// function renderNav(){
+//   const nav = document.getElementById('campaignNav');
+//   nav.innerHTML = '';
+//   const summaryPill = document.createElement('button');
+//   summaryPill.className = 'nav-pill' + (state.view==='summary' ? ' active' : '');
+//   summaryPill.textContent = 'Summary';
+//   summaryPill.onclick = ()=>{ state.view='summary'; render(); };
+//   nav.appendChild(summaryPill);
+
+//   campaigns.forEach(c=>{
+//     const pill = document.createElement('button');
+//     const dimmed = !inRange(c);
+//     pill.className = 'nav-pill' + (state.view===c.id ? ' active' : '') + (dimmed ? ' dim' : '');
+//     const dotColor = c.status==='completed' ? 'var(--pink)' : 'var(--amber)';
+//     pill.innerHTML = `<span class="status-dot" style="background:${dotColor}"></span>${c.name}`;
+//     pill.disabled = dimmed;
+//     pill.onclick = ()=>{ if(!dimmed){ state.view=c.id; render(); } };
+//     nav.appendChild(pill);
+//   });
+// }
+function renderNav() {
+
+    const nav = document.getElementById("campaignNav");
+
+    nav.innerHTML = "";
+
+    // Summary Button
+    const summaryBtn = document.createElement("button");
+
+    summaryBtn.className =
+        "nav-pill" + (state.view === "summary" ? " active" : "");
+
+    summaryBtn.innerText = "Summary";
+
+    summaryBtn.onclick = () => {
+
+        state.view = "summary";
+
+        render();
+
+    };
+
+    nav.appendChild(summaryBtn);
+
+    // Campaign Buttons
+    campaigns.forEach(campaign => {
+
+        const pill = document.createElement("button");
+
+        const dimmed = !inRange(campaign);
+
+        // API returns Completed / Active / In Progress
+        const isCompleted =
+            campaign.status.toLowerCase() === "completed";
+
+        pill.className =
+            "nav-pill" +
+            (state.view == campaign.id ? " active" : "") +
+            (dimmed ? " dim" : "");
+
+        const dotColor = isCompleted
+            ? "var(--pink)"
+            : "var(--amber)";
+
+        pill.innerHTML = `
+            <span class="status-dot" style="background:${dotColor}"></span>
+            ${campaign.name}
+        `;
+
+        pill.disabled = dimmed;
+
+        pill.onclick = () => {
+
+            if (dimmed) return;
+
+            state.view = campaign.id;
+
+            render();
+
+        };
+
+        nav.appendChild(pill);
+
+    });
+
+}
+
+/* ============== SUMMARY VIEW ============== */
+// function renderSummary(){
+//   const app = document.getElementById('app');
+//   const filtered = campaigns.filter(inRange);
+
+//   const totalSent = filtered.reduce((s,c)=>s+c.funnel.mailer[0].value,0);
+//   const totalOpened = filtered.reduce((s,c)=>s+c.funnel.mailer[1].value,0);
+//   const totalClicked = filtered.reduce((s,c)=>s+c.funnel.mailer[2].value,0);
+//   const totalLeads = filtered.reduce((s,c)=>s+c.contacts.length,0);
+//   const avgOpenRate = totalSent ? (totalOpened/totalSent*100) : 0;
+
+//   app.innerHTML = `
+//     <div class="section" style="margin-top:26px;">
+//       <div class="section-head">
+//         <h2>Portfolio summary</h2>
+//         <span class="sub">${filtered.length} of ${campaigns.length} campaigns in selected range</span>
+//       </div>
+//       <div class="kpi-grid">
+//         <div class="kpi-card"><div class="l">Total Sent</div><div class="n">${totalSent.toLocaleString()}</div></div>
+//         <div class="kpi-card"><div class="l">Total Opened</div><div class="n">${totalOpened.toLocaleString()}</div></div>
+//         <div class="kpi-card"><div class="l">Avg Open Rate</div><div class="n">${avgOpenRate.toFixed(1)}%</div></div>
+//         <div class="kpi-card"><div class="l">Total Clicked</div><div class="n">${totalClicked.toLocaleString()}</div></div>
+//         <div class="kpi-card"><div class="l">Qualified Leads</div><div class="n">${totalLeads}</div></div>
+//       </div>
+//     </div>
+
+//     <div class="section">
+//       <div class="section-head">
+//         <h2>Sent vs. opened vs. clicked</h2>
+//         <span class="sub">By campaign, selected date range</span>
+//       </div>
+//       <div class="card"><div style="height:260px;"><canvas id="portfolioChart"></canvas></div></div>
+//     </div>
+
+//     <div class="section">
+//       <div class="section-head">
+//         <h2>Campaigns</h2>
+//         <span class="sub">Click a row to open its dashboard</span>
+//       </div>
+//       <div class="table-card">
+//         <table>
+//           <thead>
+//             <tr>
+//               <th data-key="name">Campaign <span class="arrow">↕</span></th>
+//               <th data-key="start">Period <span class="arrow">↕</span></th>
+//               <th data-key="status">Status <span class="arrow">↕</span></th>
+//               <th data-key="sent">Sent <span class="arrow">↕</span></th>
+//               <th data-key="openRate">Open % <span class="arrow">↕</span></th>
+//               <th data-key="clickRate">Click % <span class="arrow">↕</span></th>
+//               <th data-key="leads">Leads <span class="arrow">↕</span></th>
+//               <th></th>
+//             </tr>
+//           </thead>
+//           <tbody id="campaignTableBody"></tbody>
+//         </table>
+//       </div>
+//     </div>
+//   `;
+
+//   renderCampaignTable(filtered);
+
+//   new Chart(document.getElementById('portfolioChart'), {
+//     type:'bar',
+//     data:{
+//       labels: filtered.map(c=>c.name),
+//       datasets:[
+//         { label:'Sent', data: filtered.map(c=>c.funnel.mailer[0].value), backgroundColor:'#3A2E7A', borderRadius:5, maxBarThickness:26 },
+//         { label:'Opened', data: filtered.map(c=>c.funnel.mailer[1].value), backgroundColor:'#F4813E', borderRadius:5, maxBarThickness:26 },
+//         { label:'Clicked', data: filtered.map(c=>c.funnel.mailer[2].value), backgroundColor:'#EF4060', borderRadius:5, maxBarThickness:26 }
+//       ]
+//     },
+//     options:{
+//       plugins:{ legend:{ position:'bottom', labels:{ boxWidth:9, boxHeight:9, padding:14, font:{size:11} } },
+//         tooltip:{ backgroundColor:'#1E1745', padding:10 } },
+//       scales:{
+//         y:{ beginAtZero:true, grid:{ color:'#EFEDF6' }, ticks:{ font:{size:10.5} } },
+//         x:{ grid:{ display:false }, ticks:{ font:{size:10.5}, autoSkip:false, maxRotation:0 } }
+//       },
+//       animation:{ duration:800 }
+//     }
+//   });
+// }
+
+// function renderCampaignTable(filtered){
+//   const rows = filtered.map(c=>({
+//     id:c.id, name:c.name, start:c.start, end:c.end, status:c.status,
+//     sent:c.funnel.mailer[0].value,
+//     openRate: c.rates[0].value,
+//     clickRate: c.rates[1].value,
+//     leads: c.contacts.length
+//   }));
+//   rows.sort((a,b)=>{
+//     const av=a[state.sortKey], bv=b[state.sortKey];
+//     if(av<bv) return -1*state.sortDir;
+//     if(av>bv) return 1*state.sortDir;
+//     return 0;
+//   });
+//   const tbody = document.getElementById('campaignTableBody');
+//   tbody.innerHTML = rows.map(r=>{
+//     const camp = campaigns.find(c=>c.id===r.id);
+//     const statusLabel = r.status==='completed' ? 'Completed' : 'In progress';
+//     const statusClass = r.status==='completed' ? 'completed' : 'progress';
+//     return `
+//       <tr data-id="${r.id}">
+//         <td><div class="camp-name">${r.name}${camp.placeholder ? ' <span style=\"font-weight:500;color:var(--slate-soft);font-size:11px;\">(sample)</span>' : ''}</div></td>
+//         <td><div class="camp-period">${fmtDate(r.start)} – ${fmtDate(r.end)}</div></td>
+//         <td><span class="status-chip ${statusClass}"><span class="dot"></span>${statusLabel}</span></td>
+//         <td>${r.sent.toLocaleString()}</td>
+//         <td>${r.openRate.toFixed(1)}%</td>
+//         <td>${r.clickRate.toFixed(1)}%</td>
+//         <td>${r.leads}</td>
+//         <td><span class="view-link">View dashboard →</span></td>
+//       </tr>`;
+//   }).join('');
+
+//   tbody.querySelectorAll('tr').forEach(tr=>{
+//     tr.addEventListener('click', ()=>{ state.view = tr.dataset.id; render(); });
+//   });
+
+//   document.querySelectorAll('thead th[data-key]').forEach(th=>{
+//     th.onclick = ()=>{
+//       const key = th.dataset.key;
+//       if(state.sortKey===key){ state.sortDir *= -1; } else { state.sortKey=key; state.sortDir=1; }
+//       renderCampaignTable(filtered);
+//     };
+//   });
+// }
+
+let campaigns_summ = [];
+let summary_summ = {};
+
+async function loadCampaigns_2() {
+
+    const response_summ = await fetch("campaign-dashboard.php");
+    const data_summ = await response_summ.json();
+
+    summary_summ = data_summ.summary;
+    campaigns_summ = data_summ.campaigns;
+
+    render();
+}
+
+function renderSummary() {
+
+    const app = document.getElementById("app");
+    
+    console.log(summary_summ.sent);
+    const filtered = campaigns.filter(inRange);
+    // const summary = data.summary;
+    const totalSent = filtered.reduce((s, c) => s + Number(summary_summ.sent), 0);
+    const totalOpened = filtered.reduce((s, c) => s + Number(summary_summ.opened), 0);
+    const totalClicked = filtered.reduce((s, c) => s + Number(summary_summ.clicked), 0);
+    const totalLeads = filtered.reduce((s, c) => s + c.contacts.length, 0);
+
+    const avgOpenRate = totalSent ? (totalOpened / totalSent) * 100 : 0;
+
+    app.innerHTML = `
+    <div class="section" style="margin-top:26px;">
+        <div class="section-head">
+            <h2>Portfolio Summary</h2>
+            <span class="sub">${filtered.length} of ${campaigns.length} campaigns</span>
+        </div>
+
+        <div class="kpi-grid">
+
+            <div class="kpi-card">
+                <div class="l">Total Sent</div>
+                <div class="n">${totalSent}</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="l">Total Opened</div>
+                <div class="n">${totalOpened}</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="l">Avg Open Rate</div>
+                <div class="n">${avgOpenRate.toFixed(1)}%</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="l">Total Clicked</div>
+                <div class="n">${totalClicked}</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="l">Qualified Leads</div>
+                <div class="n">${totalLeads}</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="card">
+            <div style="height:260px">
+                <canvas id="portfolioChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+
+        <div class="table-card">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Campaign</th>
+                        <th>Period</th>
+                        <th>Status</th>
+                        <th>Sent</th>
+                        <th>Open %</th>
+                        <th>Click %</th>
+                        <th>Leads</th>
+                        <th></th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="campaignTableBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+    `;
+
+    renderCampaignTable(filtered);
+
+    new Chart(document.getElementById("portfolioChart"), {
+
+        type: "bar",
+
+        data: {
+
+            labels: filtered.map(c => c.name),
+
+            datasets: [
+
+                {
+                    label: "Sent",
+                    data: filtered.map(c => c.contacts.length),
+                    backgroundColor: "#3A2E7A"
+                },
+
+                {
+                    label: "Opened",
+                    data: filtered.map(c => 11),
+                    backgroundColor: "#F4813E"
+                },
+
+                {
+                    label: "Clicked",
+                    data: filtered.map(c => c.clicked),
+                    backgroundColor: "#EF4060"
+                }
+
+            ]
+
+        }
+
+    });
+
+}
+loadCampaigns_2();
+function renderCampaignTable(filtered) {
+
+    const tbody = document.getElementById("campaignTableBody");
+
+    tbody.innerHTML = filtered.map(c => `
+
+        <tr data-id="${c.id}">
+
+            <td>
+                <div class="camp-name">${c.name}</div>
+            </td>
+
+            <td>
+                ${fmtDate(c.start)} - ${fmtDate(c.end)}
+            </td>
+
+            <td>
+
+                <span class="status-chip ${c.status == "Completed" ? "completed" : "progress"}">
+
+                    <span class="dot"></span>
+
+                    ${c.status}
+
+                </span>
+
+            </td>
+            <td>${c.rates[0].value} %</td>
+
+            <td>${c.rates[0].value} %</td>
+
+            <td>${c.rates[1].value} %</td>
+
+            <td>${c.summary}</td>
+
+            <td>
+
+                <span class="view-link">
+
+                    View Dashboard →
+
+                </span>
+
+            </td>
+
+        </tr>
+
+    `).join("");
+
+    tbody.querySelectorAll("tr").forEach(tr => {
+
+        tr.onclick = function () {
+
+            state.view = this.dataset.id;
+
+            render();
+
+        };
+
+    });
+
+}
+
+/* ============== CAMPAIGN DASHBOARD VIEW ============== */
+function countUp(el, target, duration=700){
+  const start = performance.now();
+  function step(now){
+    const p = Math.min((now-start)/duration, 1);
+    const eased = 1 - Math.pow(1-p, 3);
+    el.textContent = Math.round(target*eased);
+    if(p<1) requestAnimationFrame(step); else el.textContent = target;
+  }
+  requestAnimationFrame(step);
+}
+function tileClass(s){
+  if(s.key==='sent' || s.key==='fusent') return 'sent';
+  if(s.key==='optout') return 'opted';
+  if(s.key==='clicked' || s.key==='fuclicked') return 'clicked';
+  return '';
+}
+function buildRow(stages, wrap, tooltip){
+  const row = document.createElement('div');
+  row.className = 'fn-row';
+  const maxVal = Math.max(...stages.map(s=>s.value), 1);
+  stages.forEach((s,i)=>{
+    const tile = document.createElement('div');
+    tile.className = 'fn-tile ' + tileClass(s);
+    const grow = Math.max(0.62, s.value/maxVal) * 1.4;
+    tile.style.flex = `${grow} ${grow} 0`;
+    tile.innerHTML = `
+      <div class="fn-label">${s.label}</div>
+      <div class="fn-value" data-target="${s.value}">0</div>
+      <div class="fn-badge">${s.rate!==null ? fmtPct(s.rate)+' of prior' : 'Baseline'}</div>
+    `;
+    tile.addEventListener('mousemove', (e)=>{
+      const bb = wrap.getBoundingClientRect();
+      tooltip.innerHTML = `<b>${s.label}</b><br>${s.value} contacts${s.rate!==null ? ' · '+fmtPct(s.rate)+' of prior stage' : ''}`;
+      tooltip.style.left = (e.clientX - bb.left + 16) + 'px';
+      tooltip.style.top = (e.clientY - bb.top - 10) + 'px';
+      tooltip.classList.add('show');
+    });
+    tile.addEventListener('mouseleave', ()=> tooltip.classList.remove('show'));
+    row.appendChild(tile);
+    if(i < stages.length-1){
+      const next = stages[i+1];
+      const connector = document.createElement('div');
+      connector.className = 'fn-connector';
+      connector.innerHTML = `<span class="chip">${fmtPct(next.rate)}</span>`;
+      row.appendChild(connector);
+    }
+  });
+  return row;
+}
+
+function renderCampaign(camp){
+  const app = document.getElementById('app');
+  const statusLabel = camp.status==='completed' ? 'Completed' : 'In Progress';
+  const statusClass = camp.status==='completed' ? 'completed' : 'progress';
+  const totalLeads = camp.contacts.length;
+
+  app.innerHTML = `
+    <div style="margin-top:26px;">
+      <button class="back-link" id="backBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to summary
+      </button>
+      ${camp.placeholder ? `<div class="placeholder-note">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+        Sample placeholder campaign — swap in real data when available.
+      </div>` : ''}
+      <div class="camp-header">
+        <div>
+          <h1 class="camp-title">${camp.name}</h1>
+          <p class="camp-period">${fmtDate(camp.start)} → ${fmtDate(camp.end)}</p>
+        </div>
+        <span class="status-pill ${statusClass}"><span class="dot"></span>${statusLabel}</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-chip"><div class="n">${camp.funnel.mailer[0].value}</div><div class="l">Sent</div></div>
+        <div class="kpi-chip"><div class="n">${camp.rates[0].value.toFixed(1)}%</div><div class="l">Open Rate</div></div>
+        <div class="kpi-chip"><div class="n">${camp.rates[2].value.toFixed(1)}%</div><div class="l">Click-to-Open</div></div>
+        <div class="kpi-chip"><div class="n">${camp.rates[5].value.toFixed(1)}%</div><div class="l">Opt-out</div></div>
+        <div class="kpi-chip"><div class="n">${totalLeads}</div><div class="l">Qualified Leads</div></div>
+      </div>
+
+      <div class="section" style="margin-top:0;">
+        <div class="section-head">
+          <h2>Engagement funnel</h2>
+          <span class="sub">Hover any stage for detail</span>
+        </div>
+        <div class="funnel-card">
+          <div class="funnel-wrap" id="funnelWrap">
+            <div class="tooltip" id="tooltip"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Engagement insights</h2>
+          <span class="sub">Rates across the sequence · click share by channel</span>
+        </div>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <div class="card-title">Engagement rates</div>
+            <div class="chart-box"><canvas id="rateChart"></canvas></div>
+          </div>
+          <div class="insight-card">
+            <div class="card-title">Click breakdown</div>
+            <div class="chart-box donut">
+              <div class="donut-wrap">
+                <canvas id="clickDonut"></canvas>
+                <div class="donut-center"><div class="n" id="donutTotal">0</div><div class="l">clicks</div></div>
+              </div>
+              <div class="legend" id="clickLegend"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Interested contacts</h2>
+          <span class="sub">Clicked &amp; verified as genuine</span>
+        </div>
+        <div class="contacts-card">
+          <div class="contacts-toolbar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input id="searchInput" placeholder="Search name, organization, or email…">
+            </div>
+            <span class="count-badge" id="countBadge"></span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th data-key="sent">Mail sent <span class="arrow">↕</span></th>
+                <th data-key="clicked">Clicked on <span class="arrow">↕</span></th>
+                <th data-key="name">Name <span class="arrow">↕</span></th>
+                <th data-key="org">Organization <span class="arrow">↕</span></th>
+                <th>Contact</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="contactsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('backBtn').onclick = ()=>{ state.view='summary'; render(); };
+
+  /* funnel */
+  const funnelWrap = document.getElementById('funnelWrap');
+  const tooltip = document.getElementById('tooltip');
+  const rowA = buildRow(camp.funnel.mailer, funnelWrap, tooltip);
+  funnelWrap.appendChild(rowA);
+  const branch = document.createElement('div');
+  branch.className = 'fn-branch';
+  branch.innerHTML = `<span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg> ${camp.funnel.fu[0].value} opened contacts continued to follow-up</span>`;
+  funnelWrap.appendChild(branch);
+  const rowB = buildRow(camp.funnel.fu, funnelWrap, tooltip);
+  funnelWrap.appendChild(rowB);
+
+  const tiles = funnelWrap.querySelectorAll('.fn-tile');
+  tiles.forEach((t,i)=> setTimeout(()=>{ t.classList.add('in'); countUp(t.querySelector('.fn-value'), parseInt(t.querySelector('.fn-value').dataset.target)); }, i*90));
+  funnelWrap.querySelectorAll('.fn-connector').forEach((c,i)=> setTimeout(()=> c.classList.add('in'), 140+i*90));
+  setTimeout(()=> branch.classList.add('in'), 140+tiles.length*90);
+
+  /* rate chart */
+  new Chart(document.getElementById('rateChart'), {
+    type:'bar',
+    data:{
+      labels: camp.rates.map(r=>r.label),
+      datasets:[{
+        data: camp.rates.map(r=>r.value),
+        backgroundColor: camp.rates.map(r => r.kind==='warn' ? '#E24B4B' : (r.kind==='good' ? '#3A2E7A' : '#EF4060')),
+        borderRadius:5, maxBarThickness:18
+      }]
+    },
+    options:{
+      indexAxis:'y',
+      plugins:{ legend:{ display:false }, tooltip:{ backgroundColor:'#1E1745', padding:10, callbacks:{ label: ctx => ` ${ctx.raw}%` } } },
+      scales:{
+        x:{ beginAtZero:true, max:100, grid:{ color:'#F1EFF7' }, ticks:{ font:{size:10}, callback:v=>v+'%' } },
+        y:{ grid:{ display:false }, ticks:{ font:{size:11.5} } }
+      },
+      animation:{ duration:900 }
+    }
+  });
+
+  /* click donut */
+  const totalClicks = camp.clicks.reduce((s,c)=>s+c.count,0);
+  document.getElementById('donutTotal').textContent = totalClicks;
+  new Chart(document.getElementById('clickDonut'), {
+    type:'doughnut',
+    data:{ labels: camp.clicks.map(c=>c.name), datasets:[{ data: camp.clicks.map(c=>c.count), backgroundColor: camp.clicks.map(c=>c.color), borderWidth:0, hoverOffset:6 }] },
+    options:{
+      cutout:'68%',
+      plugins:{ legend:{ display:false }, tooltip:{ backgroundColor:'#1E1745', padding:10, callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.raw} contacts` } } },
+      animation:{ duration:900 }
+    }
+  });
+  const legend = document.getElementById('clickLegend');
+  camp.clicks.forEach(c=>{
+    const row = document.createElement('div');
+    row.className = 'legend-item';
+    row.innerHTML = `<span class="sw" style="background:${c.color}"></span><span class="lbl">${c.name}</span><span class="val">${c.count}</span>`;
+    legend.appendChild(row);
+  });
+
+  /* contacts table */
+  renderContacts(camp);
+}
+
+function initials(name){ return name.split(' ').map(p=>p[0]).join('').slice(0,2).toUpperCase(); }
+
+function renderContacts(camp){
+  const tbody = document.getElementById('contactsBody');
+  const searchInput = document.getElementById('searchInput');
+  const countBadge = document.getElementById('countBadge');
+  let sortKey='sent', sortDir=1;
+
+  function draw(){
+    const q = searchInput.value.trim().toLowerCase();
+    let rows = camp.contacts.filter(c => c.name.toLowerCase().includes(q) || c.org.toLowerCase().includes(q) || c.email.toLowerCase().includes(q));
+    rows.sort((a,b)=>{ const av=a[sortKey], bv=b[sortKey]; if(av<bv) return -1*sortDir; if(av>bv) return 1*sortDir; return 0; });
+    tbody.innerHTML = rows.length===0
+      ? `<tr><td colspan="6" style="text-align:center;color:var(--slate);padding:32px;">No contacts match your search.</td></tr>`
+      : rows.map(c=>`
+        <tr>
+          <td>${fmtDate(c.sent)}</td>
+          <td>${fmtDate(c.clicked)}</td>
+          <td><div class="contact-name-row"><div class="contact-avatar">${initials(c.name)}</div><div><div class="contact-name">${c.name}</div><div class="contact-org">${c.org}</div></div></div></td>
+          <td>${c.org}</td>
+          <td><div><a class="email-link" href="mailto:${c.email}">${c.email}</a></div><div><a class="phone-link" href="tel:${c.phone.replace(/ /g,'')}">${c.phone}</a></div></td>
+          <td><span class="tag-genuine">Genuine</span></td>
+        </tr>`).join('');
+    countBadge.textContent = rows.length + (rows.length===1 ? ' contact' : ' contacts');
+  }
+
+  document.querySelectorAll('thead th[data-key]').forEach(th=>{
+    th.onclick = ()=>{
+      const key = th.dataset.key;
+      if(sortKey===key){ sortDir *= -1; } else { sortKey=key; sortDir=1; }
+      draw();
+    };
+  });
+  searchInput.addEventListener('input', draw);
+  console.log(camp.contacts);
+  console.log(camp.contacts[0]);
+    console.log(camp.contacts[0].sent);
+  draw();
+}
+
+/* ============== ROOT RENDER ============== */
+function render(){
+  renderNav();
+  if(state.view==='summary'){
+    renderSummary();
+  } else {
+    const camp = campaigns.find(c=>c.id===state.view);
+    if(camp) renderCampaign(camp);
+    else { state.view='summary'; renderSummary(); }
+  }
+  document.getElementById('filterNote').textContent = `Showing ${campaigns.filter(inRange).length} of ${campaigns.length} campaigns · ${fmtDate(state.dateFrom)} – ${fmtDate(state.dateTo)}`;
+}
+
+document.getElementById('applyFilter').addEventListener('click', ()=>{
+  state.dateFrom = document.getElementById('dateFrom').value || allStarts[0];
+  state.dateTo = document.getElementById('dateTo').value || allEnds[allEnds.length-1];
+  render();
+});
+document.getElementById('resetFilter').addEventListener('click', ()=>{
+  state.dateFrom = allStarts[0];
+  state.dateTo = allEnds[allEnds.length-1];
+  document.getElementById('dateFrom').value = state.dateFrom;
+  document.getElementById('dateTo').value = state.dateTo;
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

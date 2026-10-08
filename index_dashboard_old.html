@@ -1,0 +1,2173 @@
+<!DOCTYPE html>
+<html lang="en" data-org="eurekii">
+<head>
+<meta charset="UTF-8">
+<title>Campaign Analytics — Organization Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root, [data-org="trivium"], [data-org="ga4-trivium"]{
+    --c1:#EF4060; --c2:#F4813E;
+    --dark1:#2E2260; --dark2:#1E1745; --dark3:#3A2E7A;
+    --tintA:#EFEDFA; --tintB:#FBEAE5;
+    --bg:#F0EFF5;
+    --font-display:'Poppins', sans-serif;
+  }
+  [data-org="eurekii"], [data-org="ga4-eurekii"]{
+    --c1:#F0640A; --c2:#F2B705;
+    --dark1:#0B1E5C; --dark2:#000E3E; --dark3:#30A7CF;
+    --tintA:#EAF1FB; --tintB:#FDEEE0;
+    --bg:#F2F4FA;
+    --font-display:'Quicksand', sans-serif;
+  }
+  [data-org="ga4-cte"]{
+    --c1:#6E9A1B; --c2:#0E8FB5;
+    --dark1:#0B0B0C; --dark2:#000000; --dark3:#E0A62E;
+    --tintA:#F2F6E8; --tintB:#E7F6FA;
+    --bg:#F4F4F2;
+    --font-display:'Poppins', sans-serif;
+  }
+  :root{
+    --grad: linear-gradient(90deg, var(--c1) 0%, var(--c2) 100%);
+    --ink:#2B2740; --slate:#6B7085; --slate-soft:#9CA0B3;
+    --surface:#FFFFFF;
+    --border:#E7E5F0; --red:#E24B4B; --red-light:#FBE7E7;
+    --amber:#C98A1F; --amber-light:#FBF0DC;
+    --radius-lg:20px; --radius-md:14px; --radius-sm:10px;
+    --shadow: 0 10px 30px rgba(46,34,96,0.08);
+    --shadow-sm: 0 4px 14px rgba(46,34,96,0.06);
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; transition:background .25s; }
+  h1,h2,h3{ font-family:var(--font-display); }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px 70px; }
+  button{ font-family:'Inter'; cursor:pointer; }
+
+  /* ---------- ORG SWITCHER ---------- */
+  .org-switcher{
+    background:#17151C; display:flex; align-items:center; gap:6px; padding:10px 32px;
+  }
+  .org-tab{
+    display:flex; align-items:center; gap:8px; background:transparent; border:1px solid transparent;
+    border-radius:10px; padding:8px 16px; transition:.15s;
+  }
+  .org-tab .org-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .org-tab .org-name{ color:#8B87A0; font-family:'Inter'; font-weight:600; font-size:13px; }
+  .org-tab.active{ background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.16); box-shadow: inset 0 -2px 0 var(--c1); }
+  .org-tab.active .org-name{ color:#fff; }
+  .org-tab:not(.active):hover{ background:rgba(255,255,255,0.04); }
+  .org-tab:not(.active) .org-dot{ opacity:.5; }
+
+  /* ---------- TOP BAR ---------- */
+  header.topbar{
+    background: radial-gradient(1100px 420px at 85% -10%, color-mix(in srgb, var(--c2) 35%, transparent), transparent 60%),
+                linear-gradient(160deg, var(--dark1) 0%, var(--dark2) 100%);
+    color:#fff; padding:26px 32px 22px; position:relative; overflow:hidden; transition:background .3s;
+  }
+  header.topbar::before{
+    content:""; position:absolute; left:-80px; bottom:-120px; width:320px; height:320px;
+    border-radius:50%; background:radial-gradient(circle, color-mix(in srgb, var(--c1) 30%, transparent), transparent 70%);
+  }
+  header.topbar::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background:var(--grad);
+  }
+  [data-org="eurekii"] header.topbar, [data-org="ga4-eurekii"] header.topbar{
+    background: linear-gradient(90deg, #001576 0%, #003c8e 45%, #0150B2 100%);
+  }
+  [data-org="eurekii"] header.topbar::before, [data-org="ga4-eurekii"] header.topbar::before{ display:none; }
+  .topbar-inner{ max-width:1180px; margin:0 auto; position:relative; z-index:2; }
+  .topbar-row{ display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:18px; }
+  .brand-block{ display:flex; align-items:center; gap:16px; }
+  .header-logo-chip{
+    background:transparent; border-radius:12px; padding:0; display:inline-flex; align-items:center;
+    flex-shrink:0;
+  }
+  [data-org="trivium"] .header-logo-chip, [data-org="ga4-trivium"] .header-logo-chip{
+    background:#fff; padding:9px 16px; box-shadow:0 8px 20px rgba(0,0,0,0.18);
+  }
+  [data-org="ga4-cte"] .header-logo-chip{
+    background:#fff; padding:9px 16px; box-shadow:0 8px 20px rgba(0,0,0,0.18);
+  }
+  .header-logo{ height:30px; display:block; }
+  [data-org="trivium"] .header-logo, [data-org="ga4-trivium"] .header-logo{ height:26px; }
+  [data-org="ga4-cte"] .header-logo{ height:22px; }
+  .eyebrow{ font-family:var(--font-display); font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#C9C3E8; margin:0 0 8px; }
+  h1.brand-title{ font-weight:800; font-size:clamp(24px,3.4vw,34px); margin:0; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+
+  .date-filter{ display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); border-radius:100px; padding:7px 9px 7px 16px; }
+  .date-filter label{ font-size:11px; color:#C9C3E8; font-weight:600; }
+  .date-filter input[type=date]{ background:transparent; border:none; color:#fff; font-family:'Inter'; font-size:12.5px; font-weight:600; color-scheme:dark; outline:none; }
+  .date-filter .sep{ color:#7A72A6; }
+  .date-filter button{ border:none; border-radius:100px; padding:7px 15px; font-size:12px; font-weight:700; }
+  .btn-apply{ background:var(--grad); color:#fff; }
+  .btn-reset{ background:rgba(255,255,255,0.1); color:#C9C3E8; }
+  .filter-note{ font-size:11.5px; color:#AFA8D2; margin-top:8px; text-align:right; }
+
+  /* ---------- NAV PILLS ---------- */
+  .campaign-nav{ display:flex; gap:8px; padding:14px 32px; background:#F5F4FA; border-bottom:1px solid var(--border); overflow-x:auto; max-width:1180px; margin:0 auto; }
+  .nav-pill{ border:1px solid var(--border); background:#fff; color:var(--slate); border-radius:100px; padding:8px 16px; font-size:12.5px; font-weight:600; white-space:nowrap; transition:.15s; }
+  .nav-pill.active{ background:var(--dark1); color:#fff; border-color:var(--dark1); }
+  .nav-pill:not(.active):not(.dim):hover{ border-color:var(--c1); color:var(--c1); }
+  .nav-pill.dim{ opacity:.4; cursor:not-allowed; }
+  .nav-pill .status-dot{ display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+
+  /* ---------- SECTIONS / CARDS ---------- */
+  .section{ margin-top:34px; }
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap; gap:10px; }
+  .section-head h2{ font-weight:700; font-size:18px; margin:0; color:var(--dark1); }
+  .section-head .sub{ font-size:12.5px; color:var(--slate); }
+  .card{ background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:22px 24px; }
+
+  /* ---------- SUMMARY: KPI ROW ---------- */
+  .kpi-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:22px; }
+  @media(max-width:900px){ .kpi-grid{ grid-template-columns:repeat(2,1fr); } }
+  .kpi-card{ background:var(--surface); border-radius:var(--radius-md); box-shadow:var(--shadow-sm); padding:16px 18px; }
+  .kpi-card .l{ font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--slate); font-weight:700; }
+  .kpi-card .n{ font-family:var(--font-display); font-weight:800; font-size:24px; margin-top:6px; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  [data-org="eurekii"] .kpi-card .n, [data-org="ga4-eurekii"] .kpi-card .n{ background:none; -webkit-background-clip:initial; background-clip:initial; color:#0057A6; }
+
+  /* ---------- SUMMARY: campaign table ---------- */
+  .table-card{ background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow); overflow:hidden; }
+  table{ width:100%; border-collapse:collapse; }
+  thead th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--slate); padding:14px 22px; border-bottom:1px solid var(--border); cursor:pointer; user-select:none; white-space:nowrap; font-weight:700; }
+  thead th:hover{ color:var(--c1); }
+  thead th .arrow{ font-size:10px; margin-left:4px; opacity:.5; }
+  tbody td{ padding:15px 22px; border-bottom:1px solid var(--border); font-size:13.5px; vertical-align:middle; }
+  tbody tr:last-child td{ border-bottom:none; }
+  tbody tr{ cursor:pointer; transition:.12s; }
+  tbody tr:hover{ background:var(--bg); }
+  .camp-name{ font-weight:700; color:var(--dark1); }
+  .camp-period{ font-size:11.5px; color:var(--slate-soft); margin-top:2px; }
+  .status-chip{ display:inline-flex; align-items:center; gap:6px; padding:4px 11px; border-radius:100px; font-size:11px; font-weight:700; }
+  .status-chip.completed{ background:var(--tintB); color:var(--c1); }
+  .status-chip.progress{ background:var(--amber-light); color:var(--amber); }
+  .status-chip .dot{ width:6px; height:6px; border-radius:50%; background:currentColor; }
+  .view-link{ color:var(--c1); font-weight:700; font-size:12.5px; }
+
+  /* ---------- CAMPAIGN DASHBOARD ---------- */
+  .camp-header{ display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:22px; }
+  .back-link{ display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:var(--slate); text-decoration:none; margin-bottom:10px; background:none; border:none; padding:0; }
+  .back-link:hover{ color:var(--c1); }
+  .back-link svg{ width:14px; height:14px; }
+  h1.camp-title{ font-weight:800; font-size:26px; margin:0 0 4px; color:var(--dark1); }
+  .camp-period{ font-size:13px; color:var(--slate); font-weight:500; }
+  .status-pill{ display:inline-flex; align-items:center; gap:8px; color:#fff; padding:9px 18px; border-radius:100px; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
+  .status-pill.completed{ background:var(--grad); box-shadow:0 8px 20px rgba(0,0,0,0.18); }
+  .status-pill.progress{ background:linear-gradient(90deg,#C98A1F,#E0AB4E); box-shadow:0 8px 20px rgba(201,138,31,0.28); }
+  .status-pill .dot{ width:7px; height:7px; border-radius:50%; background:#fff; }
+
+  .kpi-row{ display:flex; gap:12px; margin-bottom:28px; flex-wrap:wrap; }
+  .kpi-chip{ background:var(--surface); border-radius:var(--radius-sm); padding:12px 16px; box-shadow:var(--shadow-sm); min-width:112px; }
+  .kpi-chip .n{ font-family:var(--font-display); font-weight:800; font-size:20px; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  [data-org="eurekii"] .kpi-chip .n, [data-org="ga4-eurekii"] .kpi-chip .n{ background:none; -webkit-background-clip:initial; background-clip:initial; color:#0057A6; }
+  .kpi-chip .l{ font-size:10.5px; color:var(--slate); font-weight:600; margin-top:1px; }
+
+  /* funnel */
+  .funnel-card{ background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:24px 24px 22px; }
+  .funnel-wrap{ position:relative; }
+  .fn-row{ display:flex; align-items:stretch; gap:0; }
+  .fn-tile{ position:relative; background:var(--surface); border:1.5px solid var(--border); border-radius:var(--radius-sm); padding:16px 14px; text-align:center; cursor:pointer; opacity:0; transform:translateY(14px); min-width:0; transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease; }
+  .fn-tile.in{ animation: fnPop .55s cubic-bezier(.2,.7,.3,1.15) forwards; }
+  @keyframes fnPop{ to{ opacity:1; transform:translateY(0); } }
+  .fn-tile:hover{ box-shadow:0 14px 30px rgba(0,0,0,0.14); transform:translateY(-3px); border-color:transparent; z-index:3; }
+  .fn-tile .fn-label{ font-family:'Inter'; font-weight:600; font-size:12px; color:var(--slate); }
+  .fn-tile .fn-value{ font-family:var(--font-display); font-weight:800; font-size:24px; margin-top:5px; line-height:1; color:var(--dark1); }
+  .fn-tile .fn-badge{ display:inline-block; margin-top:7px; font-family:var(--font-display); font-weight:700; font-size:10.5px; padding:2px 9px; border-radius:100px; background:var(--tintB); color:var(--c1); opacity:0; transition:opacity .2s; }
+  .fn-tile:hover .fn-badge{ opacity:1; }
+  .fn-tile.sent{ background:var(--tintA); border-color:transparent; }
+  .fn-tile.sent .fn-label{ color:var(--dark3); }
+  .fn-tile.opted{ background:var(--red-light); border-color:transparent; }
+  .fn-tile.opted .fn-value, .fn-tile.opted .fn-label{ color:var(--red); }
+  .fn-tile.clicked{ background:var(--tintB); border-color:transparent; }
+  .fn-tile.clicked .fn-value{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  [data-org="eurekii"] .fn-tile.clicked .fn-value, [data-org="ga4-eurekii"] .fn-tile.clicked .fn-value{ background:none; -webkit-background-clip:initial; background-clip:initial; color:#0057A6; }
+  .fn-tile.clicked .fn-label{ color:var(--c1); }
+  .fn-connector{ flex:0 0 58px; position:relative; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s; }
+  .fn-connector.in{ opacity:1; }
+  .fn-connector::before{ content:""; position:absolute; left:2px; right:2px; top:50%; height:2px; transform:translateY(-50%); background:linear-gradient(90deg, var(--border), var(--c1) 50%, var(--border)); border-radius:2px; }
+  .fn-connector .chip{ position:relative; z-index:2; background:#fff; border:1px solid var(--border); border-radius:100px; padding:4px 9px; font-family:var(--font-display); font-weight:700; font-size:10.5px; color:var(--c1); box-shadow:0 4px 10px rgba(0,0,0,0.07); white-space:nowrap; }
+  .fn-branch{ display:flex; align-items:center; gap:12px; margin:18px 0; opacity:0; transition:opacity .35s; }
+  .fn-branch.in{ opacity:1; }
+  .fn-branch::before{ content:""; flex:0 0 44px; height:1px; background:var(--border); }
+  .fn-branch::after{ content:""; flex:1; height:1px; background:var(--border); }
+  .fn-branch .chip{ display:inline-flex; align-items:center; gap:7px; background:var(--dark1); color:#fff; border-radius:100px; padding:7px 16px; font-family:var(--font-display); font-weight:700; font-size:11.5px; box-shadow:0 8px 18px rgba(0,0,0,0.18); white-space:nowrap; }
+  .fn-branch .chip svg{ width:13px; height:13px; }
+
+  .tooltip{ position:absolute; pointer-events:none; background:var(--dark2); color:#fff; padding:10px 14px; border-radius:10px; font-size:12px; line-height:1.5; font-family:'Inter'; box-shadow:0 14px 28px rgba(0,0,0,0.35); z-index:50; opacity:0; transition:opacity .12s; max-width:220px; }
+  .tooltip b{ font-family:var(--font-display); color:var(--c2); }
+  .tooltip.show{ opacity:1; }
+
+  /* insight charts */
+  .insight-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:14px; }
+  @media(max-width:800px){ .insight-grid{ grid-template-columns:1fr; } }
+  .insight-card{ background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:20px 22px; }
+  .insight-card .card-title{ font-family:var(--font-display); font-weight:700; font-size:13.5px; color:var(--dark1); }
+  .chart-box{ height:200px; margin-top:6px; }
+  .chart-box.donut{ display:flex; align-items:center; gap:16px; height:170px; }
+  .donut-wrap{ position:relative; width:110px; height:110px; flex-shrink:0; }
+  .donut-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; pointer-events:none; }
+  .donut-center .n{ font-family:var(--font-display); font-weight:800; font-size:17px; color:var(--dark1); }
+  .donut-center .l{ font-size:9px; color:var(--slate); font-weight:600; }
+  .legend{ display:flex; flex-direction:column; gap:9px; flex:1; }
+  .legend-item{ display:flex; align-items:center; gap:8px; font-size:12.5px; }
+  .legend-item .sw{ width:9px; height:9px; border-radius:3px; flex-shrink:0; }
+  .legend-item .lbl{ color:var(--slate); }
+  .legend-item .val{ font-weight:700; color:var(--dark1); margin-left:auto; padding-left:10px; }
+  .legend-item.stacked{ align-items:flex-start; flex-direction:column; gap:2px; }
+  .legend-item.stacked .row1{ display:flex; align-items:center; gap:8px; width:100%; }
+  .legend-item.stacked .desc{ font-size:11px; color:var(--slate-soft); padding-left:17px; line-height:1.4; }
+
+  /* GA4: KPI delta */
+  .kpi-delta{ font-size:10.5px; font-weight:700; margin-top:4px; display:inline-flex; align-items:center; gap:3px; }
+  .kpi-delta.up{ color:#1F9D55; }
+  .kpi-delta.down{ color:var(--red); }
+  .kpi-delta svg{ width:10px; height:10px; }
+
+  /* GA4: day callouts */
+  .day-callout-row{ display:flex; gap:12px; margin-top:14px; flex-wrap:wrap; }
+  .day-callout{ display:flex; align-items:center; gap:10px; background:var(--tintA); border-radius:var(--radius-sm); padding:10px 16px; flex:1; min-width:180px; }
+  .day-callout .ico{ width:30px; height:30px; border-radius:8px; background:var(--surface); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--c1); }
+  .day-callout .ico svg{ width:15px; height:15px; }
+  .day-callout .lbl{ font-size:10.5px; color:var(--slate); font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
+  .day-callout .val{ font-family:var(--font-display); font-weight:800; font-size:14px; color:var(--dark1); }
+
+  /* GA4: click list */
+  .click-list-row{ display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .click-list-row:last-child{ border-bottom:none; }
+  .click-list-count{
+    font-family:var(--font-display); font-weight:800; font-size:16px; color:var(--c1); background:var(--tintB);
+    border-radius:8px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .click-list-text .t1{ font-weight:700; font-size:13px; color:var(--dark1); }
+  .click-list-text .t2{ font-size:11.5px; color:var(--slate); margin-top:2px; }
+  .video-note{ background:var(--tintB); border-radius:var(--radius-sm); padding:12px 16px; font-size:12.5px; color:var(--ink); margin-top:14px; display:flex; gap:10px; align-items:flex-start; }
+  .video-note svg{ width:16px; height:16px; color:var(--c1); flex-shrink:0; margin-top:1px; }
+
+  /* contacts */
+  .contacts-card{ background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow); overflow:hidden; }
+  .contacts-toolbar{ display:flex; justify-content:space-between; align-items:center; padding:20px 24px; border-bottom:1px solid var(--border); gap:16px; flex-wrap:wrap; }
+  .search-box{ display:flex; align-items:center; gap:8px; border:1px solid var(--border); border-radius:100px; padding:9px 16px; background:var(--bg); min-width:230px; }
+  .search-box svg{ width:15px; height:15px; color:var(--slate-soft); flex-shrink:0; }
+  .search-box input{ border:none; background:transparent; outline:none; font-family:'Inter'; font-size:13px; width:100%; color:var(--ink); }
+  .count-badge{ font-family:var(--font-display); font-size:12px; font-weight:600; color:var(--slate); }
+  .contact-avatar{ width:34px; height:34px; border-radius:50%; background:var(--grad); color:#fff; font-family:var(--font-display); font-weight:700; font-size:13px; display:inline-flex; align-items:center; justify-content:center; margin-right:10px; flex-shrink:0; }
+  .contact-name-row{ display:flex; align-items:center; }
+  .contact-name{ font-weight:700; color:var(--dark1); }
+  .contact-org{ font-size:12px; color:var(--slate); margin-top:2px; }
+  a.email-link, a.phone-link{ color:var(--c1); text-decoration:none; font-weight:600; font-size:12.5px; }
+  a.email-link:hover, a.phone-link:hover{ text-decoration:underline; }
+  .tag-genuine{ display:inline-flex; align-items:center; gap:6px; background:var(--tintB); color:var(--c1); padding:5px 12px; border-radius:100px; font-size:11px; font-weight:700; }
+  .tag-genuine::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--c1); }
+
+  footer.page-footer{ margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--slate-soft); }
+  .placeholder-note{ display:flex; align-items:center; gap:8px; background:var(--amber-light); color:var(--amber); border-radius:10px; padding:10px 16px; font-size:12px; font-weight:600; margin-bottom:20px; }
+
+  @media (prefers-reduced-motion:reduce){ *{ transition:none !important; animation:none !important; } }
+  /*spinner*/
+    .ga4-loading {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.75);
+        z-index: 9999;
+    
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .ga4-spinner {
+        width: 70px;
+        height: 70px;
+        border: 5px solid #e5e7eb;
+        border-top-color: #2563eb;
+        border-radius: 50%;
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        animation: ga4Spin 0.9s linear infinite;
+    }
+    
+    .ga4-spinner span {
+        font-size: 14px;
+        font-weight: 600;
+        color: #2563eb;
+    
+        animation: ga4CounterRotate 0.9s linear infinite;
+    }
+    
+    .ga4-loading-text {
+        margin-top: 14px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #374151;
+    }
+    
+    @keyframes ga4Spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    @keyframes ga4CounterRotate {
+        to {
+            transform: rotate(-360deg);
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="org-switcher" id="orgSwitcher"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-row">
+      <div class="brand-block">
+        <div class="header-logo-chip"><img class="header-logo" id="headerLogo" alt="Org logo"></div>
+        <div>
+          <p class="eyebrow" id="orgEyebrow">Campaign Analytics</p>
+          <h1 class="brand-title" id="orgTitle">Portfolio Overview</h1>
+        </div>
+      </div>
+      <div>
+        <div class="date-filter">
+          <label>From</label>
+          <input type="date" id="dateFrom">
+          <span class="sep">–</span>
+          <label>To</label>
+          <input type="date" id="dateTo">
+          <button class="btn-apply" id="applyFilter">Apply</button>
+          <button class="btn-reset" id="resetFilter">Reset</button>
+        </div>
+        <p class="filter-note" id="filterNote"></p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="campaign-nav" id="campaignNav"></nav>
+
+<div class="wrap" id="app"></div>
+<div id="ga4Loading" class="ga4-loading">
+    <div class="ga4-spinner">
+        <span id="ga4Timer">0s</span>
+    </div>
+    <div class="ga4-loading-text">Loading GA4 data...</div>
+</div>
+<script>
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.color = '#6B7085';
+
+const LOGOS = {
+  trivium: "data:image/png;base64,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",
+  eurekii: "data:image/png;base64,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",
+  'ga4-trivium': "data:image/png;base64,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",
+  'ga4-eurekii': "data:image/png;base64,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",
+  'ga4-cte': "data:image/png;base64,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"
+};
+
+const THEME_COLORS = {
+  trivium: { c1:'#EF4060', c2:'#F4813E', dark3:'#3A2E7A', warn:'#E24B4B' },
+  eurekii: { c1:'#F0640A', c2:'#F2B705', dark3:'#30A7CF', warn:'#E24B4B' },
+  'ga4-trivium': { c1:'#EF4060', c2:'#F4813E', dark3:'#3A2E7A', warn:'#E24B4B' },
+  'ga4-eurekii': { c1:'#F0640A', c2:'#F2B705', dark3:'#30A7CF', warn:'#E24B4B' },
+  'ga4-cte': { c1:'#6E9A1B', c2:'#0E8FB5', dark3:'#E0A62E', warn:'#E24B4B' }
+};
+
+/* ============== PORTFOLIO DATA ============== */
+let ORG_DATA = {};
+
+async function loadCampaigns() {
+    try {
+        const response = await fetch("campaign-dashboard.php");
+        const data = await response.json();
+
+        if (!data.success) {
+            console.error(data.message);
+            return;
+        }
+        const response_trivium = await fetch("campaign-dashboard-trivium.php");
+        const data_trivium = await response_trivium.json();
+
+        if (!data_trivium.success) {
+            console.error(data_trivium.message);
+            return;
+        }
+
+        ORG_DATA = {
+            eurekii: {
+                label: "Eurekii",
+                campaigns: data.campaigns.map(campaign => ({
+                    id: campaign.id,
+                    name: campaign.name,
+                    status: campaign.status.toLowerCase() === "active"
+                        ? "progress"
+                        : "completed",
+
+                    start: campaign.start,
+                    end: campaign.end,
+                    placeholder: false,
+
+                    funnel: {
+                        mailer: [
+                            {
+                                key: "sent",
+                                label: "Sent",
+                                value: Number(campaign.summary.sent),
+                                rate: null
+                            },
+                            {
+                                key: "opened",
+                                label: "Opened",
+                                value: Number(campaign.summary.opened),
+                                rate: campaign.summary.sent
+                                    ? campaign.summary.opened / campaign.summary.sent
+                                    : 0
+                            },
+                            {
+                                key: "clicked",
+                                label: "Clicked",
+                                value: Number(campaign.summary.clicked),
+                                rate: campaign.summary.sent
+                                    ? campaign.summary.clicked / campaign.summary.sent
+                                    : 0
+                            },
+                            {
+                                key: "optout",
+                                label: "Opted out",
+                                value: Number(campaign.summary.optOut),
+                                rate: campaign.summary.sent
+                                    ? campaign.summary.optOut / campaign.summary.sent
+                                    : 0
+                            }
+                        ],
+
+                        fu: [
+                            {
+                                key: "fusent",
+                                label: "FU Sent",
+                                value: Number(campaign.summary.opened),
+                                rate: null
+                            },
+                            {
+                                key: "fuopened",
+                                label: "FU Opened",
+                                value: Number(campaign.summary.opened),
+                                rate: 1
+                            },
+                            {
+                                key: "fuclicked",
+                                label: "FU Clicked",
+                                value: Number(campaign.summary.clicked),
+                                rate: campaign.summary.opened
+                                    ? campaign.summary.clicked / campaign.summary.opened
+                                    : 0
+                            }
+                        ]
+                    },
+
+                    rates: [
+                        {
+                            label: "Mailer Open %",
+                            value: Number(campaign.rates.openRate),
+                            kind: "good"
+                        },
+                        {
+                            label: "Mailer Click %",
+                            value: Number(campaign.rates.clickRate),
+                            kind: ""
+                        },
+                        {
+                            label: "Mailer CTOR %",
+                            value: Number(campaign.rates.ctor),
+                            kind: ""
+                        },
+                        {
+                            label: "Follow-up Open %",
+                            value: Number(campaign.rates.openRate),
+                            kind: "good"
+                        },
+                        {
+                            label: "Follow-up Click %",
+                            value: Number(campaign.rates.clickRate),
+                            kind: ""
+                        },
+                        {
+                            label: "Opt-out %",
+                            value: Number(campaign.rates.optOutRate),
+                            kind: "warn"
+                        }
+                    ],
+
+                    clicks: [
+                        {
+                            name: "Email Clicks",
+                            count: Number(campaign.summary.clicked),
+                            color: "#EF4060"
+                        }
+                    ],
+
+                    contacts: campaign.contacts.map(contact => ({
+                        sent: contact.sent,
+                        clicked: contact.clicked,
+                        name: contact.name || "",
+                        org: contact.org || "",
+                        title: contact.title || "",
+                        email: contact.email || "",
+                        phone: contact.phone || ""
+                    }))
+                }))
+            },
+
+            // Keep your existing static data here
+            trivium: {
+                label: "Trivium",
+                campaigns: data_trivium.campaigns.map(campaign => ({
+                    id: campaign.id,
+                    name: campaign.name,
+                    status: campaign.status.toLowerCase() === "active"
+                        ? "progress"
+                        : "completed",
+
+                    start: campaign.start,
+                    end: campaign.end,
+                    placeholder: false,
+
+                    funnel: {
+                        mailer: [
+                            {
+                                key: "sent",
+                                label: "Sent",
+                                value: Number(campaign.summary.sent),
+                                rate: null
+                            },
+                            {
+                                key: "opened",
+                                label: "Opened",
+                                value: Number(campaign.summary.opened),
+                                rate: campaign.summary.sent
+                                    ? campaign.summary.opened / campaign.summary.sent
+                                    : 0
+                            },
+                            {
+                                key: "clicked",
+                                label: "Clicked",
+                                value: Number(campaign.summary.clicked),
+                                rate: campaign.summary.sent
+                                    ? campaign.summary.clicked / campaign.summary.sent
+                                    : 0
+                            },
+                            {
+                                key: "optout",
+                                label: "Opted out",
+                                value: Number(campaign.summary.optOut),
+                                rate: campaign.summary.sent
+                                    ? campaign.summary.optOut / campaign.summary.sent
+                                    : 0
+                            }
+                        ],
+
+                        fu: [
+                            {
+                                key: "fusent",
+                                label: "FU Sent",
+                                value: Number(campaign.summary.opened),
+                                rate: null
+                            },
+                            {
+                                key: "fuopened",
+                                label: "FU Opened",
+                                value: Number(campaign.summary.opened),
+                                rate: 1
+                            },
+                            {
+                                key: "fuclicked",
+                                label: "FU Clicked",
+                                value: Number(campaign.summary.clicked),
+                                rate: campaign.summary.opened
+                                    ? campaign.summary.clicked / campaign.summary.opened
+                                    : 0
+                            }
+                        ]
+                    },
+
+                    rates: [
+                        {
+                            label: "Mailer Open %",
+                            value: Number(campaign.rates.openRate),
+                            kind: "good"
+                        },
+                        {
+                            label: "Mailer Click %",
+                            value: Number(campaign.rates.clickRate),
+                            kind: ""
+                        },
+                        {
+                            label: "Mailer CTOR %",
+                            value: Number(campaign.rates.ctor),
+                            kind: ""
+                        },
+                        {
+                            label: "Follow-up Open %",
+                            value: Number(campaign.rates.openRate),
+                            kind: "good"
+                        },
+                        {
+                            label: "Follow-up Click %",
+                            value: Number(campaign.rates.clickRate),
+                            kind: ""
+                        },
+                        {
+                            label: "Opt-out %",
+                            value: Number(campaign.rates.optOutRate),
+                            kind: "warn"
+                        }
+                    ],
+
+                    clicks: [
+                        {
+                            name: "Email Clicks",
+                            count: Number(campaign.summary.clicked),
+                            color: "#EF4060"
+                        }
+                    ],
+
+                    contacts: campaign.contacts.map(contact => ({
+                        sent: contact.sent,
+                        clicked: contact.clicked,
+                        name: contact.name || "",
+                        org: contact.org || "",
+                        title: contact.title || "",
+                        email: contact.email || "",
+                        phone: contact.phone || ""
+                    }))
+                }))
+            },
+            
+            'ga4-trivium': { label: 'GA4 – Trivium', type: 'ga4', 
+                reports:[
+                  {
+                    id:'triv-jun22-jul05', name:'Aug 22 – Sept 05, 2026', status:'completed',
+                    start:'2026-08-22', end:'2026-09-05', placeholder:true,
+                    kpis:[
+                      { label:'People Who Visited', value:'342', delta:8.2, desc:'Unique people who visited our site' },
+                      { label:'First-Time Visitors', value:'260', delta:5.1, desc:'People visiting for the very first time' },
+                      { label:'New Visitor Rate', value:'76%', delta:1.0, desc:'Share of visits that were a first-time visit' },
+                      { label:'Visitors Who Engaged', value:'51%', delta:4.4, desc:'Visitors who clicked, scrolled, or spent time reading' },
+                      { label:'Pages per Visit', value:'2.6', delta:6.0, desc:'On average, each visitor looked at ~3 pages' },
+                      { label:'Time Spent on Site', value:'01:12', delta:9.4, desc:'Average time a visitor spent reading our site' },
+                    ],
+                    daily:[
+                      {label:'Jun 22', unique:20, engaged:24, total:34},{label:'Jun 23', unique:26, engaged:20, total:38},
+                      {label:'Jun 24', unique:30, engaged:28, total:44},{label:'Jun 25', unique:18, engaged:16, total:26},
+                      {label:'Jun 26', unique:24, engaged:20, total:33},{label:'Jun 27', unique:10, engaged:6, total:14},
+                      {label:'Jun 28', unique:8, engaged:5, total:10},{label:'Jun 29', unique:22, engaged:19, total:31},
+                      {label:'Jun 30', unique:25, engaged:21, total:35},{label:'Jul 01', unique:23, engaged:20, total:32},
+                      {label:'Jul 02', unique:28, engaged:24, total:39},{label:'Jul 03', unique:27, engaged:22, total:36},
+                      {label:'Jul 04', unique:9, engaged:6, total:13},{label:'Jul 05', unique:8, engaged:5, total:11},
+                    ],
+                    totalVisits:396, bestDay:{ label:'Jun 24 (Wed)', value:44 }, quietestDay:{ label:'Jun 28 (Sun)', value:10 },
+                    device:[ { label:'Computer / Laptop', value:240 }, { label:'Mobile Phone', value:102 } ],
+                    countries:[
+                      { label:'United States', value:200 }, { label:'India', value:60 }, { label:'Canada', value:30 },
+                      { label:'United Kingdom', value:25 }, { label:'Germany', value:12 }, { label:'Australia', value:8 },
+                      { label:'Singapore', value:4 }, { label:'France', value:2 }, { label:'Brazil', value:1 },
+                    ],
+                    acquisition:[
+                      { label:'Direct (typed/bookmarked)', visits:154, pct:45.0, desc:'They already know us — typed our URL directly or have us saved' },
+                      { label:'Organic Search (Google)', visits:137, pct:40.0, desc:'Searched something on Google and clicked our result. Free traffic — no ads!' },
+                      { label:'Referral (link from another site)', visits:41, pct:12.0, desc:'Another site linked to us and someone followed that link' },
+                      { label:'Unknown / Not Tracked', visits:10, pct:3.0, desc:"Analytics couldn't identify where these visitors came from" },
+                    ],
+                    pageViews:[
+                      { name:'Homepage', views:198 }, { name:'Services', views:64 }, { name:'Case Studies', views:44 },
+                      { name:'Pricing', views:38 }, { name:'Contact Us', views:26 }, { name:'About Us', views:22 },
+                      { name:'Careers', views:15 }, { name:'Blog: Outsourcing Trends 2026', views:12 }, { name:'Login', views:9 },
+                      { name:'Resources', views:8 }, { name:'Partners', views:5 }, { name:'FAQ', views:3 },
+                    ],
+                    topPages:[
+                      { name:'Homepage', share:58, bounce:38.0, sessions:198 },
+                      { name:'Services', share:14, bounce:50.0, sessions:48 },
+                      { name:'Case Studies', share:10, bounce:44.0, sessions:34 },
+                      { name:'Pricing', share:9, bounce:55.0, sessions:31 },
+                      { name:'Contact Us', share:6, bounce:60.0, sessions:20 },
+                    ],
+                    highlights:[
+                      { label:'Page Views', value:900, note:'Times any page was opened' },
+                      { label:'Scrolled Down', value:200, note:'People read far enough to scroll' },
+                      { label:'Form Started', value:15, note:'Began filling out a contact form' },
+                      { label:'Form Submitted', value:9, note:'Actually sent us a message' },
+                    ],
+                    behavior:[
+                      { label:'Started a Session', value:342 }, { label:'Viewed a Page', value:900 },
+                      { label:'First Visit', value:260 }, { label:'Engaged with Content', value:510 },
+                      { label:'Scrolled Down', value:200 }, { label:'Watching the Video', value:30 },
+                      { label:'Clicked Something', value:80 }, { label:'File Download', value:25 },
+                      { label:'Started a Video', value:12 }, { label:'Started a Form', value:15 },
+                      { label:'Submitted a Form', value:9 },
+                    ],
+                    video:{
+                      totalEvents:38,
+                      stages:[
+                        { label:'Started Watching', viewers:14, note:'Pressed play on the video' },
+                        { label:'Watched Part of It', viewers:22, note:'Watched 25–75% of the video' },
+                        { label:'Watched It Fully', viewers:2, note:'Watched the entire video to the end' },
+                      ]
+                    },
+                    topClicks:[
+                      { label:'Contact Sales Button', count:22, url:'triviumedu.com/contact-sales/…', pages:['Homepage','Services','Pricing'], note:'Most clicked — prospects requesting a quote' },
+                      { label:'LinkedIn Company Page', count:14, url:'linkedin.com/company/trivium/posts/…', pages:['Homepage','About Us'], note:'Visitors checking company updates' },
+                      { label:'Case Study PDF Download', count:9, url:'triviumedu.com/resources/case-study.pdf', pages:['Case Studies'], note:'Prospects reviewing proof points' },
+                    ]
+                  }
+                ]
+            },
+            // 'ga4-trivium': {
+            //     label:'GA4 – Trivium', type:'ga4',
+            //     reports:[
+            //       {
+            //         id:'triv-jun22-jul05', name:'Jun 22 – Jul 05, 2026', status:'completed',
+            //         start:'2026-06-22', end:'2026-07-05', placeholder:true,
+            //         kpis:[
+            //           { label:'People Who Visited', value:'342', delta:8.2, desc:'Unique people who visited our site' },
+            //           { label:'First-Time Visitors', value:'260', delta:5.1, desc:'People visiting for the very first time' },
+            //           { label:'New Visitor Rate', value:'76%', delta:1.0, desc:'Share of visits that were a first-time visit' },
+            //           { label:'Visitors Who Engaged', value:'51%', delta:4.4, desc:'Visitors who clicked, scrolled, or spent time reading' },
+            //           { label:'Pages per Visit', value:'2.6', delta:6.0, desc:'On average, each visitor looked at ~3 pages' },
+            //           { label:'Time Spent on Site', value:'01:12', delta:9.4, desc:'Average time a visitor spent reading our site' },
+            //         ],
+            //         daily:[
+            //           {label:'Jun 22', unique:20, engaged:24, total:34},{label:'Jun 23', unique:26, engaged:20, total:38},
+            //           {label:'Jun 24', unique:30, engaged:28, total:44},{label:'Jun 25', unique:18, engaged:16, total:26},
+            //           {label:'Jun 26', unique:24, engaged:20, total:33},{label:'Jun 27', unique:10, engaged:6, total:14},
+            //           {label:'Jun 28', unique:8, engaged:5, total:10},{label:'Jun 29', unique:22, engaged:19, total:31},
+            //           {label:'Jun 30', unique:25, engaged:21, total:35},{label:'Jul 01', unique:23, engaged:20, total:32},
+            //           {label:'Jul 02', unique:28, engaged:24, total:39},{label:'Jul 03', unique:27, engaged:22, total:36},
+            //           {label:'Jul 04', unique:9, engaged:6, total:13},{label:'Jul 05', unique:8, engaged:5, total:11},
+            //         ],
+            //         totalVisits:396, bestDay:{ label:'Jun 24 (Wed)', value:44 }, quietestDay:{ label:'Jun 28 (Sun)', value:10 },
+            //         device:[ { label:'Computer / Laptop', value:240 }, { label:'Mobile Phone', value:102 } ],
+            //         countries:[
+            //           { label:'United States', value:200 }, { label:'India', value:60 }, { label:'Canada', value:30 },
+            //           { label:'United Kingdom', value:25 }, { label:'Germany', value:12 }, { label:'Australia', value:8 },
+            //           { label:'Singapore', value:4 }, { label:'France', value:2 }, { label:'Brazil', value:1 },
+            //         ],
+            //         acquisition:[
+            //           { label:'Direct (typed/bookmarked)', visits:154, pct:45.0, desc:'They already know us — typed our URL directly or have us saved' },
+            //           { label:'Organic Search (Google)', visits:137, pct:40.0, desc:'Searched something on Google and clicked our result. Free traffic — no ads!' },
+            //           { label:'Referral (link from another site)', visits:41, pct:12.0, desc:'Another site linked to us and someone followed that link' },
+            //           { label:'Unknown / Not Tracked', visits:10, pct:3.0, desc:"Analytics couldn't identify where these visitors came from" },
+            //         ],
+            //         pageViews:[
+            //           { name:'Homepage', views:198 }, { name:'Services', views:64 }, { name:'Case Studies', views:44 },
+            //           { name:'Pricing', views:38 }, { name:'Contact Us', views:26 }, { name:'About Us', views:22 },
+            //           { name:'Careers', views:15 }, { name:'Blog: Outsourcing Trends 2026', views:12 }, { name:'Login', views:9 },
+            //           { name:'Resources', views:8 }, { name:'Partners', views:5 }, { name:'FAQ', views:3 },
+            //         ],
+            //         topPages:[
+            //           { name:'Homepage', share:58, bounce:38.0, sessions:198 },
+            //           { name:'Services', share:14, bounce:50.0, sessions:48 },
+            //           { name:'Case Studies', share:10, bounce:44.0, sessions:34 },
+            //           { name:'Pricing', share:9, bounce:55.0, sessions:31 },
+            //           { name:'Contact Us', share:6, bounce:60.0, sessions:20 },
+            //         ],
+            //         highlights:[
+            //           { label:'Page Views', value:900, note:'Times any page was opened' },
+            //           { label:'Scrolled Down', value:200, note:'People read far enough to scroll' },
+            //           { label:'Form Started', value:15, note:'Began filling out a contact form' },
+            //           { label:'Form Submitted', value:9, note:'Actually sent us a message' },
+            //         ],
+            //         behavior:[
+            //           { label:'Started a Session', value:342 }, { label:'Viewed a Page', value:900 },
+            //           { label:'First Visit', value:260 }, { label:'Engaged with Content', value:510 },
+            //           { label:'Scrolled Down', value:200 }, { label:'Watching the Video', value:30 },
+            //           { label:'Clicked Something', value:80 }, { label:'File Download', value:25 },
+            //           { label:'Started a Video', value:12 }, { label:'Started a Form', value:15 },
+            //           { label:'Submitted a Form', value:9 },
+            //         ],
+            //         video:{
+            //           totalEvents:38,
+            //           stages:[
+            //             { label:'Started Watching', viewers:14, note:'Pressed play on the video' },
+            //             { label:'Watched Part of It', viewers:22, note:'Watched 25–75% of the video' },
+            //             { label:'Watched It Fully', viewers:2, note:'Watched the entire video to the end' },
+            //           ]
+            //         },
+            //         topClicks:[
+            //           { label:'Contact Sales Button', count:22, url:'triviumedu.com/contact-sales/…', pages:['Homepage','Services','Pricing'], note:'Most clicked — prospects requesting a quote' },
+            //           { label:'LinkedIn Company Page', count:14, url:'linkedin.com/company/trivium/posts/…', pages:['Homepage','About Us'], note:'Visitors checking company updates' },
+            //           { label:'Case Study PDF Download', count:9, url:'triviumedu.com/resources/case-study.pdf', pages:['Case Studies'], note:'Prospects reviewing proof points' },
+            //         ]
+            //       }
+            //     ]
+            //   },
+            
+              'ga4-eurekii': {
+                label:'GA4 – Eurekii', type:'ga4',
+                reports:[
+                  {
+                    id:'eur-jun22-jul05', name:'Jun 22 – Jul 05, 2026', status:'completed',
+                    start:'2026-06-22', end:'2026-07-05', placeholder:true,
+                    kpis:[
+                      { label:'People Who Visited', value:'615', delta:22.3, desc:'Unique people who visited our site' },
+                      { label:'First-Time Visitors', value:'480', delta:19.5, desc:'People visiting for the very first time' },
+                      { label:'New Visitor Rate', value:'78%', delta:1.8, desc:'Share of visits that were a first-time visit' },
+                      { label:'Visitors Who Engaged', value:'58%', delta:2.2, desc:'Visitors who clicked, scrolled, or spent time reading' },
+                      { label:'Pages per Visit', value:'3.1', delta:12.0, desc:'On average, each visitor looked at ~3 pages' },
+                      { label:'Time Spent on Site', value:'02:05', delta:15.0, desc:'Average time a visitor spent reading our site' },
+                    ],
+                    daily:[
+                      {label:'Jun 22', unique:38, engaged:44, total:60},{label:'Jun 23', unique:42, engaged:50, total:66},
+                      {label:'Jun 24', unique:55, engaged:60, total:80},{label:'Jun 25', unique:30, engaged:28, total:44},
+                      {label:'Jun 26', unique:45, engaged:42, total:58},{label:'Jun 27', unique:20, engaged:15, total:25},
+                      {label:'Jun 28', unique:15, engaged:10, total:18},{label:'Jun 29', unique:40, engaged:38, total:54},
+                      {label:'Jun 30', unique:48, engaged:45, total:62},{label:'Jul 01', unique:44, engaged:40, total:58},
+                      {label:'Jul 02', unique:50, engaged:48, total:66},{label:'Jul 03', unique:52, engaged:50, total:68},
+                      {label:'Jul 04', unique:18, engaged:14, total:22},{label:'Jul 05', unique:16, engaged:12, total:20},
+                    ],
+                    totalVisits:701, bestDay:{ label:'Jun 24 (Wed)', value:80 }, quietestDay:{ label:'Jun 28 (Sun)', value:18 },
+                    device:[ { label:'Computer / Laptop', value:240 }, { label:'Mobile Phone', value:375 } ],
+                    countries:[
+                      { label:'United States', value:550 }, { label:'Canada', value:35 }, { label:'India', value:15 },
+                      { label:'United Kingdom', value:10 }, { label:'Australia', value:5 },
+                    ],
+                    acquisition:[
+                      { label:'Direct (typed/bookmarked)', visits:185, pct:30.0, desc:'They already know us — typed our URL directly or have us saved' },
+                      { label:'Organic Search (Google)', visits:338, pct:55.0, desc:'Searched something on Google and clicked our result. Free traffic — no ads!' },
+                      { label:'Referral (link from another site)', visits:74, pct:12.0, desc:'Another site linked to us and someone followed that link' },
+                      { label:'Unknown / Not Tracked', visits:18, pct:3.0, desc:"Analytics couldn't identify where these visitors came from" },
+                    ],
+                    pageViews:[
+                      { name:'Homepage', views:308 }, { name:'Tutoring Programs', views:145 }, { name:'Pricing', views:98 },
+                      { name:'Book a Session', views:80 }, { name:'Resources', views:52 }, { name:'About Us', views:38 },
+                      { name:'Tutor Bios', views:28 }, { name:'Blog: Study Tips', views:20 }, { name:'FAQ', views:14 },
+                      { name:'Login', views:9 }, { name:'Contact Us', views:6 }, { name:'Careers', views:2 },
+                    ],
+                    topPages:[
+                      { name:'Homepage', share:50, bounce:35.0, sessions:308 },
+                      { name:'Tutoring Programs', share:20, bounce:30.0, sessions:123 },
+                      { name:'Pricing', share:12, bounce:45.0, sessions:74 },
+                      { name:'Book a Session', share:10, bounce:25.0, sessions:62 },
+                      { name:'Resources', share:5, bounce:50.0, sessions:31 },
+                    ],
+                    highlights:[
+                      { label:'Page Views', value:1800, note:'Times any page was opened' },
+                      { label:'Scrolled Down', value:400, note:'People read far enough to scroll' },
+                      { label:'Form Started', value:60, note:'Began booking a session' },
+                      { label:'Form Submitted', value:42, note:'Completed a booking request' },
+                    ],
+                    behavior:[
+                      { label:'Started a Session', value:615 }, { label:'Viewed a Page', value:1800 },
+                      { label:'First Visit', value:480 }, { label:'Engaged with Content', value:950 },
+                      { label:'Scrolled Down', value:400 }, { label:'Watching the Video', value:130 },
+                      { label:'Clicked Something', value:150 }, { label:'File Download', value:40 },
+                      { label:'Started a Video', value:60 }, { label:'Started a Form', value:60 },
+                      { label:'Submitted a Form', value:42 },
+                    ],
+                    video:{
+                      totalEvents:96,
+                      stages:[
+                        { label:'Started Watching', viewers:60, note:'Pressed play on a testimonial clip' },
+                        { label:'Watched Part of It', viewers:30, note:'Watched 25–75% of the video' },
+                        { label:'Watched It Fully', viewers:6, note:'Watched the entire video to the end' },
+                      ]
+                    },
+                    topClicks:[
+                      { label:'Book a Free Session Button', count:88, url:'eurekii.com/book-a-session/…', pages:['Homepage','Pricing','Book a Session'], note:'Most clicked — parents booking an intro session' },
+                      { label:'Tutoring Pricing Page Link', count:44, url:'eurekii.com/pricing/…', pages:['Homepage','Tutoring Programs'], note:'Families comparing plans' },
+                      { label:'Testimonial Video Play', count:36, url:'eurekii.com/testimonials/…', pages:['Homepage','About Us'], note:'Parents watching success stories' },
+                    ]
+                  }
+                ]
+              },
+            
+              'ga4-cte': {
+                label:'GA4 – Trivium CTE', type:'ga4',
+                reports:[
+                  {
+                    id:'cte-jun22-jul05', name:'Jun 22 – Jul 05, 2026', status:'completed',
+                    start:'2026-06-22', end:'2026-07-05',
+                    kpis:[
+                      { label:'People Who Visited', value:'127', delta:15.5, desc:'Unique people who visited our site' },
+                      { label:'First-Time Visitors', value:'116', delta:18.4, desc:'People visiting for the very first time' },
+                      { label:'New Visitor Rate', value:'89%', delta:2.1, desc:'Over 100% means more new visitors than sessions — some visit multiple times' },
+                      { label:'Visitors Who Engaged', value:'46%', delta:3.5, desc:'Visitors who clicked, scrolled, or spent time reading' },
+                      { label:'Pages per Visit', value:'2.0', delta:10.6, desc:'On average, each visitor looked at ~2 pages' },
+                      { label:'Time Spent on Site', value:'00:46', delta:-37.3, desc:'Average time a visitor spent reading our site' },
+                    ],
+                    daily:[
+                      {label:'Jun 22', unique:10, engaged:8, total:17},{label:'Jun 23', unique:11, engaged:12, total:22},
+                      {label:'Jun 24', unique:18, engaged:10, total:30},{label:'Jun 25', unique:8, engaged:6, total:12},
+                      {label:'Jun 26', unique:14, engaged:9, total:19},{label:'Jun 27', unique:2, engaged:0, total:2},
+                      {label:'Jun 28', unique:1, engaged:1, total:1},{label:'Jun 29', unique:11, engaged:10, total:16},
+                      {label:'Jun 30', unique:12, engaged:8, total:17},{label:'Jul 01', unique:12, engaged:10, total:13},
+                      {label:'Jul 02', unique:16, engaged:8, total:23},{label:'Jul 03', unique:16, engaged:4, total:17},
+                      {label:'Jul 04', unique:2, engaged:2, total:2},{label:'Jul 05', unique:2, engaged:0, total:2},
+                    ],
+                    totalVisits:193, bestDay:{ label:'Jun 24 (Wed)', value:30 }, quietestDay:{ label:'Jun 28 (Sun)', value:1 },
+                    device:[ { label:'Computer / Laptop', value:106 }, { label:'Mobile Phone', value:21 } ],
+                    countries:[
+                      { label:'United States', value:78 }, { label:'India', value:34 }, { label:'Singapore', value:4 },
+                      { label:'United Kingdom', value:2 }, { label:'Egypt', value:2 }, { label:'(not set)', value:2 },
+                      { label:'France', value:1 }, { label:'China', value:1 }, { label:'Canada', value:1 }, { label:'Brazil', value:1 },
+                    ],
+                    acquisition:[
+                      { label:'Direct (typed/bookmarked)', visits:124, pct:64.2, desc:'They already know us — typed our URL directly or have us saved' },
+                      { label:'Organic Search (Google)', visits:61, pct:31.6, desc:'Searched something on Google and clicked our result. Free traffic — no ads!' },
+                      { label:'Referral (link from another site)', visits:8, pct:4.1, desc:'Another site linked to us and someone followed that link' },
+                      { label:'Unknown / Not Tracked', visits:0, pct:0.0, desc:"Analytics couldn't identify where these visitors came from" },
+                    ],
+                    pageViews:[
+                      { name:'Homepage', views:149 }, { name:'Pathways', views:34 }, { name:'Pricing Plan', views:17 },
+                      { name:'About Us', views:17 }, { name:'Resources', views:11 }, { name:'Contact Us', views:10 },
+                      { name:'Login', views:4 }, { name:'Archive', views:4 },
+                      { name:'What Is Virtual Reality (VR) and How Does It Work', views:2 },
+                      { name:'Virtual Reality and Career Pathways: The Future of Professional Learning', views:2 },
+                      { name:'Why Virtual Reality in Education: Evidence, Impact and Outcomes', views:1 },
+                      { name:'Online Tutoring', views:1 }, { name:'Editorial Services', views:1 }, { name:'Assessments', views:1 },
+                    ],
+                    topPages:[
+                      { name:'Homepage', share:66, bounce:45.7, sessions:127 },
+                      { name:'Pathways', share:7, bounce:64.3, sessions:14 },
+                      { name:'About Us', share:4, bounce:57.1, sessions:7 },
+                      { name:'Contact Us', share:4, bounce:71.4, sessions:7 },
+                      { name:'Resources', share:3, bounce:40.0, sessions:5 },
+                    ],
+                    highlights:[
+                      { label:'Page Views', value:254, note:'Times any page was opened' },
+                      { label:'Scrolled Down', value:37, note:'People read far enough to scroll' },
+                      { label:'Form Started', value:2, note:'Tried to fill a form — very low' },
+                      { label:'Form Submitted', value:2, note:'Actually sent us a message' },
+                    ],
+                    behavior:[
+                      { label:'Started a Session', value:193 }, { label:'Viewed a Page', value:254 },
+                      { label:'First Visit', value:116 }, { label:'Engaged with Content', value:149 },
+                      { label:'Scrolled Down', value:37 }, { label:'Watching the Video', value:10 },
+                      { label:'Clicked Something', value:10 }, { label:'File Download', value:5 },
+                      { label:'Started a Video', value:3 }, { label:'Started a Form', value:2 },
+                      { label:'Submitted a Form', value:2 },
+                    ],
+                    video:{
+                      totalEvents:13,
+                      stages:[
+                        { label:'Started Watching', viewers:3, note:'Pressed play on the video' },
+                        { label:'Watched Part of It', viewers:10, note:'Watched 25–75% of the video' },
+                        { label:'Watched It Fully', viewers:0, note:'Watched the entire video to the end' },
+                      ]
+                    },
+                    topClicks:[
+                      { label:'Portal / Sign-up Button', count:4, url:'triviumedu.com/leadManagement/portal/…', pages:['Homepage','Resources','Pricing','Contact','Pathways'], note:'Most clicked — visitors trying to sign up or log in' },
+                      { label:'LinkedIn Company Page', count:2, url:'linkedin.com/company/triviumcte/posts/…', pages:['Homepage','About Us'], note:'People checking our LinkedIn profile' },
+                      { label:'EOHub.7z (resource download)', count:4, url:'eohubcontent.blob.core.windows.net/…', pages:['Resources'], note:'People checking resource PDFs' },
+                    ]
+                  }
+                ]
+              }
+
+            
+        };
+
+        
+        const campaigns = ORG_DATA.eurekii.campaigns;
+
+        const allStarts = campaigns.map(c => c.start).sort();
+        const allEnds = campaigns.map(c => c.end).sort();
+
+        state.dateFrom = allStarts[0];
+        state.dateTo = allEnds[allEnds.length - 1];
+
+        document.getElementById("dateFrom").value = state.dateFrom;
+        document.getElementById("dateTo").value = state.dateTo;
+        // const response_ga4 = await fetch('ga4-dashboard.php');
+        // const result = await response_ga4.json();
+        // const response_ga4 = await fetch(
+        //     `ga4-dashboard.php?start_date=${encodeURIComponent(state.dateFrom)}&end_date=${encodeURIComponent(state.dateTo)}`
+        // );
+
+        // const result = await response_ga4.json();
+        
+        // if (result.success) {
+        //     ORG_DATA['ga4-trivium'].reports = [
+        //         {
+        //             id: 'triv-jun22-jul05',
+        //             name: 'Jun 22 – Jul 05, 2026',
+        //             status: 'completed',
+        //             start: '2026-06-22',
+        //             end: '2026-07-05',
+        //             placeholder: true,
+        //             kpis: [
+        //                  { label:'People Who Visited', value:result.activeUsers, delta:8.2, desc:'Unique people who visited our site' },
+        //               { label:'First-Time Visitors', value:'260', delta:5.1, desc:'People visiting for the very first time' },
+        //               { label:'New Visitor Rate', value:'76%', delta:1.0, desc:'Share of visits that were a first-time visit' },
+        //               { label:'Visitors Who Engaged', value:'51%', delta:4.4, desc:'Visitors who clicked, scrolled, or spent time reading' },
+        //               { label:'Pages per Visit', value:'2.6', delta:6.0, desc:'On average, each visitor looked at ~3 pages' },
+        //               { label:'Time Spent on Site', value:'01:12', delta:9.4, desc:'Average time a visitor spent reading our site' },
+                        
+        //                 {
+        //                     label: 'Sessions',
+        //                     value: result.sessions,
+        //                     delta: 0,
+        //                     desc: 'Total sessions on the website'
+        //                 },
+        //                 {
+        //                     label: 'Page Views',
+        //                     value: result.pageViews,
+        //                     delta: 0,
+        //                     desc: 'Total pages viewed'
+        //                 }
+        //             ],
+        
+        //             daily:[
+        //               {label:'Jun 22', unique:10, engaged:8, total:17},{label:'Jun 23', unique:11, engaged:12, total:22},
+        //               {label:'Jun 24', unique:18, engaged:10, total:30},{label:'Jun 25', unique:8, engaged:6, total:12},
+        //               {label:'Jun 26', unique:14, engaged:9, total:19},{label:'Jun 27', unique:2, engaged:0, total:2},
+        //               {label:'Jun 28', unique:1, engaged:1, total:1},{label:'Jun 29', unique:11, engaged:10, total:16},
+        //               {label:'Jun 30', unique:12, engaged:8, total:17},{label:'Jul 01', unique:12, engaged:10, total:13},
+        //               {label:'Jul 02', unique:16, engaged:8, total:23},{label:'Jul 03', unique:16, engaged:4, total:17},
+        //               {label:'Jul 04', unique:2, engaged:2, total:2},{label:'Jul 05', unique:2, engaged:0, total:2},
+        //             ],
+        //             totalVisits:result.activeUsers, bestDay:{ label:'Jun 24 (Wed)', value:44 }, quietestDay:{ label:'Jun 28 (Sun)', value:10 },
+        //             device:[ { label:'Computer / Laptop', value:240 }, { label:'Mobile Phone', value:102 } ],
+        //             countries:[
+        //               { label:'United States', value:200 }, { label:'India', value:60 }, { label:'Canada', value:30 },
+        //               { label:'United Kingdom', value:25 }, { label:'Germany', value:12 }, { label:'Australia', value:8 },
+        //               { label:'Singapore', value:4 }, { label:'France', value:2 }, { label:'Brazil', value:1 },
+        //             ],
+        //             acquisition:[
+        //               { label:'Direct (typed/bookmarked)', visits:154, pct:45.0, desc:'They already know us — typed our URL directly or have us saved' },
+        //               { label:'Organic Search (Google)', visits:137, pct:40.0, desc:'Searched something on Google and clicked our result. Free traffic — no ads!' },
+        //               { label:'Referral (link from another site)', visits:41, pct:12.0, desc:'Another site linked to us and someone followed that link' },
+        //               { label:'Unknown / Not Tracked', visits:10, pct:3.0, desc:"Analytics couldn't identify where these visitors came from" },
+        //             ],
+        //             pageViews:[
+        //               { name:'Homepage', views:198 }, { name:'Services', views:64 }, { name:'Case Studies', views:44 },
+        //               { name:'Pricing', views:38 }, { name:'Contact Us', views:26 }, { name:'About Us', views:22 },
+        //               { name:'Careers', views:15 }, { name:'Blog: Outsourcing Trends 2026', views:12 }, { name:'Login', views:9 },
+        //               { name:'Resources', views:8 }, { name:'Partners', views:5 }, { name:'FAQ', views:3 },
+        //             ],
+        //             topPages:[
+        //               { name:'Homepage', share:58, bounce:38.0, sessions:198 },
+        //               { name:'Services', share:14, bounce:50.0, sessions:48 },
+        //               { name:'Case Studies', share:10, bounce:44.0, sessions:34 },
+        //               { name:'Pricing', share:9, bounce:55.0, sessions:31 },
+        //               { name:'Contact Us', share:6, bounce:60.0, sessions:20 },
+        //             ],
+        //             highlights:[
+        //               { label:'Page Views', value:900, note:'Times any page was opened' },
+        //               { label:'Scrolled Down', value:200, note:'People read far enough to scroll' },
+        //               { label:'Form Started', value:15, note:'Began filling out a contact form' },
+        //               { label:'Form Submitted', value:9, note:'Actually sent us a message' },
+        //             ],
+        //             behavior:[
+        //               { label:'Started a Session', value:342 }, { label:'Viewed a Page', value:900 },
+        //               { label:'First Visit', value:260 }, { label:'Engaged with Content', value:510 },
+        //               { label:'Scrolled Down', value:200 }, { label:'Watching the Video', value:30 },
+        //               { label:'Clicked Something', value:80 }, { label:'File Download', value:25 },
+        //               { label:'Started a Video', value:12 }, { label:'Started a Form', value:15 },
+        //               { label:'Submitted a Form', value:9 },
+        //             ],
+        //             video:{
+        //               totalEvents:38,
+        //               stages:[
+        //                 { label:'Started Watching', viewers:14, note:'Pressed play on the video' },
+        //                 { label:'Watched Part of It', viewers:22, note:'Watched 25–75% of the video' },
+        //                 { label:'Watched It Fully', viewers:2, note:'Watched the entire video to the end' },
+        //               ]
+        //             },
+        //             topClicks:[
+        //               { label:'Contact Sales Button', count:22, url:'triviumedu.com/contact-sales/…', pages:['Homepage','Services','Pricing'], note:'Most clicked — prospects requesting a quote' },
+        //               { label:'LinkedIn Company Page', count:14, url:'linkedin.com/company/trivium/posts/…', pages:['Homepage','About Us'], note:'Visitors checking company updates' },
+        //               { label:'Case Study PDF Download', count:9, url:'triviumedu.com/resources/case-study.pdf', pages:['Case Studies'], note:'Prospects reviewing proof points' },
+        //             ]
+        //         }
+        //     ];
+        // }
+        // console.log(ORG_DATA);
+        // render();
+        
+        
+
+        // Now everything is available
+        // initializeDashboard();
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+loadCampaigns();
+async function loadGA4Data(response) {
+    console.log('loadGA4Data:::',response);
+    try {
+
+        // const response = await fetch("ga4-dashboard.php");
+        // const response = await fetch(
+        //     `ga4-dashboard.php?start_date=${state.dateFrom}&end_date=${state.dateTo}`
+        // );
+
+        const data = response;
+
+        if (!data) {
+            console.error("GA4 API Error:", data.error);
+            return;
+        }
+
+        ORG_DATA['ga4-trivium'] = {
+            label: 'GA4 – Trivium',
+            type: 'ga4',
+            reports: [
+                {
+                    id: 'triv-ga4-report',
+                    name: data.reportName || 'GA4 Report',
+                    status: 'completed',
+
+                    start: data.start,
+                    end: data.end,
+
+                    placeholder: false,
+
+                    kpis: data.kpis || [],
+
+                    daily: data.daily || [],
+
+                    totalVisits: data.totalVisits || 0,
+
+                    bestDay: data.bestDay || {
+                        label: '-',
+                        value: 0
+                    },
+
+                    quietestDay: data.quietestDay || {
+                        label: '-',
+                        value: 0
+                    },
+
+                    device: data.device || [],
+
+                    countries: data.countries || [],
+
+                    acquisition: data.acquisition || [],
+
+                    pageViews: data.pageViews || [],
+
+                    topPages: data.topPages || [],
+
+                    highlights: data.highlights || [],
+
+                    behavior: data.behavior || [],
+
+                    video: data.video || {
+                        totalEvents: 0,
+                        stages: []
+                    },
+
+                    topClicks: data.topClicks || []
+                }
+            ]
+        };
+
+        console.log("GA4 data loaded:", ORG_DATA['ga4-trivium']);
+
+    } catch (error) {
+
+        console.error("GA4 loading error:", error);
+
+    }
+}
+/* ============== STATE ============== */
+const state = { org:'eurekii', view:'summary', dateFrom:null, dateTo:null, sortKey:'start', sortDir:1 };
+
+function isGA4(){ return ORG_DATA[state.org].type === 'ga4'; }
+function items(){ return isGA4() ? ORG_DATA[state.org].reports : ORG_DATA[state.org].campaigns; }
+function campaigns(){ return items(); }
+function orgBounds(){
+  const c = items();
+  const starts = c.map(x=>x.start).sort();
+  const ends = c.map(x=>x.end).sort();
+  return { from:starts[0], to:ends[ends.length-1] };
+}
+function inRange(c){ return c.end >= state.dateFrom && c.start <= state.dateTo; }
+function fmtDate(d){
+    if (!d) return "-";
+    const dt = new Date(d.replace(' ', 'T'));
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${String(dt.getDate()).padStart(2,'0')} ${months[dt.getMonth()]} '${String(dt.getFullYear()).slice(2)}`;
+//   const dt = new Date(d+'T00:00:00');
+//   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+//   return `${String(dt.getDate()).padStart(2,'0')} ${months[dt.getMonth()]} '${String(dt.getFullYear()).slice(2)}`;
+}
+function fmtPct(r){ return r===null || r===undefined ? '—' : (r*100).toFixed(1)+'%'; }
+
+/* ============== ORG SWITCHER ============== */
+function defaultViewFor(orgKey){
+  const org = ORG_DATA[orgKey];
+  if(org.type === 'ga4') return org.reports[0].id;
+  return 'summary';
+}
+
+function renderOrgSwitcher(){
+  const el = document.getElementById('orgSwitcher');
+  el.innerHTML = '';
+  Object.keys(ORG_DATA).forEach(orgKey=>{
+    const tab = document.createElement('button');
+    tab.className = 'org-tab' + (state.org===orgKey ? ' active' : '');
+    const dotColor = THEME_COLORS[orgKey].c1;
+    tab.innerHTML = `<span class="org-dot" style="background:${dotColor}"></span><span class="org-name">${ORG_DATA[orgKey].label}</span>`;
+    tab.onclick = ()=>{
+      if(state.org===orgKey) return;
+      state.org = orgKey;
+      state.view = defaultViewFor(orgKey);
+      const b = orgBounds();
+      state.dateFrom = b.from; state.dateTo = b.to;
+      document.getElementById('dateFrom').value = state.dateFrom;
+      document.getElementById('dateTo').value = state.dateTo;
+      document.documentElement.setAttribute('data-org', orgKey);
+      document.getElementById('orgEyebrow').textContent = ORG_DATA[orgKey].label + ' · Campaign Analytics';
+      document.getElementById('headerLogo').src = LOGOS[orgKey];
+      render();
+    };
+    el.appendChild(tab);
+  });
+}
+
+/* ============== NAV ============== */
+function renderNav(){
+  const nav = document.getElementById('campaignNav');
+  nav.innerHTML = '';
+  const ga4 = isGA4();
+
+  if(!ga4){
+    const summaryPill = document.createElement('button');
+    summaryPill.className = 'nav-pill' + (state.view==='summary' ? ' active' : '');
+    summaryPill.textContent = 'Summary';
+    summaryPill.onclick = ()=>{ state.view='summary'; render(); };
+    nav.appendChild(summaryPill);
+  }
+
+  const list = items();
+  if(!ga4 || list.length > 1){
+    list.forEach(c=>{
+      const pill = document.createElement('button');
+      const dimmed = !inRange(c);
+      pill.className = 'nav-pill' + (state.view===c.id ? ' active' : '') + (dimmed ? ' dim' : '');
+      const dotColor = c.status==='completed' ? 'var(--c1)' : 'var(--amber)';
+      pill.innerHTML = `<span class="status-dot" style="background:${dotColor}"></span>${c.name}`;
+      pill.disabled = dimmed;
+      pill.onclick = ()=>{ if(!dimmed){ state.view=c.id; render(); } };
+      nav.appendChild(pill);
+    });
+  }
+}
+
+/* ============== SUMMARY VIEW ============== */
+function renderSummary(){
+  const app = document.getElementById('app');
+  const filtered = campaigns().filter(inRange);
+
+  const totalSent = filtered.reduce((s,c)=>s+c.funnel.mailer[0].value,0);
+  const totalOpened = filtered.reduce((s,c)=>s+c.funnel.mailer[1].value,0);
+  const totalClicked = filtered.reduce((s,c)=>s+c.funnel.mailer[2].value,0);
+  const totalLeads = filtered.reduce((s,c)=>s+c.contacts.length,0);
+  const avgOpenRate = totalSent ? (totalOpened/totalSent*100) : 0;
+
+  app.innerHTML = `
+    <div class="section" style="margin-top:26px;">
+      <div class="section-head">
+        <h2>Portfolio summary</h2>
+        <span class="sub">${filtered.length} of ${campaigns().length} campaigns in selected range</span>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="l">Total Sent</div><div class="n">${totalSent.toLocaleString()}</div></div>
+        <div class="kpi-card"><div class="l">Total Opened</div><div class="n">${totalOpened.toLocaleString()}</div></div>
+        <div class="kpi-card"><div class="l">Avg Open Rate</div><div class="n">${avgOpenRate.toFixed(1)}%</div></div>
+        <div class="kpi-card"><div class="l">Total Clicked</div><div class="n">${totalClicked.toLocaleString()}</div></div>
+        <div class="kpi-card"><div class="l">Qualified Leads</div><div class="n">${totalLeads}</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2>Sent vs. opened vs. clicked</h2>
+        <span class="sub">By campaign, selected date range</span>
+      </div>
+      <div class="card"><div style="height:260px;"><canvas id="portfolioChart"></canvas></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2>Campaigns</h2>
+        <span class="sub">Click a row to open its dashboard</span>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th data-key="name">Campaign <span class="arrow">↕</span></th>
+              <th data-key="start">Period <span class="arrow">↕</span></th>
+              <th data-key="status">Status <span class="arrow">↕</span></th>
+              <th data-key="sent">Sent <span class="arrow">↕</span></th>
+              <th data-key="openRate">Open % <span class="arrow">↕</span></th>
+              <th data-key="clickRate">Click % <span class="arrow">↕</span></th>
+              <th data-key="leads">Leads <span class="arrow">↕</span></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="campaignTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  `;
+
+  renderCampaignTable(filtered);
+
+  const theme = THEME_COLORS[state.org];
+  new Chart(document.getElementById('portfolioChart'), {
+    type:'bar',
+    data:{
+      labels: filtered.map(c=>c.name),
+      datasets:[
+        { label:'Sent', data: filtered.map(c=>c.funnel.mailer[0].value), backgroundColor: theme.dark3, borderRadius:5, maxBarThickness:26 },
+        { label:'Opened', data: filtered.map(c=>c.funnel.mailer[1].value), backgroundColor: theme.c2, borderRadius:5, maxBarThickness:26 },
+        { label:'Clicked', data: filtered.map(c=>c.funnel.mailer[2].value), backgroundColor: theme.c1, borderRadius:5, maxBarThickness:26 }
+      ]
+    },
+    options:{
+      plugins:{ legend:{ position:'bottom', labels:{ boxWidth:9, boxHeight:9, padding:14, font:{size:11} } },
+        tooltip:{ backgroundColor:'#1E1745', padding:10 } },
+      scales:{
+        y:{ beginAtZero:true, grid:{ color:'#EFEDF6' }, ticks:{ font:{size:10.5} } },
+        x:{ grid:{ display:false }, ticks:{ font:{size:10.5}, autoSkip:false, maxRotation:0 } }
+      },
+      animation:{ duration:800 }
+    }
+  });
+}
+
+function renderCampaignTable(filtered){
+  const rows = filtered.map(c=>({
+    id:c.id, name:c.name, start:c.start, end:c.end, status:c.status,
+    sent:c.funnel.mailer[0].value,
+    openRate: c.rates[0].value,
+    clickRate: c.rates[1].value,
+    leads: c.contacts.length
+  }));
+  rows.sort((a,b)=>{
+    const av=a[state.sortKey], bv=b[state.sortKey];
+    if(av<bv) return -1*state.sortDir;
+    if(av>bv) return 1*state.sortDir;
+    return 0;
+  });
+  const tbody = document.getElementById('campaignTableBody');
+  tbody.innerHTML = rows.map(r=>{
+    const camp = campaigns().find(c=>c.id===r.id);
+    const statusLabel = r.status==='completed' ? 'Completed' : 'In progress';
+    const statusClass = r.status==='completed' ? 'completed' : 'progress';
+    return `
+      <tr data-id="${r.id}">
+        <td><div class="camp-name">${r.name}${camp.placeholder ? ' <span style=\"font-weight:500;color:var(--slate-soft);font-size:11px;\">(sample)</span>' : ''}</div></td>
+        <td><div class="camp-period">${fmtDate(r.start)} – ${fmtDate(r.end)}</div></td>
+        <td><span class="status-chip ${statusClass}"><span class="dot"></span>${statusLabel}</span></td>
+        <td>${r.sent.toLocaleString()}</td>
+        <td>${r.openRate.toFixed(1)}%</td>
+        <td>${r.clickRate.toFixed(1)}%</td>
+        <td>${r.leads}</td>
+        <td><span class="view-link">View dashboard →</span></td>
+      </tr>`;
+  }).join('');
+
+  tbody.querySelectorAll('tr').forEach(tr=>{
+    tr.addEventListener('click', ()=>{ state.view = tr.dataset.id; render(); });
+  });
+
+  document.querySelectorAll('thead th[data-key]').forEach(th=>{
+    th.onclick = ()=>{
+      const key = th.dataset.key;
+      if(state.sortKey===key){ state.sortDir *= -1; } else { state.sortKey=key; state.sortDir=1; }
+      renderCampaignTable(filtered);
+    };
+  });
+}
+
+/* ============== CAMPAIGN DASHBOARD VIEW ============== */
+function countUp(el, target, duration=700){
+  const start = performance.now();
+  function step(now){
+    const p = Math.min((now-start)/duration, 1);
+    const eased = 1 - Math.pow(1-p, 3);
+    el.textContent = Math.round(target*eased);
+    if(p<1) requestAnimationFrame(step); else el.textContent = target;
+  }
+  requestAnimationFrame(step);
+}
+function tileClass(s){
+  if(s.key==='sent' || s.key==='fusent') return 'sent';
+  if(s.key==='optout') return 'opted';
+  if(s.key==='clicked' || s.key==='fuclicked') return 'clicked';
+  return '';
+}
+function buildRow(stages, wrap, tooltip){
+  const row = document.createElement('div');
+  row.className = 'fn-row';
+  const maxVal = Math.max(...stages.map(s=>s.value), 1);
+  stages.forEach((s,i)=>{
+    const tile = document.createElement('div');
+    tile.className = 'fn-tile ' + tileClass(s);
+    const grow = Math.max(0.62, s.value/maxVal) * 1.4;
+    tile.style.flex = `${grow} ${grow} 0`;
+    tile.innerHTML = `
+      <div class="fn-label">${s.label}</div>
+      <div class="fn-value" data-target="${s.value}">0</div>
+      <div class="fn-badge">${s.rate!==null ? fmtPct(s.rate)+' of prior' : 'Baseline'}</div>
+    `;
+    tile.addEventListener('mousemove', (e)=>{
+      const bb = wrap.getBoundingClientRect();
+      tooltip.innerHTML = `<b>${s.label}</b><br>${s.value} contacts${s.rate!==null ? ' · '+fmtPct(s.rate)+' of prior stage' : ''}`;
+      tooltip.style.left = (e.clientX - bb.left + 16) + 'px';
+      tooltip.style.top = (e.clientY - bb.top - 10) + 'px';
+      tooltip.classList.add('show');
+    });
+    tile.addEventListener('mouseleave', ()=> tooltip.classList.remove('show'));
+    row.appendChild(tile);
+    if(i < stages.length-1){
+      const next = stages[i+1];
+      const connector = document.createElement('div');
+      connector.className = 'fn-connector';
+      connector.innerHTML = `<span class="chip">${fmtPct(next.rate)}</span>`;
+      row.appendChild(connector);
+    }
+  });
+  return row;
+}
+
+function renderCampaign(camp){
+  const app = document.getElementById('app');
+  const statusLabel = camp.status==='completed' ? 'Completed' : 'In Progress';
+  const statusClass = camp.status==='completed' ? 'completed' : 'progress';
+  const totalLeads = camp.contacts.length;
+
+  app.innerHTML = `
+    <div style="margin-top:26px;">
+      <button class="back-link" id="backBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to summary
+      </button>
+      ${camp.placeholder ? `<div class="placeholder-note">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+        Sample placeholder campaign — swap in real data when available.
+      </div>` : ''}
+      <div class="camp-header">
+        <div>
+          <h1 class="camp-title">${camp.name}</h1>
+          <p class="camp-period">${fmtDate(camp.start)} → ${fmtDate(camp.end)}</p>
+        </div>
+        <span class="status-pill ${statusClass}"><span class="dot"></span>${statusLabel}</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-chip"><div class="n">${camp.funnel.mailer[0].value}</div><div class="l">Sent</div></div>
+        <div class="kpi-chip"><div class="n">${camp.rates[0].value.toFixed(1)}%</div><div class="l">Open Rate</div></div>
+        <div class="kpi-chip"><div class="n">${camp.rates[2].value.toFixed(1)}%</div><div class="l">Click-to-Open</div></div>
+        <div class="kpi-chip"><div class="n">${camp.rates[5].value.toFixed(1)}%</div><div class="l">Opt-out</div></div>
+        <div class="kpi-chip"><div class="n">${totalLeads}</div><div class="l">Qualified Leads</div></div>
+      </div>
+
+      <div class="section" style="margin-top:0;">
+        <div class="section-head">
+          <h2>Engagement funnel</h2>
+          <span class="sub">Hover any stage for detail</span>
+        </div>
+        <div class="funnel-card">
+          <div class="funnel-wrap" id="funnelWrap">
+            <div class="tooltip" id="tooltip"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Engagement insights</h2>
+          <span class="sub">Rates across the sequence · click share by channel</span>
+        </div>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <div class="card-title">Engagement rates</div>
+            <div class="chart-box"><canvas id="rateChart"></canvas></div>
+          </div>
+          <div class="insight-card">
+            <div class="card-title">Click breakdown</div>
+            <div class="chart-box donut">
+              <div class="donut-wrap">
+                <canvas id="clickDonut"></canvas>
+                <div class="donut-center"><div class="n" id="donutTotal">0</div><div class="l">clicks</div></div>
+              </div>
+              <div class="legend" id="clickLegend"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Interested contacts</h2>
+          <span class="sub">Clicked &amp; verified as genuine</span>
+        </div>
+        <div class="contacts-card">
+          <div class="contacts-toolbar">
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input id="searchInput" placeholder="Search name, organization, or email…">
+            </div>
+            <span class="count-badge" id="countBadge"></span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th data-key="sent">Mail sent <span class="arrow">↕</span></th>
+                <th data-key="clicked">Clicked on <span class="arrow">↕</span></th>
+                <th data-key="name">Name <span class="arrow">↕</span></th>
+                <th data-key="org">Organization <span class="arrow">↕</span></th>
+                <th>Contact</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="contactsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('backBtn').onclick = ()=>{ state.view='summary'; render(); };
+
+  const funnelWrap = document.getElementById('funnelWrap');
+  const tooltip = document.getElementById('tooltip');
+  const rowA = buildRow(camp.funnel.mailer, funnelWrap, tooltip);
+  funnelWrap.appendChild(rowA);
+  const branch = document.createElement('div');
+  branch.className = 'fn-branch';
+  branch.innerHTML = `<span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg> ${camp.funnel.fu[0].value} opened contacts continued to follow-up</span>`;
+  funnelWrap.appendChild(branch);
+  const rowB = buildRow(camp.funnel.fu, funnelWrap, tooltip);
+  funnelWrap.appendChild(rowB);
+
+  const tiles = funnelWrap.querySelectorAll('.fn-tile');
+  tiles.forEach((t,i)=> setTimeout(()=>{ t.classList.add('in'); countUp(t.querySelector('.fn-value'), parseInt(t.querySelector('.fn-value').dataset.target)); }, i*90));
+  funnelWrap.querySelectorAll('.fn-connector').forEach((c,i)=> setTimeout(()=> c.classList.add('in'), 140+i*90));
+  setTimeout(()=> branch.classList.add('in'), 140+tiles.length*90);
+
+  const theme = THEME_COLORS[state.org];
+  new Chart(document.getElementById('rateChart'), {
+    type:'bar',
+    data:{
+      labels: camp.rates.map(r=>r.label),
+      datasets:[{
+        data: camp.rates.map(r=>r.value),
+        backgroundColor: camp.rates.map(r => r.kind==='warn' ? theme.warn : (r.kind==='good' ? theme.dark3 : theme.c1)),
+        borderRadius:5, maxBarThickness:18
+      }]
+    },
+    options:{
+      indexAxis:'y',
+      plugins:{ legend:{ display:false }, tooltip:{ backgroundColor:'#1E1745', padding:10, callbacks:{ label: ctx => ` ${ctx.raw}%` } } },
+      scales:{
+        x:{ beginAtZero:true, max:100, grid:{ color:'#F1EFF7' }, ticks:{ font:{size:10}, callback:v=>v+'%' } },
+        y:{ grid:{ display:false }, ticks:{ font:{size:11.5} } }
+      },
+      animation:{ duration:900 }
+    }
+  });
+
+  const totalClicks = camp.clicks.reduce((s,c)=>s+c.count,0);
+  document.getElementById('donutTotal').textContent = totalClicks;
+  new Chart(document.getElementById('clickDonut'), {
+    type:'doughnut',
+    data:{ labels: camp.clicks.map(c=>c.name), datasets:[{ data: camp.clicks.map(c=>c.count), backgroundColor: camp.clicks.map(c=>c.color), borderWidth:0, hoverOffset:6 }] },
+    options:{
+      cutout:'68%',
+      plugins:{ legend:{ display:false }, tooltip:{ backgroundColor:'#1E1745', padding:10, callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.raw} contacts` } } },
+      animation:{ duration:900 }
+    }
+  });
+  const legend = document.getElementById('clickLegend');
+  camp.clicks.forEach(c=>{
+    const row = document.createElement('div');
+    row.className = 'legend-item';
+    row.innerHTML = `<span class="sw" style="background:${c.color}"></span><span class="lbl">${c.name}</span><span class="val">${c.count}</span>`;
+    legend.appendChild(row);
+  });
+
+  renderContacts(camp);
+}
+
+function initials(name){ return name.split(' ').map(p=>p[0]).join('').slice(0,2).toUpperCase(); }
+
+function renderContacts(camp){
+  const tbody = document.getElementById('contactsBody');
+  const searchInput = document.getElementById('searchInput');
+  const countBadge = document.getElementById('countBadge');
+  let sortKey='sent', sortDir=1;
+
+  function draw(){
+    const q = searchInput.value.trim().toLowerCase();
+    let rows = camp.contacts.filter(c => c.name.toLowerCase().includes(q) || c.org.toLowerCase().includes(q) || c.email.toLowerCase().includes(q));
+    rows.sort((a,b)=>{ const av=a[sortKey], bv=b[sortKey]; if(av<bv) return -1*sortDir; if(av>bv) return 1*sortDir; return 0; });
+    tbody.innerHTML = rows.length===0
+      ? `<tr><td colspan="6" style="text-align:center;color:var(--slate);padding:32px;">No contacts match your search.</td></tr>`
+      : rows.map(c=>`
+        <tr>
+          <td>${fmtDate(c.sent)}</td>
+          <td>${fmtDate(c.clicked)}</td>
+          <td><div class="contact-name-row"><div class="contact-avatar">${initials(c.name)}</div><div><div class="contact-name">${c.name}</div><div class="contact-org">${c.title}</div></div></div></td>
+          <td>${c.org}</td>
+          <td><div><a class="email-link" href="mailto:${c.email}">${c.email}</a></div><div><a class="phone-link" href="tel:${c.phone.replace(/ /g,'')}">${c.phone}</a></div></td>
+          <td><span class="tag-genuine">Genuine</span></td>
+        </tr>`).join('');
+    countBadge.textContent = rows.length + (rows.length===1 ? ' contact' : ' contacts');
+  }
+
+  document.querySelectorAll('thead th[data-key]').forEach(th=>{
+    th.onclick = ()=>{
+      const key = th.dataset.key;
+      if(sortKey===key){ sortDir *= -1; } else { sortKey=key; sortDir=1; }
+      draw();
+    };
+  });
+  searchInput.addEventListener('input', draw);
+  draw();
+}
+
+/* ============== GA4 SUMMARY VIEW ============== */
+function renderGA4Table(filtered){
+  const rows = filtered.map(r=>({
+    id:r.id, name:r.name, start:r.start, end:r.end, status:r.status,
+    visitors: parseInt(r.kpis[0].value), newRate: r.kpis[2].value, engaged: r.kpis[3].value
+  }));
+  rows.sort((a,b)=>{
+    const av=a[state.sortKey] ?? a.name, bv=b[state.sortKey] ?? b.name;
+    if(av<bv) return -1*state.sortDir;
+    if(av>bv) return 1*state.sortDir;
+    return 0;
+  });
+  const tbody = document.getElementById('campaignTableBody');
+  tbody.innerHTML = rows.map(r=>{
+    const rep = items().find(x=>x.id===r.id);
+    const statusLabel = r.status==='completed' ? 'Completed' : 'In progress';
+    const statusClass = r.status==='completed' ? 'completed' : 'progress';
+    return `
+      <tr data-id="${r.id}">
+        <td><div class="camp-name">${r.name}${rep.placeholder ? ' <span style=\"font-weight:500;color:var(--slate-soft);font-size:11px;\">(sample)</span>' : ''}</div></td>
+        <td><div class="camp-period">${fmtDate(r.start)} – ${fmtDate(r.end)}</div></td>
+        <td><span class="status-chip ${statusClass}"><span class="dot"></span>${statusLabel}</span></td>
+        <td>${r.visitors.toLocaleString()}</td>
+        <td>${r.newRate}</td>
+        <td>${r.engaged}</td>
+        <td><span class="view-link">View report →</span></td>
+      </tr>`;
+  }).join('');
+  tbody.querySelectorAll('tr').forEach(tr=>{
+    tr.addEventListener('click', ()=>{ state.view = tr.dataset.id; render(); });
+  });
+  document.querySelectorAll('thead th[data-key]').forEach(th=>{
+    th.onclick = ()=>{
+      const key = th.dataset.key;
+      if(state.sortKey===key){ state.sortDir *= -1; } else { state.sortKey=key; state.sortDir=1; }
+      renderGA4Table(filtered);
+    };
+  });
+}
+
+function renderGA4Summary(){
+  const app = document.getElementById('app');
+  const filtered = items().filter(inRange);
+
+  const totalVisitors = filtered.reduce((s,r)=>s+parseInt(r.kpis[0].value),0);
+  const totalFirstTime = filtered.reduce((s,r)=>s+parseInt(r.kpis[1].value),0);
+  const avgEngaged = filtered.length ? (filtered.reduce((s,r)=>s+parseFloat(r.kpis[3].value),0)/filtered.length) : 0;
+  const totalPageViews = filtered.reduce((s,r)=>s+ (r.behavior.find(b=>b.label==='Viewed a Page')?.value || 0), 0);
+
+  app.innerHTML = `
+    <div class="section" style="margin-top:26px;">
+      <div class="section-head">
+        <h2>Website analytics summary</h2>
+        <span class="sub">${filtered.length} of ${items().length} reports in selected range</span>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="l">Total Visitors</div><div class="n">${totalVisitors.toLocaleString()}</div></div>
+        <div class="kpi-card"><div class="l">First-Time Visitors</div><div class="n">${totalFirstTime.toLocaleString()}</div></div>
+        <div class="kpi-card"><div class="l">Avg Engaged Rate</div><div class="n">${avgEngaged.toFixed(0)}%</div></div>
+        <div class="kpi-card"><div class="l">Total Page Views</div><div class="n">${totalPageViews.toLocaleString()}</div></div>
+        <div class="kpi-card"><div class="l">Reports</div><div class="n">${filtered.length}</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2>Visitors by report</h2>
+        <span class="sub">Selected date range</span>
+      </div>
+      <div class="card"><div style="height:240px;"><canvas id="ga4PortfolioChart"></canvas></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2>Reports</h2>
+        <span class="sub">Click a row to open the full report</span>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th data-key="name">Report <span class="arrow">↕</span></th>
+              <th data-key="start">Period <span class="arrow">↕</span></th>
+              <th data-key="status">Status <span class="arrow">↕</span></th>
+              <th data-key="visitors">Visitors <span class="arrow">↕</span></th>
+              <th data-key="newRate">New Visitor % <span class="arrow">↕</span></th>
+              <th data-key="engaged">Engaged % <span class="arrow">↕</span></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="campaignTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  `;
+
+  renderGA4Table(filtered);
+
+  const theme = THEME_COLORS[state.org];
+  new Chart(document.getElementById('ga4PortfolioChart'), {
+    type:'bar',
+    data:{
+      labels: filtered.map(r=>r.name),
+      datasets:[{ label:'Visitors', data: filtered.map(r=>parseInt(r.kpis[0].value)), backgroundColor: theme.c1, borderRadius:5, maxBarThickness:34 }]
+    },
+    options:{
+      plugins:{ legend:{ display:false }, tooltip:{ backgroundColor:'#1E1745', padding:10 } },
+      scales:{ y:{ beginAtZero:true, grid:{ color:'#EFEDF6' }, ticks:{ font:{size:10.5} } }, x:{ grid:{ display:false }, ticks:{ font:{size:10.5} } } },
+      animation:{ duration:800 }
+    }
+  });
+}
+
+/* ============== GA4 REPORT VIEW ============== */
+function renderGA4Report(report){
+    // console.log('GA4-Triviumnav', report);
+    // console.log('GA4-Trivium:nav', report.id);
+    // console.log('GA4-Trivium:nav', report.name);
+    // console.log('GA4-Trivium:nav', report.kpis);
+  const app = document.getElementById('app');
+  const statusLabel = report.status==='completed' ? 'Completed' : 'In Progress';
+  const statusClass = report.status==='completed' ? 'completed' : 'progress';
+  const multiReport = items().length > 1;
+
+  const kpiHtml = report.kpis.map(k=>{
+    const dir = k.delta >= 0 ? 'up' : 'down';
+    const arrow = dir==='up'
+      ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 15l7-7 7 7"/></svg>`
+      : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7"/></svg>`;
+    return `
+      <div class="kpi-chip" title="${k.desc || ''}">
+        <div class="n">${k.value}</div>
+        <div class="l">${k.label}</div>
+        <div class="kpi-delta ${dir}">${arrow} ${Math.abs(k.delta).toFixed(1)}%</div>
+      </div>`;
+  }).join('');
+
+  const highlightsHtml = (report.highlights||[]).map(h=>`
+    <div class="kpi-card">
+      <div class="l">${h.label}</div>
+      <div class="n">${h.value.toLocaleString()}</div>
+      <div style="font-size:11px;color:var(--slate-soft);margin-top:4px;">${h.note}</div>
+    </div>`).join('');
+
+  app.innerHTML = `
+    <div style="margin-top:26px;">
+      ${multiReport ? `<button class="back-link" id="backBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to reports
+      </button>` : ''}
+      ${report.placeholder ? `<div class="placeholder-note">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+        Sample placeholder report — swap in real GA4 data when available.
+      </div>` : ''}
+      <div class="camp-header">
+        <div>
+          <h1 class="camp-title">Website Performance</h1>
+          <p class="camp-period">${fmtDate(report.start)} → ${fmtDate(report.end)} · Data source: Google Analytics</p>
+        </div>
+        <span class="status-pill ${statusClass}"><span class="dot"></span>${statusLabel}</span>
+      </div>
+
+      <div class="section-head" style="margin-top:4px;">
+        <h2>Key numbers at a glance</h2>
+        <span class="sub">Hover a card for what it means · vs. the previous fortnight</span>
+      </div>
+      <div class="kpi-row">${kpiHtml}</div>
+
+      <div class="section" style="margin-top:28px;">
+        <div class="section-head">
+          <h2>How traffic changed day by day</h2>
+          <span class="sub">Unique visitors, engaged visitors &amp; total visits — each day</span>
+        </div>
+        <div class="card">
+          <div style="height:240px;"><canvas id="dailyChart"></canvas></div>
+          <div class="day-callout-row">
+            <div class="day-callout">
+              <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+              <div><div class="lbl">Best Day</div><div class="val">${report.bestDay.label} · ${report.bestDay.value} visits</div></div>
+            </div>
+            <div class="day-callout">
+              <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"/></svg></div>
+              <div><div class="lbl">Quietest Day</div><div class="val">${report.quietestDay.label} · ${report.quietestDay.value} visit${report.quietestDay.value===1?'':'s'}</div></div>
+            </div>
+            <div class="day-callout">
+              <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg></div>
+              <div><div class="lbl">Total Visits</div><div class="val">${report.totalVisits} over 2 weeks</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Visitor demographics</h2>
+          <span class="sub">Device used &amp; top countries of origin</span>
+        </div>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <div class="card-title">What device did they use?</div>
+            <div class="chart-box donut">
+              <div class="donut-wrap">
+                <canvas id="deviceDonut"></canvas>
+                <div class="donut-center"><div class="n" id="deviceTotal">0</div><div class="l">visitors</div></div>
+              </div>
+              <div class="legend" id="deviceLegend"></div>
+            </div>
+          </div>
+          <div class="insight-card">
+            <div class="card-title">Top ${Math.min(report.countries.length,10)} — visitors by country</div>
+            <div class="chart-box"><canvas id="countryChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>How did people find the site?</h2>
+          <span class="sub">Where the ${report.totalVisits} visits came from</span>
+        </div>
+        <div class="insight-card">
+          <div class="chart-box donut" style="height:auto;align-items:flex-start;">
+            <div class="donut-wrap" style="margin-top:6px;">
+              <canvas id="acqDonut"></canvas>
+              <div class="donut-center"><div class="n" id="acqTotal">0</div><div class="l">visits</div></div>
+            </div>
+            <div class="legend" id="acqLegend" style="flex:1;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Which pages did people visit?</h2>
+          <span class="sub">All page views, and where visitors first landed</span>
+        </div>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <div class="card-title">Page views</div>
+            <div class="chart-box" style="height:${Math.max(180, report.pageViews.length*20)}px;"><canvas id="pageViewsChart"></canvas></div>
+          </div>
+          <div class="insight-card">
+            <div class="card-title">Where visitors first landed — top 5</div>
+            <div style="margin-top:6px;" id="topPagesList"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>Visitor behavior</h2>
+          <span class="sub">Key action signals — ${report.behavior.find(b=>b.label==='Viewed a Page')?.value || ''} total actions recorded</span>
+        </div>
+        <div class="kpi-grid" style="margin-top:0;margin-bottom:16px;">${highlightsHtml}</div>
+        <div class="card"><div style="height:${Math.max(220, report.behavior.length*26)}px;"><canvas id="behaviorChart"></canvas></div></div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <h2>What did they click &amp; watch?</h2>
+          <span class="sub">Specific links clicked and video engagement, detail behind the actions above</span>
+        </div>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <div class="card-title">What did they click?</div>
+            <div style="margin-top:6px;" id="clickListCard"></div>
+          </div>
+          <div class="insight-card">
+            <div class="card-title">What did they watch? (${report.video ? report.video.totalEvents : 0} video events)</div>
+            <div style="margin-top:6px;" id="videoStagesCard"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  if(multiReport){
+    document.getElementById('backBtn').onclick = ()=>{ state.view='summary'; render(); };
+  }
+
+  const theme = THEME_COLORS[state.org];
+
+  /* daily traffic line chart */
+  new Chart(document.getElementById('dailyChart'), {
+    type:'line',
+    data:{
+      labels: report.daily.map(d=>d.label),
+      datasets:[
+        { label:'Total Visits', data: report.daily.map(d=>d.total), borderColor: theme.c1, backgroundColor:'transparent', tension:0.35, pointRadius:3 },
+        { label:'Unique Visitors', data: report.daily.map(d=>d.unique), borderColor: theme.c2, backgroundColor:'transparent', tension:0.35, pointRadius:3 },
+        { label:'Engaged', data: report.daily.map(d=>d.engaged), borderColor: theme.dark3, backgroundColor:'transparent', tension:0.35, pointRadius:3 },
+      ]
+    },
+    options:{
+      plugins:{ legend:{ position:'bottom', labels:{ boxWidth:9, boxHeight:9, padding:14, font:{size:11} } }, tooltip:{ backgroundColor:'#1E1745', padding:10 } },
+      scales:{ y:{ beginAtZero:true, grid:{ color:'#F1EFF7' }, ticks:{ font:{size:10.5} } }, x:{ grid:{ display:false }, ticks:{ font:{size:10} } } },
+      animation:{ duration:900 }
+    }
+  });
+
+  /* device donut */
+  const deviceTotal = report.device.reduce((s,d)=>s+d.value,0);
+  document.getElementById('deviceTotal').textContent = deviceTotal;
+  const deviceColors = [theme.c1, theme.dark3];
+  new Chart(document.getElementById('deviceDonut'), {
+    type:'doughnut',
+    data:{ labels: report.device.map(d=>d.label), datasets:[{ data: report.device.map(d=>d.value), backgroundColor: deviceColors, borderWidth:0, hoverOffset:6 }] },
+    options:{ cutout:'68%', plugins:{ legend:{ display:false }, tooltip:{ backgroundColor:'#1E1745', padding:10 } }, animation:{ duration:900 } }
+  });
+  const deviceLegend = document.getElementById('deviceLegend');
+  report.device.forEach((d,i)=>{
+    const row = document.createElement('div');
+    row.className = 'legend-item';
+    row.innerHTML = `<span class="sw" style="background:${deviceColors[i]}"></span><span class="lbl">${d.label}</span><span class="val">${d.value}</span>`;
+    deviceLegend.appendChild(row);
+  });
+
+  /* top countries bar (already sorted ascending->descending; show as-is) */
+  new Chart(document.getElementById('countryChart'), {
+    type:'bar',
+    data:{ labels: report.countries.map(c=>c.label), datasets:[{ data: report.countries.map(c=>c.value), backgroundColor: theme.c1, borderRadius:5, maxBarThickness:16 }] },
+    options:{
+      indexAxis:'y',
+      plugins:{ legend:{ display:false }, tooltip:{ backgroundColor:'#1E1745', padding:10 } },
+      scales:{ x:{ beginAtZero:true, grid:{ color:'#F1EFF7' }, ticks:{ font:{size:10} } }, y:{ grid:{ display:false }, ticks:{ font:{size:11} } } },
+      animation:{ duration:900 }
+    }
+  });
+
+  /* acquisition donut + descriptive legend */
+  const acqTotal = report.acquisition.reduce((s,a)=>s+a.visits,0);
+  document.getElementById('acqTotal').textContent = acqTotal;
+  const acqColors = [theme.c1, theme.c2, theme.dark3, '#C7CBD6'];
+  new Chart(document.getElementById('acqDonut'), {
+    type:'doughnut',
+    data:{ labels: report.acquisition.map(a=>a.label), datasets:[{ data: report.acquisition.map(a=>a.visits), backgroundColor: acqColors, borderWidth:0, hoverOffset:6 }] },
+    options:{ cutout:'62%', plugins:{ legend:{ display:false }, tooltip:{ backgroundColor:'#1E1745', padding:10, callbacks:{ label: ctx => ` ${ctx.label}: ${ctx.raw} visits` } } }, animation:{ duration:900 } }
+  });
+  const acqLegend = document.getElementById('acqLegend');
+  report.acquisition.forEach((a,i)=>{
+    const row = document.createElement('div');
+    row.className = 'legend-item stacked';
+    row.innerHTML = `
+      <div class="row1"><span class="sw" style="background:${acqColors[i]}"></span><span class="lbl" style="font-weight:700;color:var(--dark1);">${a.label}</span><span class="val">${a.pct.toFixed(1)}% · ${a.visits} visits</span></div>
+      <div class="desc">${a.desc}</div>`;
+    acqLegend.appendChild(row);
+  });
+
+  /* full page views chart */
+  const sortedPV = [...report.pageViews].sort((a,b)=>a.views-b.views);
+  new Chart(document.getElementById('pageViewsChart'), {
+    type:'bar',
+    data:{ labels: sortedPV.map(p=>p.name), datasets:[{ data: sortedPV.map(p=>p.views), backgroundColor: theme.c1, borderRadius:5, maxBarThickness:14 }] },
+    options:{
+      indexAxis:'y',
+      plugins:{ legend:{ display:false }, tooltip:{ backgroundColor:'#1E1745', padding:10 } },
+      scales:{ x:{ beginAtZero:true, grid:{ color:'#F1EFF7' }, ticks:{ font:{size:10} } }, y:{ grid:{ display:false }, ticks:{ font:{size:10} } } },
+      animation:{ duration:900 }
+    }
+  });
+
+  /* top landing pages list */
+  const topPagesList = document.getElementById('topPagesList');
+  topPagesList.innerHTML = report.topPages.map(p=>`
+    <div class="legend-item stacked" style="margin-bottom:12px;">
+      <div class="row1"><span class="sw" style="background:${theme.c1}"></span><span class="lbl" style="font-weight:700;color:var(--dark1);">${p.name}</span><span class="val">${p.share}%</span></div>
+      <div class="desc">${p.sessions} session${p.sessions===1?'':'s'} · left immediately (bounce): ${p.bounce.toFixed(1)}%</div>
+    </div>`).join('');
+
+  /* behavior signals bar (full, ordered ascending for readability) */
+  const sortedBehavior = [...report.behavior].sort((a,b)=>a.value-b.value);
+  new Chart(document.getElementById('behaviorChart'), {
+    type:'bar',
+    data:{ labels: sortedBehavior.map(b=>b.label), datasets:[{ data: sortedBehavior.map(b=>b.value), backgroundColor: theme.c1, borderRadius:5, maxBarThickness:18 }] },
+    options:{
+      indexAxis:'y',
+      plugins:{ legend:{ display:false }, tooltip:{ backgroundColor:'#1E1745', padding:10 } },
+      scales:{ x:{ beginAtZero:true, grid:{ color:'#F1EFF7' }, ticks:{ font:{size:10} } }, y:{ grid:{ display:false }, ticks:{ font:{size:11} } } },
+      animation:{ duration:900 }
+    }
+  });
+
+  /* top clicks list, with source pages */
+  const clickListCard = document.getElementById('clickListCard');
+  clickListCard.innerHTML = report.topClicks.map(c=>`
+    <div class="click-list-row">
+      <div class="click-list-count">${c.count}</div>
+      <div class="click-list-text">
+        <div class="t1">${c.label}</div>
+        <div class="t2">${c.note}</div>
+        ${c.url ? `<div class="t2" style="margin-top:3px;opacity:.8;">🔗 ${c.url}</div>` : ''}
+        ${c.pages ? `<div class="t2" style="margin-top:2px;">📄 ${c.pages.join(', ')}</div>` : ''}
+      </div>
+    </div>`).join('');
+
+  /* video engagement funnel (3 stages) */
+  const videoStagesCard = document.getElementById('videoStagesCard');
+  if(report.video){
+    videoStagesCard.innerHTML = report.video.stages.map(s=>`
+      <div class="click-list-row">
+        <div class="click-list-count">${s.viewers}</div>
+        <div class="click-list-text"><div class="t1">${s.label}</div><div class="t2">${s.note}</div></div>
+      </div>`).join('');
+  }
+}
+
+
+function render(){
+  const ga4 = isGA4();
+  if(ga4 && state.view==='summary'){ state.view = items()[0].id; }
+  renderOrgSwitcher();
+  renderNav();
+  if(state.view==='summary'){
+    renderSummary();
+  } else {
+    const item = items().find(c=>c.id===state.view);
+    if(item){ ga4 ? renderGA4Report(item) : renderCampaign(item); }
+    else { state.view = ga4 ? items()[0].id : 'summary'; render(); return; }
+  }
+  const noun = ga4 ? 'reports' : 'campaigns';
+  document.getElementById('filterNote').textContent = `Showing ${items().filter(inRange).length} of ${items().length} ${noun} · ${fmtDate(state.dateFrom)} – ${fmtDate(state.dateTo)}`;
+}
+
+// document.getElementById('applyFilter').addEventListener('click', ()=>{
+//   state.dateFrom = document.getElementById('dateFrom').value || orgBounds().from;
+//   state.dateTo = document.getElementById('dateTo').value || orgBounds().to;
+//   render();
+// });
+let ga4TimerInterval = null;
+
+function startGA4Loading() {
+
+    const loading = document.getElementById('ga4Loading');
+    const timer = document.getElementById('ga4Timer');
+
+    loading.style.display = 'flex';
+
+    let seconds = 0;
+    timer.textContent = '0s';
+
+    // Clear any existing timer
+    if (ga4TimerInterval) {
+        clearInterval(ga4TimerInterval);
+    }
+
+    ga4TimerInterval = setInterval(() => {
+        seconds++;
+        timer.textContent = `${seconds}s`;
+    }, 1000);
+}
+
+function stopGA4Loading() {
+
+    if (ga4TimerInterval) {
+        clearInterval(ga4TimerInterval);
+        ga4TimerInterval = null;
+    }
+
+    const loading = document.getElementById('ga4Loading');
+
+    loading.style.display = 'none';
+}
+document.getElementById('applyFilter').addEventListener('click', async () => {
+
+  state.dateFrom =
+    document.getElementById('dateFrom').value || orgBounds().from;
+
+  state.dateTo =
+    document.getElementById('dateTo').value || orgBounds().to;
+    const orgType = document.documentElement.dataset.org;
+
+    // console.log(orgType);
+    if (orgType === 'ga4-trivium') {
+        startGA4Loading();
+        // Call GA4 API with selected dates
+        const params = new URLSearchParams({
+        start_date: state.dateFrom,
+        end_date: state.dateTo
+        });
+        
+        try {
+            const response_ga4 = await fetch(
+              `ga4-trivium.php?${params.toString()}`
+            );
+            
+            if (!response_ga4.ok) {
+              throw new Error(`HTTP error: ${response_ga4.status}`);
+            }
+            
+            const result_ga4 = await response_ga4.json();
+            
+            // console.log('GA4 result:', result_ga4);
+            
+            // Store the updated GA4 data
+            if (result_ga4.success) {
+              ORG_DATA.eurekii.ga4 = result_ga4.report;
+            }
+            
+            // Render after API response
+            loadGA4Data(result_ga4.report);
+            stopGA4Loading();
+            
+            } catch (error) {
+            console.error('GA4 API error:', error);
+        }
+    } 
+    render();
+  
+});
+document.getElementById('resetFilter').addEventListener('click', ()=>{
+  const b = orgBounds();
+  state.dateFrom = b.from; state.dateTo = b.to;
+  document.getElementById('dateFrom').value = state.dateFrom;
+  document.getElementById('dateTo').value = state.dateTo;
+  render();
+});
+
+/* init */
+(function init(){
+  const b = orgBounds();
+  state.dateFrom = b.from; state.dateTo = b.to;
+  document.getElementById('dateFrom').value = state.dateFrom;
+  document.getElementById('dateTo').value = state.dateTo;
+  document.getElementById('orgEyebrow').textContent = ORG_DATA[state.org].label + ' · Campaign Analytics';
+  document.getElementById('headerLogo').src = LOGOS[state.org];
+  render();
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+[18-Sep-2026 06:14:37 UTC] PHP Warning:  file_get_contents(/home/jtrivium/public_html/api-campaign/weekly_mail/templates/report-template.html): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php on line 123
+[18-Sep-2026 06:14:37 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php:209
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php(247): sendReport(Array, 'Campaign Analyt...', '', Array)
+#1 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php on line 209
+[18-Sep-2026 06:14:53 UTC] PHP Warning:  file_get_contents(/home/jtrivium/public_html/api-campaign/weekly_mail/templates/report-template.html): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php on line 123
+[18-Sep-2026 06:14:53 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php:209
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php(247): sendReport(Array, 'Campaign Analyt...', '', Array)
+#1 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php on line 209
+[18-Sep-2026 06:20:05 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "STDERR" in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php:209
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php(247): sendReport(Array, 'Campaign Analyt...', '<!DOCTYPE html>...', Array)
+#1 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php on line 209
+[18-Sep-2026 10:40:54 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\Exception" not found in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php:103
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 103
+[18-Sep-2026 10:40:55 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\Exception" not found in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php:103
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 103
+[18-Sep-2026 10:55:56 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\Exception" not found in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php:104
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 104
+[18-Sep-2026 10:56:12 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\Exception" not found in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php:104
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 104
+[18-Sep-2026 10:57:13 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\Exception" not found in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php:104
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 104
+[18-Sep-2026 11:03:27 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\Exception" not found in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php:111
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 111
+[18-Sep-2026 11:04:04 UTC] PHP Fatal error:  Uncaught Error: Class "PHPMailer\PHPMailer\Exception" not found in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php:111
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 111
+[18-Sep-2026 11:12:35 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Email template not found: /home/jtrivium/public_html/api-campaign/weekly_mail/../templates/GA4-dashboard-email.html in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php:111
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 111
+[18-Sep-2026 11:14:29 UTC] PHP Warning:  file_get_contents(/home/jtrivium/public_html/api-campaign/weekly_mail/../templates/GA4-dashboard-email.html): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 116
+[18-Sep-2026 11:14:53 UTC] PHP Warning:  file_get_contents(/home/jtrivium/public_html/api-campaign/weekly_mail/../templates/GA4-dashboard-email.html): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 116
+[18-Sep-2026 11:15:05 UTC] PHP Warning:  file_get_contents(/home/jtrivium/public_html/api-campaign/weekly_mail/../templates/GA4-dashboard-email.html): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 116
+[18-Sep-2026 12:32:49 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: GA4 API returned HTTP 404: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL was not found on this server.</p>
+<p>Additionally, a 404 Not Found
+error was encountered while trying to use an ErrorDocument to handle the request.</p>
+</body></html>
+ in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-cte.php:77
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-cte.php on line 77
+[25-Sep-2026 11:51:15 UTC] PHP Warning:  require_once(db-trivium.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php on line 6
+[25-Sep-2026 11:51:15 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'db-trivium.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php on line 6
+[25-Sep-2026 12:30:03 UTC] PHP Warning:  require_once(db-trivium.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php on line 6
+[25-Sep-2026 12:30:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'db-trivium.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php on line 6
+[25-Sep-2026 12:35:03 UTC] PHP Warning:  require_once(db-trivium.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php on line 6
+[25-Sep-2026 12:35:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'db-trivium.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php on line 6
+[25-Sep-2026 12:40:04 UTC] PHP Warning:  require_once(db-trivium.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php on line 6
+[25-Sep-2026 12:40:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'db-trivium.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_send_campaign_mails.php on line 6
+[28-Sep-2026 10:58:22 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 10:58:22 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 10:58:22 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 10:58:22 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 11:00:45 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 11:00:45 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 11:00:45 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 11:00:45 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 11:01:59 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 11:01:59 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 11:01:59 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 11:01:59 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 52
+[28-Sep-2026 11:07:54 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:07:54 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:07:54 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:07:54 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:09:23 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:09:23 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:09:23 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:09:23 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:11:21 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:11:21 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:11:21 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:11:21 UTC] PHP Warning:  Undefined array key "from_addresses" in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:20:27 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:20:27 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:20:27 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:20:27 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 60
+[28-Sep-2026 11:20:27 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 64
+[28-Sep-2026 12:22:34 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 58
+[28-Sep-2026 12:22:34 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 58
+[28-Sep-2026 12:22:34 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 58
+[28-Sep-2026 12:22:34 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 58
+[28-Sep-2026 12:28:35 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "DB_HOST" in /home/jtrivium/public_html/api-campaign/db.php:8
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php(6): require_once()
+#1 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/db.php on line 8
+[28-Sep-2026 12:34:03 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "DB_HOST" in /home/jtrivium/public_html/api-campaign/db.php:8
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php(6): require_once()
+#1 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/db.php on line 8
+[28-Sep-2026 12:37:19 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "DB_HOST" in /home/jtrivium/public_html/api-campaign/db.php:8
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php(6): require_once()
+#1 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/db.php on line 8
+[28-Sep-2026 12:46:09 UTC] PHP Fatal error:  Uncaught Error: Undefined constant "DB_HOST" in /home/jtrivium/public_html/api-campaign/db.php:8
+Stack trace:
+#0 /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php(6): require_once()
+#1 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/db.php on line 8
+[29-Sep-2026 08:21:45 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 69
+[29-Sep-2026 08:28:01 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 69
+[29-Sep-2026 08:53:24 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 69
+[29-Sep-2026 10:06:39 UTC] PHP Fatal error:  A function with return type must return a value in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports-eurekii.php on line 246
+[29-Sep-2026 10:07:09 UTC] PHP Fatal error:  A function with return type must return a value in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php on line 233
+[29-Sep-2026 10:07:30 UTC] PHP Fatal error:  A function with return type must return a value in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php on line 233
+[29-Sep-2026 10:07:42 UTC] PHP Fatal error:  A function with return type must return a value in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports-eurekii.php on line 246
+[29-Sep-2026 10:10:07 UTC] PHP Fatal error:  A function with return type must return a value in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports-eurekii.php on line 246
+[29-Sep-2026 10:10:14 UTC] PHP Fatal error:  A function with return type must return a value in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php on line 233
+[29-Sep-2026 10:13:52 UTC] PHP Fatal error:  A function with return type must return a value in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php on line 233
+[29-Sep-2026 10:14:09 UTC] PHP Fatal error:  A function with return type must return a value in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php on line 233
+[29-Sep-2026 10:14:10 UTC] PHP Fatal error:  A function with return type must return a value in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports.php on line 233
+[29-Sep-2026 11:25:26 UTC] PHP Warning:  require_once(/send-campaign-reports-eurekii.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 7
+[29-Sep-2026 11:25:26 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/send-campaign-reports-eurekii.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 7
+[29-Sep-2026 11:38:00 UTC] PHP Warning:  require_once(/send-campaign-reports.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 7
+[29-Sep-2026 11:38:00 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/send-campaign-reports.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 7
+[29-Sep-2026 12:38:15 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:38:15 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:38:15 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:40:15 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:40:15 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:40:15 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:43:32 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:43:32 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:43:32 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:43:59 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:43:59 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:43:59 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:45:06 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:45:06 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 85
+[29-Sep-2026 12:45:06 UTC] Sending report for campaign: 6836df5848ff4384c
+[29-Sep-2026 12:45:06 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 12:45:11 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:45:11 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 85
+[29-Sep-2026 12:45:11 UTC] Sending report for campaign: 686fa15a7d8633685
+[29-Sep-2026 12:45:11 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 12:45:15 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 12:45:15 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 85
+[29-Sep-2026 12:45:15 UTC] Sending report for campaign: 6911bcd8cbdd86227
+[29-Sep-2026 12:45:15 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 12:50:07 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 75
+[29-Sep-2026 12:50:07 UTC] Sending report for campaign: 6a508ece0aa313b93
+[29-Sep-2026 12:50:07 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 12:50:10 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 75
+[29-Sep-2026 12:50:10 UTC] Sending report for campaign: 6a50fecd068c1310c
+[29-Sep-2026 12:50:10 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 12:50:13 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 75
+[29-Sep-2026 12:50:13 UTC] Sending report for campaign: 6a54980491457595e
+[29-Sep-2026 12:50:13 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 12:50:17 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 75
+[29-Sep-2026 12:50:17 UTC] Sending report for campaign: 6aba677c3b720f339
+[29-Sep-2026 12:50:17 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 13:03:48 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 13:03:48 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 13:03:48 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 69
+[29-Sep-2026 13:03:49 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 66
+[29-Sep-2026 13:10:28 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 66
+[29-Sep-2026 13:11:06 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 66
+[29-Sep-2026 13:11:06 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 85
+[29-Sep-2026 13:11:06 UTC] Sending report for campaign: 6a508ece0aa313b93
+[29-Sep-2026 13:11:06 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 13:11:13 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 85
+[29-Sep-2026 13:11:13 UTC] Sending report for campaign: 6a50fecd068c1310c
+[29-Sep-2026 13:11:13 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 13:11:19 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 85
+[29-Sep-2026 13:11:19 UTC] Sending report for campaign: 6a54980491457595e
+[29-Sep-2026 13:11:19 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 13:11:27 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 85
+[29-Sep-2026 13:11:27 UTC] Sending report for campaign: 6aba677c3b720f339
+[29-Sep-2026 13:11:27 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 13:17:09 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 66
+[29-Sep-2026 13:34:23 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 71
+[29-Sep-2026 13:34:23 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:34:23 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:34:23 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:34:24 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 70
+[29-Sep-2026 13:39:12 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 71
+[29-Sep-2026 13:39:12 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:39:12 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:39:12 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:39:13 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 70
+[29-Sep-2026 13:43:51 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 71
+[29-Sep-2026 13:43:51 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:43:51 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:43:51 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:43:52 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 70
+[29-Sep-2026 13:43:52 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 92
+[29-Sep-2026 13:43:52 UTC] Sending report for campaign: 6a508ece0aa313b93
+[29-Sep-2026 13:43:52 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 13:43:58 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 92
+[29-Sep-2026 13:43:58 UTC] Sending report for campaign: 6a50fecd068c1310c
+[29-Sep-2026 13:43:58 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 13:44:04 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 92
+[29-Sep-2026 13:44:04 UTC] Sending report for campaign: 6a54980491457595e
+[29-Sep-2026 13:44:04 UTC] Recipients: navneet.verma@algoqube.com
+[29-Sep-2026 13:48:00 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 71
+[29-Sep-2026 13:48:00 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:48:00 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 110
+[29-Sep-2026 13:48:00 UTC] Sending report for campaign: 6836df5848ff4384c
+[29-Sep-2026 13:48:00 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[29-Sep-2026 13:48:12 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:48:12 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 110
+[29-Sep-2026 13:48:12 UTC] Sending report for campaign: 686fa15a7d8633685
+[29-Sep-2026 13:48:12 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[29-Sep-2026 13:48:17 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[29-Sep-2026 13:48:17 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 110
+[29-Sep-2026 13:48:17 UTC] Sending report for campaign: 6911bcd8cbdd86227
+[29-Sep-2026 13:48:17 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[29-Sep-2026 13:48:22 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 70
+[29-Sep-2026 13:48:22 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 92
+[29-Sep-2026 13:48:22 UTC] Sending report for campaign: 6a508ece0aa313b93
+[29-Sep-2026 13:48:22 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[29-Sep-2026 13:48:25 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 92
+[29-Sep-2026 13:48:25 UTC] Sending report for campaign: 6a50fecd068c1310c
+[29-Sep-2026 13:48:25 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[29-Sep-2026 13:48:32 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 92
+[29-Sep-2026 13:48:32 UTC] Sending report for campaign: 6a54980491457595e
+[29-Sep-2026 13:48:32 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 07:22:15 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 71
+[30-Sep-2026 07:22:15 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[30-Sep-2026 07:22:15 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 110
+[30-Sep-2026 07:22:15 UTC] Sending report for campaign: 6836df5848ff4384c
+[30-Sep-2026 07:22:15 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 07:22:20 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[30-Sep-2026 07:22:20 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 110
+[30-Sep-2026 07:22:20 UTC] Sending report for campaign: 686fa15a7d8633685
+[30-Sep-2026 07:22:20 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 07:22:24 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 73
+[30-Sep-2026 07:22:24 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php on line 110
+[30-Sep-2026 07:22:24 UTC] Sending report for campaign: 6911bcd8cbdd86227
+[30-Sep-2026 07:22:24 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 07:22:30 UTC] PHP Warning:  Undefined variable $isIntervalDay in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 70
+[30-Sep-2026 07:22:30 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 92
+[30-Sep-2026 07:22:30 UTC] Sending report for campaign: 6a508ece0aa313b93
+[30-Sep-2026 07:22:30 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 07:22:33 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 92
+[30-Sep-2026 07:22:33 UTC] Sending report for campaign: 6a50fecd068c1310c
+[30-Sep-2026 07:22:33 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 07:22:37 UTC] PHP Warning:  Array to string conversion in /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php on line 92
+[30-Sep-2026 07:22:37 UTC] Sending report for campaign: 6a54980491457595e
+[30-Sep-2026 07:22:37 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 08:01:26 UTC] Sending report for campaign: 6836df5848ff4384c
+[30-Sep-2026 08:01:26 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 08:01:35 UTC] Sending report for campaign: 686fa15a7d8633685
+[30-Sep-2026 08:01:35 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 08:01:47 UTC] Sending report for campaign: 6911bcd8cbdd86227
+[30-Sep-2026 08:01:47 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 08:02:00 UTC] Sending report for campaign: 6a508ece0aa313b93
+[30-Sep-2026 08:02:00 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 08:02:05 UTC] Sending report for campaign: 6a50fecd068c1310c
+[30-Sep-2026 08:02:05 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 08:02:11 UTC] Sending report for campaign: 6a54980491457595e
+[30-Sep-2026 08:02:11 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 08:02:16 UTC] Sending report for campaign: 6aba677c3b720f339
+[30-Sep-2026 08:02:16 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[30-Sep-2026 08:02:23 UTC] Sending report for campaign: 6abcafb93235574d2
+[30-Sep-2026 08:02:23 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[05-Oct-2026 08:14:07 UTC] PHP Warning:  Undefined variable $html in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports-eurekii.php on line 156
+[05-Oct-2026 08:14:07 UTC] PHP Deprecated:  str_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports-eurekii.php on line 156
+[05-Oct-2026 08:14:09 UTC] PHP Warning:  Undefined variable $html in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports-eurekii.php on line 156
+[05-Oct-2026 08:14:09 UTC] PHP Deprecated:  str_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports-eurekii.php on line 156
+[05-Oct-2026 08:14:12 UTC] PHP Warning:  Undefined variable $html in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports-eurekii.php on line 156
+[05-Oct-2026 08:14:12 UTC] PHP Deprecated:  str_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in /home/jtrivium/public_html/api-campaign/weekly_mail/send-campaign-reports-eurekii.php on line 156
+[07-Oct-2026 06:29:56 UTC] Sending report for campaign: 6836df5848ff4384c
+[07-Oct-2026 06:29:56 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[07-Oct-2026 06:30:00 UTC] Sending report for campaign: 686fa15a7d8633685
+[07-Oct-2026 06:30:00 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[07-Oct-2026 06:30:05 UTC] Sending report for campaign: 6911bcd8cbdd86227
+[07-Oct-2026 06:30:05 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com

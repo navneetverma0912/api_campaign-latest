@@ -1,0 +1,10 @@
+{
+    "require": {
+        "google/analytics-data": "^0.24.0"
+    },
+     "config": {
+        "platform": {
+            "php": "8.1.34"
+        }
+    }
+}

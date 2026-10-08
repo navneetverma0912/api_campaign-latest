@@ -1,0 +1,504 @@
+/usr/local/cpanel/bin/jailshell: /usr/local/bin/php82: No such file or directory
+Failed to send 'Campaign Analytics Report — Test Campaign Navneet- 26-08': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Power Learning at scale- Nick': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Testing 18th June- First Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Testing 18th June- Second Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Testing 18th June- Third Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Testing 18th June- Fourth Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — tesing_campaign_3rd_march_one': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Nick Follow Up Emailer Nov': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Community College-Dean-Instruction-CTE-CAO': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Health Sc test': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Test Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Skills USA Attendees Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Global HDT Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — ISTE CTE Service-2 Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — ISTE CTE Service-1 Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Skills USA 062025': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE_Follow_Up_Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — May A&E': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — May Tutoring': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — test_CTE': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Follow_up_email_A&E,Tutoring': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — test_email_for_follow_up': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE_Mailers': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Test email-Nick': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Tutoring Back to School Campaign August 2025': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Assessment & Editorial Back to School Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Webinar CTE Directors Campaign 1st Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Webinar CTE Principals Campaign 1st Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Webinar CTE Directors Campaign 3rd Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Webinar CTE Principals Campaign 3rd Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Webinar Principals Campaign 4th Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Webinar CTE Directors Campaign 4th Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Automotive': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Construction': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Health': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Manufacturing': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Mechanical': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Nursing': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Robotics': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Welding': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Webinar CTE Directors Campaign Last Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Webinar Principals Campaign Last Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Thank-you! Mailer To Attendees': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Test EmailTemplate': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Thank-you Attendees Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Mailer- Justice Impacted Individuals Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — TestBouncedEmail': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — ACTE Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Editorial Mailer Campaign Nov': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — ACTE Campaign Lisa': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Assessment Mailer Campaign Nov': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Health Science Campaign': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — New ACTE Campaign Tim': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Tim Follow Up Email ACTE And Health Science': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Sample': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Live at ACTE': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Lisa's follow up mail': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Live At ACTE_5th Dec': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Nick pinckchok test': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Esports Lab_Nicholas (11th Dec '25)': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Stakeholder_Jan '26': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Trivium CTE Healthcare Programs - Emailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — ACTE Follow-up_7th Jan '26': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE/STEM Intro_George (6th Jan '26)': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Nursing Program Campaign - Emailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Health Sciences Campaign - Emailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Tim_Technical Schools': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Trivium CTE Winter Offer 2026': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Preparing Nursing & Allied Health Students for Success': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE (Nick) Jan '26': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE-Nick_follow-up': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Health Sciences_follow-up': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — National CTE Month Offer-Tim': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTAT- Feb 2026 Mail-Lisa': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Nick - Global HDT Vendors mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Month Feb'26_Email plan - Week 1': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — IACTE Conference_Nicholas': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Florida_Explore & Prep - Nick M's Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — 2nd Mail - IACTE Conference_Nicholas': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Month Feb'26_Email plan - Week 2': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Nicholas_P (Indiana) - 24th feb': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Month Feb'26_Email plan - Week 3': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE Month Feb'26_Email plan - Week 4': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Nicholas_P (Ohio) - 3rd March': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — League of Innovation 2026-Tim': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Nicholas_P (Michigan) - 10th March': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — League of Innovation 2026-Tim (Event Registration Roster List)': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Follow up- League of Innovation list 1': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Nicholas_P (Illinois) - 17th March': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Test - Checking Reply Option': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Nicholas_P (Wisconsin) - 24th March': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — High-Dosage Tutoring (HDT) Global Initiative - A Case Study': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Trivium CTE Intro Mailer_Tim': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Test campaign 2603 Nav': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Follow up- Florida_Explore & Prep - Nick M's Mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Anatomy Connected- Conf. mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Anatomy Connected Conf.- 2nd mailer': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Trivium CTE-Spring Offer 2026_Nicholas': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Trivium CTE Intro Mailer_Nick M': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Trivium CTE-Spring Offer 2026_Tim': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Trivium CTE-End of School Year Offer (May'26_Tim)': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Trivium CTE-End of School Year Offer (June'26_Tim)': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — NCSA-Conf_Nick_June '26': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — TriviumCTE - Pre Emailer MAVA 2026': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Trivium CTE - Emailer 1 CTAT (New)': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — ISTE_Nick_June '26': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Trivium CTE - Emailer 1 CTAT (Tim)': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Trivium CTE - Pre Emailer 2 MAVA 2026': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTAT Mailer 2 (Joe)': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTAT Emailer 3 (Joe)': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Post Emailer MAVA 2026 (Tim)': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Tim CTE Test warm Up': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — High Dosage Tutoring HDT-mailer 1 Nick': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE-JOE': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE-Nick Pinchok': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE-Tim': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE-Tim1': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — CTE-Donna': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Nick-High Dosage Tutoring HDT-mailer 2': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Indiana ACTE - Nick P': SMTP Error: Could not authenticate.
+Failed to send 'Campaign Analytics Report — Indiana ACTE - Nick P | C2': SMTP Error: Could not authenticate.
+No matching campaigns in the selected window.
+Sent: Campaign Analytics Report — Power Learning at scale- Nick -> kvnavneetg@gmail.com
+No matching campaigns in the selected window.
+No matching campaigns in the selected window.
+Sent: Campaign Analytics Report — Power Learning at scale- Nick -> kvnavneetg@gmail.com
+Sent: Campaign Analytics Report — Power Learning at scale- Nick -> kvnavneetg@gmail.com
+Sent: Campaign Analytics Report — Power Learning at scale- Nick -> kvnavneetg@gmail.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> kvnavneetg@gmail.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> kvnavneetg@gmail.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> kvnavneetg@gmail.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> tapas.mishra@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> tapas.mishra@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+No matching campaigns in the selected window.
+No matching campaigns in the selected window.
+No matching campaigns in the selected window.
+No matching campaigns in the selected window.
+Sent: Campaign Analytics Report - CTE & Technology Contacts -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Homeless & Foster Care Liaisons -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Military Family Coordinators -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - CTE & Technology Contacts -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Homeless & Foster Care Liaisons -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Military Family Coordinators -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - CTE & Technology Contacts -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Homeless & Foster Care Liaisons -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Military Family Coordinators -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - CTE & Technology Contacts -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Homeless & Foster Care Liaisons -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Military Family Coordinators -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - CTE & Technology Contacts -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Homeless & Foster Care Liaisons -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Military Family Coordinators -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - CTE & Technology Contacts -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Homeless & Foster Care Liaisons -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Military Family Coordinators -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - CTE & Technology Contacts -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Homeless & Foster Care Liaisons -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Military Family Coordinators -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - CTE & Technology Contacts -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Homeless & Foster Care Liaisons -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Military Family Coordinators -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - CTE & Technology Contacts -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Homeless & Foster Care Liaisons -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Military Family Coordinators -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+Sent: Campaign Analytics Report - CTE & Technology Contacts -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Homeless & Foster Care Liaisons -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Military Family Coordinators -> navneet.verma@algoqube.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> kvnavneetg@gmail.com
+Sent: Campaign Analytics Report - Power Learning at scale- Nick -> kvnavneetg@gmail.com
+========================================
+Master Cron Started: 2026-09-29 19:30:05
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-09-29 19:30:05
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-09-29 19:30:05
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 29th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-09-29 19:30:05
+========================================
+========================================
+Master Cron Started: 2026-09-30 12:40:03
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-09-30 12:40:03
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-09-30 12:40:03
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 30th - running web analytics.
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php.php
+Started: 2026-09-30 12:40:03
+ERROR: File does not exist
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php
+Started: 2026-09-30 12:40:03
+Analytics email sent successfully.
+SUCCESS: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-cte.php
+Started: 2026-09-30 12:40:09
+Analytics email sent successfully.
+SUCCESS: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-cte.php
+
+========================================
+Master Cron Finished: 2026-09-30 12:40:14
+========================================
+========================================
+Master Cron Started: 2026-09-30 12:45:04
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-09-30 12:45:04
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-09-30 12:45:04
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 30th - running web analytics.
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php.php
+Started: 2026-09-30 12:45:04
+ERROR: File does not exist
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php
+Started: 2026-09-30 12:45:04
+Analytics email sent successfully.
+SUCCESS: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-cte.php
+Started: 2026-09-30 12:45:09
+Analytics email sent successfully.
+SUCCESS: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-cte.php
+
+========================================
+Master Cron Finished: 2026-09-30 12:45:18
+========================================
+========================================
+Master Cron Started: 2026-10-01 10:30:06
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-01 10:30:06
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-01 10:30:06
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 1th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-01 10:30:06
+========================================
+========================================
+Master Cron Started: 2026-10-02 10:30:07
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-02 10:30:07
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-02 10:30:07
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 2th - running web analytics.
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php
+Started: 2026-10-02 10:30:07
+Analytics email sent successfully.
+SUCCESS: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php
+Started: 2026-10-02 10:30:14
+Analytics email sent successfully.
+SUCCESS: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-cte.php
+Started: 2026-10-02 10:30:21
+Analytics email sent successfully.
+SUCCESS: /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-cte.php
+
+========================================
+Master Cron Finished: 2026-10-02 10:30:26
+========================================
+========================================
+Master Cron Started: 2026-10-03 10:30:10
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-03 10:30:10
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-03 10:30:10
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 3th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-03 10:30:10
+========================================
+========================================
+Master Cron Started: 2026-10-04 10:30:08
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-04 10:30:08
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-04 10:30:08
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 4th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-04 10:30:08
+========================================
+========================================
+Master Cron Started: 2026-10-05 10:30:07
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-05 10:30:07
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-05 10:30:08
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 5th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-05 10:30:08
+========================================
+========================================
+Master Cron Started: 2026-10-06 10:30:07
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-06 10:30:07
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-06 10:30:07
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 6th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-06 10:30:07
+========================================
+========================================
+Master Cron Started: 2026-10-07 10:30:07
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-07 10:30:07
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-07 10:30:07
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 7th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-07 10:30:07
+========================================
+========================================
+Master Cron Started: 2026-10-08 10:30:06
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-08 10:30:06
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-08 10:30:06
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 8th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-08 10:30:06
+========================================

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Campaign Analytics — Detailed Report</title>
+<!--[if mso]>
+<noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+<![endif]-->
+<style>
+  body, table, td { font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; }
+  body { margin:0; padding:0; background-color:#F0EFF5; -webkit-text-size-adjust:100%; }
+  img { border:0; line-height:100%; outline:none; text-decoration:none; }
+  table { border-collapse:collapse !important; }
+  a { text-decoration:none; }
+  .kpi-num { font-family:'Poppins','Segoe UI',Arial,sans-serif; font-weight:800; font-size:21px; color:#2E2260; }
+  .kpi-lbl { font-family:Arial,sans-serif; font-size:10px; font-weight:700; color:#6B7085; text-transform:uppercase; letter-spacing:.04em; }
+  .sec-title { font-family:'Poppins','Segoe UI',Arial,sans-serif; font-size:15px; font-weight:700; color:#2E2260; margin:0 0 4px; }
+  .sec-sub { font-family:Arial,sans-serif; font-size:11.5px; color:#6B7085; margin:0 0 14px; }
+  .th { font-family:Arial,sans-serif; font-size:10px; font-weight:700; color:#6B7085; text-transform:uppercase; letter-spacing:.03em; padding:9px 10px; background-color:#F5F4FA; }
+  .td { font-family:Arial,sans-serif; font-size:11.5px; color:#2B2740; padding:10px 10px; border-bottom:1px solid #EFEDF6; }
+  @media only screen and (max-width:600px){
+    .container{ width:100% !important; }
+    .kpi-cell{ display:inline-block !important; width:31% !important; padding-bottom:14px !important; }
+    .px{ padding-left:18px !important; padding-right:18px !important; }
+    .stack-td{ display:block !important; width:100% !important; }
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background-color:#F0EFF5;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">
+  {{PREHEADER}}
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#F0EFF5;">
+<tr><td align="center" style="padding:32px 16px;">
+
+  <table role="presentation" class="container" width="640" cellpadding="0" cellspacing="0" style="width:640px;max-width:640px;background-color:#FFFFFF;border-radius:16px;overflow:hidden;">
+
+    <!-- HEADER -->
+    <tr>
+      <td style="background-color:#2E2260;background:linear-gradient(135deg,#2E2260,#1E1745);padding:30px 36px;" class="px">
+        <!-- LOGO -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="background-color:__TRIVIUM_LOGO_BG_COLOR__;border-radius:10px;padding:8px 14px;" width="1">
+              <!--<img src="data:image/png;base64,__TRIVIUM_LOGO_B64__" width="120" alt="Trivium" style="display:block;">-->
+              <img src="__TRIVIUM_LOGO_URL__" width="120" alt="Trivium" style="display:block;">
+              
+
+            </td>
+            <td></td>
+          </tr>
+        </table>
+        <!-- /LOGO -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:18px;">
+          <tr>
+            <td>
+              <p style="margin:0 0 6px;font-family:'Poppins','Segoe UI',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C9C3E8;">Campaign Analytics · Detailed Report</p>
+              <p style="margin:0;font-family:'Poppins','Segoe UI',Arial,sans-serif;font-size:23px;font-weight:800;color:#FFFFFF;">{{CAMPAIGN_NAME}}</p>
+              <p style="margin:8px 0 0;font-family:Arial,sans-serif;font-size:12.5px;color:#B9B4DA;">{{DATE_RANGE}} &nbsp;·&nbsp; Status: <span style="color:#9FE0BE;font-weight:700;">{{CAMPAIGN_STATUS}}</span></p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <!-- CTA BUTTON -->
+        <tr>
+          <td align="center" class="px" style="padding:30px 36px 8px;">
+            <table role="presentation" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="center" style="background-color:#EF4060;background:linear-gradient(90deg,#EF4060,#F4813E);border-radius:100px;">
+                  <a href="{{DASHBOARD_URL}}" style="display:inline-block;padding:13px 32px;font-family:'Poppins','Segoe UI',Arial,sans-serif;font-size:13px;font-weight:700;color:#FFFFFF;">Open interactive dashboard</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+    <!-- KPI ROW -->
+    <tr>
+      <td class="px" style="padding:28px 36px 8px;">
+        <p class="sec-title">Key numbers</p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="kpi-cell" width="20%" align="center" style="padding:10px 4px;"><div class="kpi-num">{{KPI_SENT}}</div><div class="kpi-lbl">Sent</div></td>
+            <td class="kpi-cell" width="20%" align="center" style="padding:10px 4px;"><div class="kpi-num" style="color:#EF4060;">{{KPI_OPEN_RATE}}</div><div class="kpi-lbl">Open Rate</div></td>
+            <td class="kpi-cell" width="20%" align="center" style="padding:10px 4px;"><div class="kpi-num" style="color:#F4813E;">{{KPI_CTOR}}</div><div class="kpi-lbl">Click-to-Open</div></td>
+            <td class="kpi-cell" width="20%" align="center" style="padding:10px 4px;"><div class="kpi-num">{{KPI_OPTOUT}}</div><div class="kpi-lbl">Opt-out</div></td>
+            <td class="kpi-cell" width="20%" align="center" style="padding:10px 4px;"><div class="kpi-num" style="color:#EF4060;">{{KPI_ENGAGED}}</div><div class="kpi-lbl">Engaged Contacts</div></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="px" style="padding:16px 36px 0;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-top:1px solid #E7E5F0;font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>
+
+    <!-- FUNNEL -->
+    <tr>
+      <td class="px" style="padding:24px 36px 4px;">
+        <p class="sec-title">Engagement funnel</p>
+        <p class="sec-sub">Every stage of the send</p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="25%" align="center" style="background-color:#EFEDFA;border-radius:8px 0 0 8px;padding:16px 4px;">
+              <div style="font-family:'Poppins',Arial,sans-serif;font-weight:800;font-size:19px;color:#2E2260;">{{FUNNEL_SENT}}</div>
+              <div style="font-family:Arial,sans-serif;font-size:10.5px;color:#6B7085;font-weight:600;">Sent</div>
+              <div style="font-family:Arial,sans-serif;font-size:9.5px;color:#9CA0B3;margin-top:2px;">Baseline</div>
+            </td>
+            <td width="25%" align="center" style="background-color:#F5F5F5;padding:16px 4px;">
+              <div style="font-family:'Poppins',Arial,sans-serif;font-weight:800;font-size:19px;color:#2E2260;">{{FUNNEL_OPENED}}</div>
+              <div style="font-family:Arial,sans-serif;font-size:10.5px;color:#6B7085;font-weight:600;">Opened</div>
+              <div style="font-family:Arial,sans-serif;font-size:9.5px;color:#9CA0B3;margin-top:2px;">{{FUNNEL_OPENED_PCT}}</div>
+            </td>
+            <td width="25%" align="center" style="background-color:#FBEAE5;padding:16px 4px;">
+              <div style="font-family:'Poppins',Arial,sans-serif;font-weight:800;font-size:19px;color:#EF4060;">{{FUNNEL_CLICKED}}</div>
+              <div style="font-family:Arial,sans-serif;font-size:10.5px;color:#EF4060;font-weight:600;">Clicked</div>
+              <div style="font-family:Arial,sans-serif;font-size:9.5px;color:#9CA0B3;margin-top:2px;">{{FUNNEL_CLICKED_PCT}}</div>
+            </td>
+            <td width="25%" align="center" style="background-color:#FBE7E7;border-radius:0 8px 8px 0;padding:16px 4px;">
+              <div style="font-family:'Poppins',Arial,sans-serif;font-weight:800;font-size:19px;color:#E24B4B;">{{FUNNEL_OPTOUT}}</div>
+              <div style="font-family:Arial,sans-serif;font-size:10.5px;color:#E24B4B;font-weight:600;">Opted out</div>
+              <div style="font-family:Arial,sans-serif;font-size:9.5px;color:#9CA0B3;margin-top:2px;">{{FUNNEL_OPTOUT_PCT}}</div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <!--clicks Breakdown-->
+    <tr>
+      <td class="px" style="padding:24px 36px 4px;">
+        <p class="sec-title">Clicks Breakdown</p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+    
+            <tr>
+                
+                <td style="padding:20px 18px 10px;">
+        
+                    <p style="margin:4px 0 0;font-family:Arial,sans-serif;font-size:11px;color:#9CA0B3;">
+                        {{TRACKING_URL_COUNT}} tracking URLs
+                    </p>
+                </td>
+            </tr>
+        
+            {{TRACKING_URL_ROWS}}
+        
+        </table>
+        </td>
+    </tr>
+        <!--Track-->
+
+    <tr><td class="px" style="padding:20px 36px 0;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-top:1px solid #E7E5F0;font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>
+
+    <!-- ALL ENGAGEMENT RATES -->
+    <!--<tr>-->
+    <!--  <td class="px" style="padding:24px 36px 4px;">-->
+    <!--    <p class="sec-title">Engagement rates</p>-->
+    <!--    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #E7E5F0;border-radius:10px;overflow:hidden;">-->
+    <!--      <tr>-->
+    <!--        <td class="th">Metric</td>-->
+    <!--        <td class="th" align="right">Rate</td>-->
+    <!--      </tr>-->
+    <!--      <tr><td class="td">Open %</td><td class="td" align="right" style="font-family:'Poppins',Arial,sans-serif;font-weight:700;color:#EF4060;">{{RATE_OPEN}}</td></tr>-->
+    <!--      <tr><td class="td">Click %</td><td class="td" align="right" style="font-family:'Poppins',Arial,sans-serif;font-weight:700;color:#EF4060;">{{RATE_CLICK}}</td></tr>-->
+    <!--      <tr><td class="td">Click-to-Open %</td><td class="td" align="right" style="font-family:'Poppins',Arial,sans-serif;font-weight:700;color:#EF4060;">{{RATE_CTOR}}</td></tr>-->
+    <!--      <tr><td class="td" style="border-bottom:none;">Opt-out %</td><td class="td" align="right" style="border-bottom:none;font-family:'Poppins',Arial,sans-serif;font-weight:700;color:#E24B4B;">{{RATE_OPTOUT}}</td></tr>-->
+    <!--    </table>-->
+    <!--  </td>-->
+    <!--</tr>-->
+    <tr>
+      <td class="px" style="padding:24px 36px 4px;">
+        <p class="sec-title">Engagement rates</p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #E7E5F0;border-radius:10px;overflow:hidden;">
+          <tr>
+            <td class="th" align="center">Open %</td>
+            <td class="th" align="center">Click %</td>
+            <td class="th" align="center">Click-to-Open %</td>
+            <td class="th" align="center">Opt-out %</td>
+          </tr>
+          <tr>
+            <td class="td" align="center" style="font-family:'Poppins',Arial,sans-serif;font-weight:700;color:#EF4060;">{{RATE_OPEN}}</td>
+            <td class="td" align="center" style="font-family:'Poppins',Arial,sans-serif;font-weight:700;color:#EF4060;">{{RATE_CLICK}}</td>
+            <td class="td" align="center" style="font-family:'Poppins',Arial,sans-serif;font-weight:700;color:#EF4060;">{{RATE_CTOR}}</td>
+            <td class="td" align="center" style="border-bottom:none;font-family:'Poppins',Arial,sans-serif;font-weight:700;color:#E24B4B;">{{RATE_OPTOUT}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="px" style="padding:20px 36px 0;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-top:1px solid #E7E5F0;font-size:0;line-height:0;">&nbsp;</td></tr></table></td></tr>
+
+    <!-- FULL CONTACTS LIST -->
+    <tr>
+      <td class="px" style="padding:24px 36px 4px;">
+        <p class="sec-title">Engaged contacts ({{CONTACT_COUNT}})</p>
+        <p class="sec-sub">Everyone who clicked through</p>
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #E7E5F0;border-radius:10px;overflow:hidden;">
+          {{CONTACT_ROWS}}
+        </table>
+      </td>
+    </tr>
+
+    
+
+    <!-- FOOTER -->
+    <tr>
+      <td class="px" style="padding:28px 36px 30px;">
+        <table width="100%" cellpadding="0" cellspacing="0"><tr><td style="border-top:1px solid #E7E5F0;font-size:0;line-height:0;padding-bottom:18px;">&nbsp;</td></tr></table>
+        <p style="margin:0;font-family:Arial,sans-serif;font-size:11px;color:#9CA0B3;line-height:1.6;">
+          Report generated from your campaign delivery &amp; engagement logs.<br>
+          Trivium Inc &nbsp;·&nbsp; <a href="#" style="color:#9CA0B3;">Manage email preferences</a> &nbsp;·&nbsp; <a href="#" style="color:#9CA0B3;">Unsubscribe</a>
+        </p>
+      </td>
+    </tr>
+
+  </table>
+
+</td></tr>
+</table>
+</body>
+</html>
