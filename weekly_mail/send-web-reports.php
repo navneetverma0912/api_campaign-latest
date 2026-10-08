@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/dashboard-api-auth.php';
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -41,6 +43,7 @@ curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_TIMEOUT        => 120,
     CURLOPT_SSL_VERIFYPEER => true,
+    CURLOPT_HTTPHEADER     => dashboardApiAuthHeaders(),
 ]);
 
 $response = curl_exec($ch);

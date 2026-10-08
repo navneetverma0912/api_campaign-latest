@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . '/dashboard-api-auth.php';
 require __DIR__ . '/vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -16,6 +17,7 @@ function fetchCampaignData(string $apiUrl): array
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_TIMEOUT        => 30,
         CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_HTTPHEADER     => dashboardApiAuthHeaders(),
     ]);
     $raw = curl_exec($ch);
     if ($raw === false) {

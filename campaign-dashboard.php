@@ -1,5 +1,8 @@
 <?php
 
+require_once __DIR__ . '/dashboard-auth.php';
+requireDashboardAccess();
+
 header("Content-Type: application/json");
 
 require_once "db.php";

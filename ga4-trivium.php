@@ -8,6 +8,9 @@ use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\Metric;
 use Google\Analytics\Data\V1beta\RunReportRequest;
 
+require_once __DIR__ . '/dashboard-auth.php';
+requireDashboardAccess();
+
 header('Content-Type: application/json');
 
 // $propertyId = '260338115';

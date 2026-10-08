@@ -49,19 +49,37 @@ The codebase supports:
    ```
 
 4. Ensure your MySQL database contains the campaign tables used by the scripts, such as `campaign`, `campaign_log_record`, and related tracking tables.
-5. Run the project through your PHP server (for example, XAMPP Apache or a PHP web server).
+5. Configure the administrator login in the project-root `.env` file. The file is excluded from Git and denied by Apache. The current local `.env` is configured with username `Admin` and the password you specified, stored as a password hash. This password is weak; change it before making the dashboard accessible outside a trusted local network.
+
+   To choose a different password and API token, generate their values locally:
+
+   ```bash
+   php -r "echo password_hash('replace-with-your-password', PASSWORD_DEFAULT), PHP_EOL;"
+   php -r "echo bin2hex(random_bytes(32)), PHP_EOL;"
+   ```
+
+   Set the generated values in `.env`:
+
+   ```dotenv
+   DASHBOARD_ADMIN_USERNAME=your-admin-username
+   DASHBOARD_ADMIN_PASSWORD_HASH=paste-the-generated-hash-here
+   DASHBOARD_API_TOKEN=paste-the-generated-api-token-here
+   ```
+
+   Environment variables set directly by Apache take precedence over `.env`. Restart Apache after changing its configuration.
+6. Run the project through XAMPP Apache. Ensure Apache has `mod_rewrite` enabled and allows `.htaccess` overrides so dashboard HTML routes open through the authenticated page.
 
 ## Running the API
 
-The dashboard endpoints are PHP files that can be accessed directly via the browser or a server-side HTTP client.
+Open the project root or `login.php` in a browser and sign in with the configured administrator account. The dashboard and its campaign and GA4 data endpoints require an authenticated administrator session.
 
-Example:
+Automated report scripts use the same API endpoints without a browser session. They read `DASHBOARD_API_TOKEN` from the project `.env` unless it is set directly in the runner's environment. Requests without a valid administrator session or API token receive HTTP 401.
 
 ```bash
-http://localhost/api_campaign-latest/campaign-dashboard.php
+http://localhost/api_campaign-latest/
 ```
 
-This returns JSON data containing campaign metrics and engagement information.
+The dashboard displays campaign metrics and engagement information after login.
 
 ## Weekly email reports
 
@@ -76,6 +94,7 @@ weekly_mail/README.md
 ## Notes
 
 - `config.php` stores database credentials and should not be committed to public repositories if it contains real secrets.
+- `.env` contains the administrator password hash and report API token; it is Git-ignored and denied by Apache. Never commit or share this file.
 - This project is designed for a specific CRM/data structure and may require adjustments to table names or field mappings depending on your database schema.
 - The API responses are intended for dashboard and reporting use and may be consumed by frontend applications or cron-driven automation.
 

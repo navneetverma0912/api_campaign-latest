@@ -21,6 +21,7 @@ HTML report per campaign over SMTP, using PHPMailer.
    - `recipients` — who gets the report emails.
    - `logo_path` — optional. Drop a PNG/JPG in `assets/` and point to it, or leave the file missing and the logo block is skipped automatically.
 4. `config.php` holds credentials — keep it out of version control / public web roots.
+5. Set `DASHBOARD_API_TOKEN` in the report runner's environment to the same random token configured in Apache for the campaign API. The report scripts send it as a bearer token; do not commit the token.
 
 ## Sending reports
 
