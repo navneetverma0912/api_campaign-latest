@@ -304,7 +304,7 @@ try {
                 END AS status
             
             FROM contact_average
-            
+            WHERE avg_click_gap_seconds >= 3
             ORDER BY avg_click_gap_seconds DESC;
         ");
         $stmt->execute([$campaignId]);

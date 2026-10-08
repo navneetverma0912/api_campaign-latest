@@ -80,7 +80,15 @@
   [data-org="eurekii"] header.topbar::before, [data-org="ga4-eurekii"] header.topbar::before, [data-org="li-eurekii"] header.topbar::before{ display:none; }
   .topbar-inner{ max-width:1180px; margin:0 auto; position:relative; z-index:2; }
   .topbar-row{ display:flex; align-items:center; justify-content:space-between;  gap:18px; }
-  .brand-block{ display:flex; align-items:center; gap:16px;width:-webkit-fill-available; }
+  .brand-block{ display:flex; align-items:center; gap:16px; flex:1 1 auto; min-width:0; }
+  .dashboard-logout-form{ flex:0 0 auto; }
+  .dashboard-logout-button{
+    border:1px solid rgba(255,255,255,.42); border-radius:9px; padding:9px 14px;
+    background:rgba(255,255,255,.12); color:#fff; font:600 13px 'Inter',sans-serif;
+    cursor:pointer; transition:background .15s,border-color .15s;
+  }
+  .dashboard-logout-button:hover{ background:rgba(255,255,255,.22); border-color:rgba(255,255,255,.7); }
+  .dashboard-logout-button:focus-visible{ outline:3px solid #fff; outline-offset:3px; }
   .header-logo-chip{
     background:transparent; border-radius:12px; padding:0; display:inline-flex; align-items:center;
     flex-shrink:0;
@@ -97,7 +105,7 @@
   .eyebrow{ font-family:var(--font-display); font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#C9C3E8; margin:0 0 8px; }
   h1.brand-title{ font-weight:800; font-size:clamp(24px,3.4vw,34px); margin:0; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
     .date-filter{
-      display:flex;
+      /* display:flex; */
       flex-wrap:wrap;
     }
     /*.date-range-row{*/
@@ -460,6 +468,37 @@
         font-weight: 500;
         color: #374151;
     }
+
+    @media(max-width:640px){
+      .org-switcher{ gap:4px; padding:8px 12px; overflow-x:auto; }
+      .org-tab{ flex:0 0 auto; padding:8px 12px; }
+      header.topbar{ padding:20px 16px 18px; }
+      .topbar-row{ align-items:flex-start; flex-wrap:wrap; gap:14px 10px; }
+      .brand-block{ flex:1 1 calc(100% - 92px); gap:10px; }
+      .header-logo-chip{ max-width:100px; }
+      .header-logo{ max-width:100%; height:auto; }
+      .eyebrow{ font-size:9px; margin-bottom:5px; }
+      h1.brand-title{ font-size:clamp(21px,6vw,28px); overflow-wrap:anywhere; }
+      .dashboard-logout-form{ margin-left:auto; }
+      #dateFilterWrap{ flex:1 0 100%; width:100%; }
+      .date-filter{ gap:8px; }
+      .date-preset-group{ flex-wrap:wrap; gap:8px 12px; }
+      .date-range-row.visible{ flex-wrap:wrap; gap:8px; }
+      .date-range-row input[type=date]{ min-width:0; flex:1 1 125px; }
+      .filter-note{ text-align:left; }
+      .campaign-nav{ gap:6px; padding:11px 16px; }
+      .wrap{ padding:0 16px 44px; }
+      .card{ padding:18px 16px; }
+    }
+
+    @media(max-width:380px){
+      .org-tab{ padding:7px 9px; }
+      .org-tab .org-name{ font-size:11px; }
+      .header-logo-chip{ padding:6px 8px !important; }
+      .dashboard-logout-button{ padding:8px 10px; }
+      .kpi-grid{ gap:9px; }
+      .kpi-card{ padding:13px 12px; }
+    }
     
     @keyframes ga4Spin {
         to {
@@ -492,19 +531,10 @@
           <h1 class="brand-title" id="orgTitle">Choose a Brand</h1>
         </div>
       </div>
-      <!--<div id="dateFilterWrap" style="display:none;">-->
-      <!--  <div class="date-filter">-->
-      <!--    <label>From</label>-->
-      <!--    <input type="date" id="dateFrom">-->
-      <!--    <span class="sep">–</span>-->
-      <!--    <label>To</label>-->
-      <!--    <input type="date" id="dateTo">-->
-      <!--    <button class="btn-apply" id="applyFilter">Apply</button>-->
-      <!--    <button class="btn-reset" id="resetFilter">Reset</button>-->
-      <!--  </div>-->
-      <!--  <p class="filter-note" id="filterNote"></p>-->
-      <!--</div>-->
-    <!--</div>-->
+      <form class="dashboard-logout-form" method="post" action="logout.php">
+        <input type="hidden" name="csrf_token" value="__DASHBOARD_CSRF_TOKEN__">
+        <button class="dashboard-logout-button" type="submit">Log out</button>
+      </form>
         <div id="dateFilterWrap" style="display:none;">
           <div class="date-filter">
             <div class="date-preset-group" id="datePresetGroup">
@@ -1825,8 +1855,8 @@ function renderSummary(){
         <div class="filter-field">
           <label for="ownerFilter">Campaign owner</label>
           <select id="ownerFilter" class="filter-select">
-            
-            ${owners.map(o=>`<option value="${o}"${state.owner===o?' selected':''}>${o}</option>`).join('')}
+            <option value=""></option>
+            ${owners.map(o => `<option value="${o}"${state.owner === o ? ' selected' : ''}>${o}</option>`).join('')}
           </select>
         </div>
         <div class="filter-field">
