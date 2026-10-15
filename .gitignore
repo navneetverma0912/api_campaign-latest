@@ -1,1 +1,8 @@
 /.env
+/.credentials-ga.json
+/sql_data.sql
+/error_log
+/report.log
+credentials-ga.json
+
+credentials-ga.json

@@ -502,3 +502,171 @@ Today is 8th - web jobs skipped.
 ========================================
 Master Cron Finished: 2026-10-08 10:30:06
 ========================================
+========================================
+Master Cron Started: 2026-10-09 10:30:06
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-09 10:30:06
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-09 10:30:06
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 9th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-09 10:30:06
+========================================
+========================================
+Master Cron Started: 2026-10-10 10:30:06
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-10 10:30:06
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-10 10:30:06
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 10th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-10 10:30:06
+========================================
+========================================
+Master Cron Started: 2026-10-11 10:30:06
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-11 10:30:06
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-11 10:30:06
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 11th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-11 10:30:07
+========================================
+========================================
+Master Cron Started: 2026-10-12 10:30:09
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-12 10:30:09
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-12 10:30:09
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 12th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-12 10:30:09
+========================================
+========================================
+Master Cron Started: 2026-10-13 10:30:06
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-13 10:30:06
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-13 10:30:07
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 13th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-13 10:30:07
+========================================
+========================================
+Master Cron Started: 2026-10-14 10:30:09
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-14 10:30:09
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-14 10:30:09
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 14th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-14 10:30:09
+========================================
+========================================
+Master Cron Started: 2026-10-15 10:30:08
+========================================
+
+========== CAMPAIGN JOBS ==========
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Started: 2026-10-15 10:30:08
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days.php
+Return Code: 255
+
+----------------------------------------
+Running: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Started: 2026-10-15 10:30:08
+FAILED: /home/jtrivium/public_html/api-campaign/weekly_mail/cron_15_days_eurekii.php
+Return Code: 255
+
+========== WEB JOBS ==========
+Today is 15th - web jobs skipped.
+
+========================================
+Master Cron Finished: 2026-10-15 10:30:08
+========================================

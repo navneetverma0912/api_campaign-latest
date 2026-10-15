@@ -67,6 +67,14 @@ The codebase supports:
    ```
 
    Environment variables set directly by Apache take precedence over `.env`. Restart Apache after changing its configuration.
+   For the Trivium CTE Campaign tab, add its MySQL credentials to the same ignored `.env` file:
+
+   ```dotenv
+   TRIVIUM_CTE_DB_USER=your_cte_database_username
+   TRIVIUM_CTE_DB_PASSWORD=your_cte_database_password
+   ```
+
+   The CTE campaign connection uses database `triviumedu` on `localhost`. The CRM account needs read access to the campaign, campaign activity, contact, and tracking tables used by the campaign API.
 6. Run the project through XAMPP Apache. Ensure Apache has `mod_rewrite` enabled and allows `.htaccess` overrides so dashboard HTML routes open through the authenticated page.
 
 ## Running the API

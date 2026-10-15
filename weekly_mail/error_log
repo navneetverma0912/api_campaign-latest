@@ -311,3 +311,23 @@ Stack trace:
 [07-Oct-2026 06:30:00 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
 [07-Oct-2026 06:30:05 UTC] Sending report for campaign: 6911bcd8cbdd86227
 [07-Oct-2026 06:30:05 UTC] Recipients: navneet.verma@algoqube.com, tapas.mishra@algoqube.com
+[08-Oct-2026 10:49:25 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: GA4 API returned HTTP 401: {"success":false,"message":"Administrator login is required."} in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php:60
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 60
+[08-Oct-2026 10:49:33 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: GA4 API returned HTTP 401: {"success":false,"message":"Administrator login is required."} in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php:60
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports.php on line 60
+[08-Oct-2026 10:49:40 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: GA4 API returned HTTP 401: {"success":false,"message":"Administrator login is required."} in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php:80
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php on line 80
+[08-Oct-2026 10:49:50 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: GA4 API returned HTTP 401: {"success":false,"message":"Administrator login is required."} in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php:80
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php on line 80
+[08-Oct-2026 12:56:42 UTC] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: GA4 API returned HTTP 401: {"success":false,"message":"Administrator login is required."} in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php:80
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/weekly_mail/send-web-reports-eurekii.php on line 80

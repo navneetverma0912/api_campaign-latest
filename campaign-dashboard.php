@@ -35,37 +35,85 @@ try {
         $campaignId = $campaign['id'];
         $campaignOwner = $campaign['c_campaign_owner'];
 
-        // Sent
+         // Sent
         $stmt = $pdo->prepare("
-            SELECT COUNT(*) total
-            FROM campaign_log_record
-            WHERE campaign_id=?
-            AND action='Sent' AND deleted=0
+            SELECT COUNT(*) AS total
+            FROM campaign_log_record clr
+            LEFT JOIN contact c
+                ON clr.parent_id = c.id
+                AND clr.parent_type = 'Contact'
+            WHERE clr.campaign_id = ?
+              AND clr.action = 'Sent'
+              AND clr.deleted = 0
+              AND LOWER(clr.string_data) NOT LIKE '%@triviumedu.com'
+              AND (clr.data IS NULL OR clr.data <> 'repliedMail');
         ");
 
         $stmt->execute([$campaignId]);
         $sent = $stmt->fetchColumn();
+        // FU-Sent
+        $stmt = $pdo->prepare("
+            SELECT COUNT(*) AS total
+            FROM campaign_log_record clr
+            LEFT JOIN contact c
+                ON clr.parent_id = c.id
+                AND clr.parent_type = 'Contact'
+            WHERE clr.campaign_id = ?
+              AND clr.action = 'Sent'
+              AND clr.deleted = 0
+              AND LOWER(clr.string_data) NOT LIKE '%@triviumedu.com'
+              AND (clr.data IS NOT NULL OR clr.data = 'repliedMail');
+        ");
+
+        $stmt->execute([$campaignId]);
+        $fu_sent = $stmt->fetchColumn();
 
         // Opened
         $stmt = $pdo->prepare("
-            SELECT COUNT(*) total
-            FROM campaign_log_record
-            WHERE campaign_id=?
-            AND action='Opened' AND deleted=0
+            SELECT COUNT(DISTINCT clr.parent_id) AS total
+            FROM campaign_log_record clr
+            LEFT join campaign_opened_report cor ON clr.id=cor.log_id
+            WHERE clr.campaign_id = ?
+              AND clr.action = 'Opened'
+              AND clr.deleted = 0
+              AND clr.is_test = 0
+              AND NOT (
+                  clr.parent_type = 'Contact'
+                  AND clr.parent_id IN (
+                      '6900abcf45a64dcf7',
+                      'CONTACT_ID_2',
+                      'CONTACT_ID_3'
+                  )
+              )
+              AND cor.reply_template_id IS NULL
+              ;
         ");
 
         $stmt->execute([$campaignId]);
         $opened = $stmt->fetchColumn();
-
-        // Clicked
+        // FU-Opened
         $stmt = $pdo->prepare("
-            SELECT COUNT(*) total
-            FROM campaign_log_record
-            WHERE campaign_id=? AND action='Clicked' AND deleted=0
+            SELECT COUNT(DISTINCT clr.parent_id) AS total
+            FROM campaign_log_record clr
+            LEFT join campaign_opened_report cor ON clr.id=cor.log_id
+            WHERE clr.campaign_id = ?
+              AND clr.action = 'Opened'
+              AND clr.deleted = 0
+              AND clr.is_test = 0
+              AND NOT (
+                  clr.parent_type = 'Contact'
+                  AND clr.parent_id IN (
+                      '6900abcf45a64dcf7',
+                      'CONTACT_ID_2',
+                      'CONTACT_ID_3'
+                  )
+              )
+              AND cor.reply_template_id IS NOT NULL
+              ;
         ");
 
         $stmt->execute([$campaignId]);
-        $clicked = $stmt->fetchColumn();
+        $fu_opened = $stmt->fetchColumn();
         // 1. Count total tracking URLs in this campaign
         $stmt = $pdo->prepare("
             SELECT COUNT(*) total
@@ -95,17 +143,67 @@ try {
         ");
         $stmt->execute([$campaignId]);
         $trackingUrls = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// SELECT COUNT(*) total
+//             FROM campaign_tracking_url
+//             WHERE campaign_id=? AND deleted=0
+        // Clicked
+        $stmt = $pdo->prepare("
+            SELECT COUNT(DISTINCT(clr.parent_id))
+            FROM campaign_log_record clr
+            LEFT JOIN campaign_tracking_url ctu
+                ON ctu.id = clr.object_id
+            WHERE clr.campaign_id = ?
+              AND clr.action = 'Clicked'
+              AND clr.deleted = 0
+              AND clr.object_type = 'CampaignTrackingUrl'
+              AND ctu.name NOT LIKE 'Reply%'
+              AND NOT (
+                  clr.parent_type = 'Contact'
+                  AND clr.parent_id IN (
+                      '6900abcf45a64dcf7',
+                      'CONTACT_ID_2',
+                      'CONTACT_ID_3'
+                  )
+              )
+        ");
+
+        $stmt->execute([$campaignId]);
+        $clicked = $stmt->fetchColumn();
+        // FU-Clicked
+        $stmt = $pdo->prepare("
+            SELECT COUNT(DISTINCT(clr.parent_id))
+            FROM campaign_log_record clr
+            LEFT JOIN campaign_tracking_url ctu
+                ON ctu.id = clr.object_id
+            WHERE clr.campaign_id = ?
+              AND clr.action = 'Clicked'
+              AND clr.deleted = 0
+              AND clr.object_type = 'CampaignTrackingUrl'
+              AND ctu.name LIKE 'Reply%'
+              AND NOT (
+                  clr.parent_type = 'Contact'
+                  AND clr.parent_id IN (
+                      '6900abcf45a64dcf7',
+                      'CONTACT_ID_2',
+                      'CONTACT_ID_3'
+                  )
+              )
+        ");
+
+        $stmt->execute([$campaignId]);
+        $fu_clicked = $stmt->fetchColumn();
 
         // Opt Out
         $stmt = $pdo->prepare("
-            SELECT COUNT(*) total
-            FROM campaign_log_record
+            SELECT COUNT(DISTINCT(clr.parent_id)) total
+            FROM campaign_log_record clr
             WHERE campaign_id=?
-            AND action='OptOut' AND deleted=0
+            AND action='Opted Out' AND deleted=0
         ");
 
         $stmt->execute([$campaignId]);
         $optOut = $stmt->fetchColumn();
+
 
         // Rates
         $openRate = $sent > 0 ? round(($opened/$sent)*100,2) : 0;
@@ -164,150 +262,251 @@ try {
         // $stmt->execute([$campaignId]);
 
         // $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // $stmt = $pdo->prepare("
+        //     WITH click_data AS (
+        //         SELECT
+        //             c.id as campaign_id,
+        //             c.name AS campaign_name,
+        //             ct.c_company_name AS org,
+        //             ea.name AS email,
+        //             pn.name AS phone,
+        //             clr.created_at AS sent,
+        //             clr.action_date AS clicked,
+        //             CASE
+        //                 WHEN clr.parent_type = 'Contact'
+        //                     THEN CONCAT_WS(' ', ct.first_name, ct.last_name)
+        //                 WHEN clr.parent_type = 'Lead'
+        //                     THEN CONCAT_WS(' ', ld.first_name, ld.last_name)
+        //                 ELSE NULL
+        //             END AS name,
+            
+        //             clr.parent_type,
+        //             clr.parent_id as contact_id,
+        //             ctu.name AS tracking_url_name,
+        //             clr.created_at AS clicked_at,
+                    
+        //             LAG(clr.created_at) OVER (
+        //                 PARTITION BY clr.parent_type, clr.parent_id
+        //                 ORDER BY clr.created_at
+        //             ) AS previous_clicked_at
+            
+        //         FROM campaign_log_record AS clr
+            
+        //         LEFT JOIN campaign AS c
+        //             ON c.id = clr.campaign_id
+        //             AND c.deleted = 0
+            
+        //         LEFT JOIN campaign_tracking_url AS ctu
+        //             ON ctu.campaign_id = clr.campaign_id
+        //             AND ctu.deleted = 0
+            
+        //         LEFT JOIN contact AS ct
+        //             ON ct.id = clr.parent_id
+        //             AND clr.parent_type = 'Contact'
+        //             AND ct.deleted = 0
+            
+        //         LEFT JOIN lead AS ld
+        //             ON ld.id = clr.parent_id
+        //             AND clr.parent_type = 'Lead'
+        //             AND ld.deleted = 0
+        //             LEFT JOIN entity_email_address eea
+        //                 ON eea.entity_id = ct.id
+        //                 AND eea.deleted = 0
+        //                 AND eea.primary = 1
+                    
+        //             LEFT JOIN email_address ea
+        //                 ON ea.id = eea.email_address_id
+        //                 AND ea.deleted = 0
+                    
+        //             LEFT JOIN entity_phone_number epn
+        //                 ON epn.entity_id = ct.id
+        //                 AND epn.deleted = 0
+        //                 AND epn.primary = 1
+                    
+        //             LEFT JOIN phone_number pn
+        //                 ON pn.id = epn.phone_number_id
+        //                 AND pn.deleted = 0
+            
+        //         WHERE clr.campaign_id = ?
+        //           AND clr.is_test = 0
+        //           AND clr.action = 'Clicked'
+        //           AND clr.deleted = 0
+        //     ),
+            
+        //     contact_average AS (
+        //         SELECT
+        //             campaign_id,
+        //             campaign_name,
+        //             name,
+        //             sent,
+        //             clicked,
+        //             parent_type,
+        //             contact_id,
+        //             org,email,phone,
+        //             COUNT(*) AS total_clicks,
+            
+        //             MIN(clicked_at) AS first_click,
+        //             MAX(clicked_at) AS last_click,
+            
+        //             ROUND(
+        //                 AVG(
+        //                     TIMESTAMPDIFF(
+        //                         SECOND,
+        //                         previous_clicked_at,
+        //                         clicked_at
+        //                     )
+        //                 ),
+        //                 2
+        //             ) AS avg_click_gap_seconds
+            
+        //         FROM click_data
+            
+        //         WHERE previous_clicked_at IS NOT NULL
+            
+        //         GROUP BY
+        //             campaign_name,
+        //             name,
+        //             parent_type,
+        //             contact_id
+        //     )
+            
+        //     SELECT
+        //         campaign_id,
+        //         campaign_name,
+        //         name,
+        //         email,
+        //         phone,
+        //         sent,
+        //         clicked,
+        //         parent_type,
+        //         contact_id,
+        //         org,
+        //         total_clicks,
+        //         first_click,
+        //         last_click,
+            
+        //         avg_click_gap_seconds,
+            
+        //         SEC_TO_TIME(
+        //             ROUND(avg_click_gap_seconds)
+        //         ) AS avg_click_gap,
+            
+        //         CASE
+        //             WHEN avg_click_gap_seconds >= 3
+        //                 THEN 'Genuine'
+            
+        //             WHEN avg_click_gap_seconds < 3
+        //                 THEN 'Confirmed Bot'
+            
+        //             ELSE 'Unknown'
+        //         END AS status
+            
+        //     FROM contact_average
+        //     WHERE avg_click_gap_seconds >= 3
+        //     AND email IS NOT NULL
+        //     AND TRIM(email) != ''
+        //     AND email NOT LIKE '%@triviumedu.com'
+        //     AND email NOT LIKE '%@algoqube.com'
+        //     ORDER BY avg_click_gap_seconds DESC;
+        // ");
+        // $stmt->execute([$campaignId]);
+
+        // $contacts_tracking = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt = $pdo->prepare("
             WITH click_data AS (
                 SELECT
-                    c.id as campaign_id,
-                    c.name AS campaign_name,
-                    ct.c_company_name AS org,
-                    ea.name AS email,
-                    pn.name AS phone,
-                    clr.created_at AS sent,
-                    clr.action_date AS clicked,
-                    CASE
-                        WHEN clr.parent_type = 'Contact'
-                            THEN CONCAT_WS(' ', ct.first_name, ct.last_name)
-                        WHEN clr.parent_type = 'Lead'
-                            THEN CONCAT_WS(' ', ld.first_name, ld.last_name)
-                        ELSE NULL
-                    END AS name,
-            
-                    clr.parent_type,
-                    clr.parent_id as contact_id,
-                    ctu.name AS tracking_url_name,
-                    clr.created_at AS clicked_at,
-                    
+                    clr.parent_id,
+                    clr.created_at,
                     LAG(clr.created_at) OVER (
-                        PARTITION BY clr.parent_type, clr.parent_id
+                        PARTITION BY clr.parent_id
                         ORDER BY clr.created_at
                     ) AS previous_clicked_at
-            
                 FROM campaign_log_record AS clr
-            
-                LEFT JOIN campaign AS c
-                    ON c.id = clr.campaign_id
-                    AND c.deleted = 0
-            
-                LEFT JOIN campaign_tracking_url AS ctu
-                    ON ctu.campaign_id = clr.campaign_id
-                    AND ctu.deleted = 0
-            
-                LEFT JOIN contact AS ct
-                    ON ct.id = clr.parent_id
-                    AND clr.parent_type = 'Contact'
-                    AND ct.deleted = 0
-            
-                LEFT JOIN lead AS ld
-                    ON ld.id = clr.parent_id
-                    AND clr.parent_type = 'Lead'
-                    AND ld.deleted = 0
-                    LEFT JOIN entity_email_address eea
-                        ON eea.entity_id = ct.id
-                        AND eea.deleted = 0
-                        AND eea.primary = 1
-                    
-                    LEFT JOIN email_address ea
-                        ON ea.id = eea.email_address_id
-                        AND ea.deleted = 0
-                    
-                    LEFT JOIN entity_phone_number epn
-                        ON epn.entity_id = ct.id
-                        AND epn.deleted = 0
-                        AND epn.primary = 1
-                    
-                    LEFT JOIN phone_number pn
-                        ON pn.id = epn.phone_number_id
-                        AND pn.deleted = 0
-            
                 WHERE clr.campaign_id = ?
-                  AND clr.is_test = 0
                   AND clr.action = 'Clicked'
+                  AND clr.object_type = 'CampaignTrackingUrl'
                   AND clr.deleted = 0
+                  AND clr.is_test = 0
+                  AND clr.parent_type = 'Contact'
             ),
-            
-            contact_average AS (
+            contact_gaps AS (
                 SELECT
-                    campaign_id,
-                    campaign_name,
-                    name,
-                    sent,
-                    clicked,
-                    parent_type,
-                    contact_id,
-                    org,email,phone,
-                    COUNT(*) AS total_clicks,
-            
-                    MIN(clicked_at) AS first_click,
-                    MAX(clicked_at) AS last_click,
-            
-                    ROUND(
-                        AVG(
-                            TIMESTAMPDIFF(
-                                SECOND,
-                                previous_clicked_at,
-                                clicked_at
-                            )
-                        ),
-                        2
-                    ) AS avg_click_gap_seconds
-            
+                    parent_id,
+                    MIN(TIMESTAMPDIFF(SECOND, previous_clicked_at, created_at)) AS min_time_gap_seconds,
+                    ROUND(AVG(TIMESTAMPDIFF(SECOND, previous_clicked_at, created_at)), 2) AS avg_time_gap_seconds
                 FROM click_data
-            
-                WHERE previous_clicked_at IS NOT NULL
-            
-                GROUP BY
-                    campaign_name,
-                    name,
-                    parent_type,
-                    contact_id
+                GROUP BY parent_id
             )
-            
             SELECT
-                campaign_id,
-                campaign_name,
-                name,
-                email,
-                phone,
-                sent,
-                clicked,
-                parent_type,
-                contact_id,
-                org,
-                total_clicks,
-                first_click,
-                last_click,
-            
-                avg_click_gap_seconds,
-            
-                SEC_TO_TIME(
-                    ROUND(avg_click_gap_seconds)
-                ) AS avg_click_gap,
-            
+            	c.name as campaign_name,
+                CONCAT_WS(' ', ct.first_name, ct.last_name) AS name,
+                clr.parent_type,
+                GROUP_CONCAT(
+                    DISTINCT ctu.name
+                    ORDER BY ctu.name
+                    SEPARATOR ', '
+                ) AS tracking_urls,
+                ct.c_company_name AS org,
+                ea.name AS email,
+                pn.name AS phone,
+                clr.parent_id AS contact_id,
+                MAX(clr.created_at) AS last_clicked_at,
+                clr.created_at AS sent,
+                clr.action_date AS clicked,
+                MAX(clr.created_at) AS first_click,
+                MAX(clr.created_at) AS last_click,
+                COUNT(DISTINCT ctu.name) AS total_tracking_url_counts,
+                cg.min_time_gap_seconds as avg_click_gap_seconds,
+                cg.avg_time_gap_seconds as avg_click_gap,
                 CASE
-                    WHEN avg_click_gap_seconds >= 3
+                    WHEN cg.min_time_gap_seconds IS NULL OR cg.min_time_gap_seconds > 3
                         THEN 'Genuine'
-            
-                    WHEN avg_click_gap_seconds < 3
-                        THEN 'Confirmed Bot'
-            
-                    ELSE 'Unknown'
-                END AS status
-            
-            FROM contact_average
-            WHERE avg_click_gap_seconds >= 3
-            ORDER BY avg_click_gap_seconds DESC;
+                    ELSE 'Confirmed Bot'
+                END AS status,
+                SEC_TO_TIME(
+                    ROUND(cg.avg_time_gap_seconds)
+                ) AS avg_time_gap
+            FROM campaign_log_record AS clr
+            LEFT JOIN campaign_tracking_url AS ctu ON ctu.id = clr.object_id AND ctu.campaign_id = clr.campaign_id AND ctu.deleted = 0
+            LEFT JOIN contact AS ct ON ct.id = clr.parent_id AND ct.deleted = 0 AND clr.parent_type = 'Contact'
+            LEFT JOIN contact_gaps AS cg ON cg.parent_id = clr.parent_id
+            LEFT JOIN campaign c ON c.id = clr.campaign_id
+            LEFT JOIN lead AS ld ON ld.id = clr.parent_id AND clr.parent_type = 'Lead' AND ld.deleted = 0
+            LEFT JOIN entity_email_address eea ON eea.entity_id = ct.id AND eea.deleted = 0 AND eea.primary = 1
+            LEFT JOIN email_address ea ON ea.id = eea.email_address_id AND ea.deleted = 0
+            LEFT JOIN entity_phone_number epn ON epn.entity_id = ct.id AND epn.deleted = 0 AND epn.primary = 1
+            LEFT JOIN phone_number pn ON pn.id = epn.phone_number_id AND pn.deleted = 0
+            WHERE clr.campaign_id = ?
+              AND clr.action = 'Clicked'
+              AND clr.object_type = 'CampaignTrackingUrl'
+              AND clr.deleted = 0
+              AND clr.is_test = 0
+              AND clr.parent_type = 'Contact'
+              AND (cg.min_time_gap_seconds IS NULL OR cg.min_time_gap_seconds > 3)
+              AND NOT EXISTS (
+                    SELECT 1
+                    FROM campaign_log_record AS o
+                    WHERE o.campaign_id = clr.campaign_id
+                      AND o.parent_id = clr.parent_id
+                      AND o.action = 'Opted Out'
+                      AND o.deleted = 0
+                      AND o.is_test = 0
+              )
+              AND ea.name NOT LIKE '%@triviumedu.com'
+            AND ea.name NOT LIKE '%@algoqube.com'
+            AND ea.name NOT LIKE '%@eurekii.com'
+            AND ctu.name LIKE '%Calendar%'  
+            GROUP BY
+                clr.parent_id,
+                ct.first_name,
+                ct.last_name,
+                cg.min_time_gap_seconds,
+                cg.avg_time_gap_seconds
+            ORDER BY
+                name ASC,
+                last_clicked_at DESC;
         ");
-        $stmt->execute([$campaignId]);
+        $stmt->execute([$campaignId,$campaignId]);
 
         $contacts_tracking = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $response[] = [
@@ -326,10 +525,13 @@ try {
             "summary"=>[
                 "sent"=>$sent,
                 "opened"=>$opened,
+                "fu_sent" => $fu_sent,
+                "fu_opened"=>$fu_opened,
+                "fu_clicked"=>$fu_clicked,
                 "clicked"=>$clicked,
                 "optOut"=>$optOut,
-                 "trackingUrlsCount" => $trackingUrlsCount,
-                "trackingUrls" => $trackingUrls,
+                "trackingUrlsCount" => $trackingUrlsCount,
+                "trackingUrls" => $trackingUrls
             ],
             
 
