@@ -7,19 +7,24 @@
 header('Content-Type: application/json; charset=utf-8');
 
 /* ---------- connection ---------- */
+
 function db(): PDO {
     static $pdo = null;
+
     if ($pdo === null) {
         $pdo = new PDO(
-            'mysql:host=localhost;dbname=espocrm;charset=utf8mb4',
-            'DB_USER',      // TODO: move to env/config
-            'DB_PASSWORD',  // TODO: move to env/config
-            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
+            'mysql:host=localhost;dbname=u732292919_espo10;charset=utf8mb4',
+            'u732292919_espo10',
+            'N@vneet.@123',
+            [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]
         );
     }
+
     return $pdo;
 }
-
 function run(string $sql, array $params = []): array {
     $st = db()->prepare($sql);
     $st->execute($params);
@@ -130,35 +135,127 @@ function qNextActions(?string $rep): array {
 }
 
 /** Team overview: one aggregated row per salesperson for the date range. */
+// function qTeamSummary(
+//     string $from,
+//     string $to,
+//     string $today,
+//     ?string $stage
+// ): array {
+//     $sql = "
+//         SELECT
+//             u.id AS rep_id,
+//             u.user_name,
+//             CONCAT_WS(' ', u.first_name, u.last_name) AS rep_name,
+
+//             (
+//                 SELECT COALESCE(
+//                     MAX(DATEDIFF(:today_a, DATE(t.date_end))), 0
+//                 )
+//                 FROM task t
+//                 WHERE t.deleted = 0
+//                   AND t.assigned_user_id = u.id
+//                   AND t.status NOT IN ('Completed', 'Canceled')
+//                   AND DATE(t.date_end) < :today_a2
+//             ) AS oldest_overdue_days,
+
+//             (
+//                 SELECT COUNT(*)
+//                 FROM opportunity o
+//                 WHERE o.deleted = 0
+//                   AND o.assigned_user_id = u.id
+//                   AND o.stage NOT IN ('Closed Won', 'Closed Lost')
+//                   AND (:s4 = '' OR o.stage = :s4b)
+//                   AND o.close_date < :today_b
+//             ) AS past_close,
+
+//             (
+//                 SELECT COUNT(*)
+//                 FROM opportunity o
+//                 WHERE o.deleted = 0
+//                   AND o.assigned_user_id = u.id
+//                   AND o.stage NOT IN ('Closed Won', 'Closed Lost')
+//                   AND (:s5 = '' OR o.stage = :s5b)
+//                   AND o.modified_at < DATE_SUB(:today_c, INTERVAL 14 DAY)
+//             ) AS stale_opps,
+
+//             (
+//                 SELECT COUNT(*)
+//                 FROM opportunity o
+//                 WHERE o.deleted = 0
+//                   AND o.assigned_user_id = u.id
+//                   AND o.stage NOT IN ('Closed Won', 'Closed Lost')
+//                   AND (:s6 = '' OR o.stage = :s6b)
+//                   AND o.close_date BETWEEN :today_d
+//                       AND DATE_ADD(:today_e, INTERVAL 7 DAY)
+//             ) AS closing_soon,
+
+//             (
+//                 SELECT COUNT(*)
+//                 FROM task t
+//                 WHERE t.deleted = 0
+//                   AND t.assigned_user_id = u.id
+//                   AND t.status NOT IN ('Completed', 'Canceled')
+//                   AND DATE(t.date_end) BETWEEN
+//                       DATE_ADD(:to5, INTERVAL 1 DAY)
+//                       AND DATE_ADD(:to6, INTERVAL 7 DAY)
+//             ) AS next_week_tasks
+
+//         FROM user u
+//         WHERE u.deleted = 0
+//           AND u.is_active = 1
+//           AND u.type IN ('regular', 'admin')
+//         ORDER BY u.first_name
+//     ";
+
+//     $s = $stage ?? '';
+
+//     $params = [
+//         'today_a'  => $today,
+//         'today_a2' => $today,
+//         'today_b'  => $today,
+//         'today_c'  => $today,
+//         'today_d'  => $today,
+//         'today_e'  => $today,
+//         'to5'      => $to,
+//         'to6'      => $to,
+//         's4'       => $s,
+//         's4b'      => $s,
+//         's5'       => $s,
+//         's5b'      => $s,
+//         's6'       => $s,
+//         's6b'      => $s,
+//     ];
+
+//     return run($sql, $params);
+// }
+/** Team overview: one aggregated row per salesperson for the date range. */
 function qTeamSummary(string $from, string $to, string $today, ?string $stage): array {
-    $sql = "(SELECT COALESCE(MAX(DATEDIFF(:today_a, DATE(t.date_end))),0) FROM task t
-           WHERE t.deleted=0 AND t.assigned_user_id=u.id AND t.status NOT IN ('Completed','Canceled')
-             AND DATE(t.date_end) < :today_a2)                                   AS oldest_overdue_days,
+    $sql = "SELECT u.id AS rep_id, CONCAT_WS(' ', u.first_name, u.last_name) AS name,
+        (SELECT COUNT(*) FROM lead l WHERE l.deleted=0 AND l.assigned_user_id=u.id
+            AND l.status IN ('New','Assigned','In Process'))                              AS total_leads,
+        (SELECT COUNT(*) FROM lead l WHERE l.deleted=0 AND l.assigned_user_id=u.id
+            AND DATE(l.created_at) BETWEEN :f1 AND :t1)                                   AS new_leads,
         (SELECT COUNT(*) FROM opportunity o WHERE o.deleted=0 AND o.assigned_user_id=u.id
-           AND o.stage NOT IN ('Closed Won','Closed Lost') AND (:s4 = '' OR o.stage = :s4b)
-           AND o.close_date < :today_b)                                          AS past_close,
+            AND o.stage NOT IN ('Closed Won','Closed Lost') AND (:s1 = '' OR o.stage = :s1b)) AS open_opps,
         (SELECT COUNT(*) FROM opportunity o WHERE o.deleted=0 AND o.assigned_user_id=u.id
-           AND o.stage NOT IN ('Closed Won','Closed Lost') AND (:s5 = '' OR o.stage = :s5b)
-           AND o.modified_at < DATE_SUB(:today_c, INTERVAL 14 DAY))              AS stale_opps,
-        (SELECT COUNT(*) FROM opportunity o WHERE o.deleted=0 AND o.assigned_user_id=u.id
-           AND o.stage NOT IN ('Closed Won','Closed Lost') AND (:s6 = '' OR o.stage = :s6b)
-           AND o.close_date BETWEEN :today_d AND DATE_ADD(:today_e, INTERVAL 7 DAY)) AS closing_soon,
+            AND DATE(o.created_at) BETWEEN :f2 AND :t2 AND (:s2 = '' OR o.stage = :s2b))  AS new_opps,
+        (SELECT COALESCE(SUM(o.amount),0) FROM opportunity o WHERE o.deleted=0 AND o.assigned_user_id=u.id
+            AND o.stage NOT IN ('Closed Won','Closed Lost') AND (:s3 = '' OR o.stage = :s3b)) AS pipeline,
         (SELECT COUNT(*) FROM task t WHERE t.deleted=0 AND t.assigned_user_id=u.id
-           AND t.status NOT IN ('Completed','Canceled')
-           AND DATE(t.date_end) BETWEEN DATE_ADD(:to5, INTERVAL 1 DAY) AND DATE_ADD(:to6, INTERVAL 7 DAY)) AS next_week_tasks";
+            AND DATE(t.date_end) BETWEEN :f3 AND :t3)                                     AS tasks_due,
+        (SELECT COUNT(*) FROM task t WHERE t.deleted=0 AND t.assigned_user_id=u.id AND t.status='Completed'
+            AND DATE(t.date_completed) BETWEEN :f4 AND :t4)                               AS tasks_completed,
+        (SELECT COUNT(*) FROM task t WHERE t.deleted=0 AND t.assigned_user_id=u.id
+            AND t.status NOT IN ('Completed','Canceled') AND DATE(t.date_end) < :today)   AS overdue
+        FROM user u
+        WHERE u.deleted=0 AND u.is_active=1 AND u.type IN ('regular','admin')
+        ORDER BY u.first_name";
     $s = $stage ?: '';
-    // return run($sql, [
-    //     'f1'=>$from,'t1'=>$to,'f2'=>$from,'t2'=>$to,'f3'=>$from,'t3'=>$to,'f4'=>$from,'t4'=>$to,
-    //     's1'=>$s,'s1b'=>$s,'s2'=>$s,'s2b'=>$s,'s3'=>$s,'s3b'=>$s,'today'=>$today,
-    // ]);
-    $extra = ['today_a'=>$today,'today_a2'=>$today,'today_b'=>$today,'today_c'=>$today,'today_d'=>$today,'today_e'=>$today,
-          'to5'=>$to,'to6'=>$to,'s4'=>$s,'s4b'=>$s,'s5'=>$s,'s5b'=>$s,'s6'=>$s,'s6b'=>$s];
-    return run($sql, array_merge([
+    return run($sql, [
         'f1'=>$from,'t1'=>$to,'f2'=>$from,'t2'=>$to,'f3'=>$from,'t3'=>$to,'f4'=>$from,'t4'=>$to,
         's1'=>$s,'s1b'=>$s,'s2'=>$s,'s2b'=>$s,'s3'=>$s,'s3b'=>$s,'today'=>$today,
-    ], $extra));
+    ]);
 }
-
 /** Single record for the side panel. $type is one of Lead | Opportunity | Task. */
 function qRecord(string $type, string $id): ?array {
     switch ($type) {
@@ -221,7 +318,12 @@ try {
     http_response_code(400);
     echo json_encode(['error' => $e->getMessage()]);
 } catch (Throwable $e) {
+    error_log('Sales dashboard API error: ' . $e->getMessage());
+
     http_response_code(500);
-    error_log($e->getMessage());
-    echo json_encode(['error' => 'Server error']);
+
+    echo json_encode([
+        'error' => 'Server error',
+        'details' => $e->getMessage()
+    ]);
 }
