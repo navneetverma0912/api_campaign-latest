@@ -393,8 +393,8 @@
   .contact-org{ font-size:12px; color:var(--slate); margin-top:2px; }
   a.email-link, a.phone-link{ color:var(--c1); text-decoration:none; font-weight:600; font-size:12.5px; }
   a.email-link:hover, a.phone-link:hover{ text-decoration:underline; }
-  .tag-genuine{ display:inline-flex; align-items:center; gap:6px; background:var(--tintB); color:var(--c1); padding:5px 12px; border-radius:100px; font-size:11px; font-weight:700; }
-  .tag-genuine::before{ content:""; width:6px; height:6px; border-radius:50%; background:var(--c1); }
+  .tag-genuine{ display:inline-flex; align-items:center; gap:6px; background:#ecf8f1; color:#1F9D55; padding:5px 12px; border-radius:100px; font-size:11px; font-weight:700; }
+  .tag-genuine::before{ content:""; width:6px; height:6px; border-radius:50%; background:#1F9D55; }
 
   footer.page-footer{ margin-top:40px; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--slate-soft); }
   .placeholder-note{ display:flex; align-items:center; gap:8px; background:var(--amber-light); color:var(--amber); border-radius:10px; padding:10px 16px; font-size:12px; font-weight:600; margin-bottom:20px; }
@@ -502,10 +502,10 @@
         <div>
           <button class="back-link" id="backToBrandsBtn" style="display:none;margin-bottom:6px;color:#C9C3E8;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            All brands
+            All portals
           </button>
-          <p class="eyebrow" id="orgEyebrow">Analytics Portfolio</p>
-          <h1 class="brand-title" id="orgTitle">Choose a Brand</h1>
+          <p class="eyebrow" id="orgEyebrow">Analytics Hub</p>
+          <h1 class="brand-title" id="orgTitle">Choose a Portal</h1>
         </div>
       </div>
       <form class="dashboard-logout-form" method="post" action="logout.php">
@@ -704,7 +704,7 @@ async function loadCampaigns(response) {
       },
     
       'ga4-trivium': {
-        label:'GA4 – Trivium', type:'ga4',
+        label:'Website Analysis – Trivium', type:'ga4',
         reports:[
           {
             id:'triv-jun22-jul05', name:'Jun 22 – Sep 09, 2026', status:'completed',
@@ -784,7 +784,7 @@ async function loadCampaigns(response) {
       },
     
       'ga4-eurekii': {
-        label:'GA4 – Eurekii', type:'ga4',
+        label:'Website Analysis – Eurekii', type:'ga4',
         reports:[
           {
             id:'eur-jun22-jul05', name:'Jun 22 – Sep 09, 2026', status:'completed',
@@ -863,7 +863,7 @@ async function loadCampaigns(response) {
       },
     
       'ga4-cte': {
-        label:'GA4 – Trivium CTE', type:'ga4',
+        label:'Website Analysis – Trivium CTE', type:'ga4',
         reports:[
           {
             id:'cte-jun22-jul05', name:'Jun 22 – Sep 09, 2026', status:'completed',
@@ -1078,16 +1078,34 @@ async function loadCampaigns(response) {
         ]
       }
     };
+    const CAMPAIGN_ENDPOINTS = {
+      eurekii: 'campaign-dashboard.php',
+      trivium: 'campaign-dashboard-trivium.php',
+      cte:     'campaign-dashboard-triviumCTE.php'
+    };
+    
+    const earlyOrg = document.documentElement.dataset.org;   // must already be set in the HTML
+    const campaignPromise = CAMPAIGN_ENDPOINTS[earlyOrg]
+      ? fetch(CAMPAIGN_ENDPOINTS[earlyOrg]).then(async r => {
+          if (!r.ok) throw new Error(`Campaign API returned HTTP ${r.status}.`);
+          const d = await r.json();
+          if (!d.success) throw new Error(d.message || 'Campaign API request failed.');
+          return d;
+        })
+      : null;
+    
+    campaignPromise?.catch(() => {});   // avoids an "unhandled rejection" warning; your await below still throws
     const orgTypeCam = document.documentElement.dataset.org;
     try {
 
         // console.log(orgTypeNew);
         if (response === 'eurekii') {
-            const response = await fetch("campaign-dashboard.php");
-            if (!response.ok) {
-                throw new Error(`Campaign API returned HTTP ${response.status}.`);
-            }
-            const data = await response.json();
+            // const response = await fetch("campaign-dashboard.php");
+            // if (!response.ok) {
+            //     throw new Error(`Campaign API returned HTTP ${response.status}.`);
+            // }
+            const data = await campaignPromise;   // eurekii branch
+            // const data = await response.json();
     
             if (!data.success) {
                 throw new Error(data.message || 'Campaign API request failed.');
@@ -1257,15 +1275,15 @@ async function loadCampaigns(response) {
             document.getElementById("dateFrom").value = state.dateFrom;
             document.getElementById("dateTo").value = state.dateTo;
         } else if (response === 'trivium' || response === 'cte') {
-            const campaignEndpoint = response === 'cte'
-                ? 'campaign-dashboard-triviumCTE.php'
-                : 'campaign-dashboard-trivium.php';
-            const campaignResponse = await fetch(campaignEndpoint);
-            if (!campaignResponse.ok) {
-                throw new Error(`Campaign API returned HTTP ${campaignResponse.status}.`);
-            }
-            const campaignData = await campaignResponse.json();
-    
+            // const campaignEndpoint = response === 'cte'
+            //     ? 'campaign-dashboard-triviumCTE.php'
+            //     : 'campaign-dashboard-trivium.php';
+            // const campaignResponse = await fetch(campaignEndpoint);
+            // if (!campaignResponse.ok) {
+            //     throw new Error(`Campaign API returned HTTP ${campaignResponse.status}.`);
+            // }
+            // const campaignData = await campaignResponse.json();
+            const campaignData = await campaignPromise;   // trivium / cte branch
             if (!campaignData.success) {
                 throw new Error(campaignData.message || 'Campaign API request failed.');
             }
@@ -1456,7 +1474,7 @@ async function loadGA4Data(response) {
         const data = response;
 
         if (!data) {
-            console.error("GA4 API Error:", data.error);
+            console.error("Website Analysis API Error:", data.error);
             return;
         }
         const orgTypeNew = document.documentElement.dataset.org;
@@ -1464,12 +1482,12 @@ async function loadGA4Data(response) {
         // console.log(orgTypeNew);
         if (orgTypeNew === 'ga4-trivium') {
             ORG_DATA['ga4-trivium'] = {
-                label: 'GA4 – Trivium',
+                label: 'Website Analysis – Trivium',
                 type: 'ga4',
                 reports: [
                     {
                         id: 'triv-ga4-report',
-                        name: data.reportName || 'GA4 Report',
+                        name: data.reportName || 'Website Analysis Report',
                         status: 'completed',
     
                         start: data.start,
@@ -1519,12 +1537,12 @@ async function loadGA4Data(response) {
         }
         else if (orgTypeNew === 'ga4-eurekii') {
             ORG_DATA['ga4-eurekii'] = {
-                label: 'GA4 – Eurekii',
+                label: 'Website Analysis – Eurekii',
                 type: 'ga4',
                 reports: [
                     {
                         id: 'eurekii-ga4-report',
-                        name: data.reportName || 'GA4 Report',
+                        name: data.reportName || 'Website Analysis Report',
                         status: 'completed',
     
                         start: data.start,
@@ -1573,12 +1591,12 @@ async function loadGA4Data(response) {
             };
         } else if (orgTypeNew === 'ga4-cte') {
             ORG_DATA['ga4-cte'] = {
-                label: 'GA4 – Trivium CTE',
+                label: 'Website Analysis – Trivium CTE',
                 type: 'ga4',
                 reports: [
                     {
                         id: 'trivCTE-ga4-report',
-                        name: data.reportName || 'GA4 Report',
+                        name: data.reportName || 'Website Analysis Report',
                         status: 'completed',
     
                         start: data.start,
@@ -1631,11 +1649,11 @@ async function loadGA4Data(response) {
             
             
 
-        // console.log("GA4 data loaded:", ORG_DATA['ga4-trivium']);
+        // console.log("Website Analysis data loaded:", ORG_DATA['ga4-trivium']);
 
     } catch (error) {
 
-        console.error("GA4 loading error:", error);
+        console.error("Website Analysisloading error:", error);
         throw error;
 
     }
@@ -1685,15 +1703,15 @@ async function fetchGA4Report(orgType, startDate, endDate){
     'ga4-cte': 'ga4-triviumCTE.php'
   };
   const endpoint = endpoints[orgType];
-  if(!endpoint) throw new Error('No GA4 endpoint is configured for this tab.');
+  if(!endpoint) throw new Error('No Website Analysis endpoint is configured for this tab.');
 
   const params = new URLSearchParams({ start_date:startDate, end_date:endDate });
   const response = await fetch(`${endpoint}?${params.toString()}`);
-  if(!response.ok) throw new Error(`GA4 API returned HTTP ${response.status}.`);
+  if(!response.ok) throw new Error(`Website Analysis API returned HTTP ${response.status}.`);
 
   const result = await response.json();
   if(!result.success || !result.report){
-    throw new Error(result.message || 'GA4 API request failed.');
+    throw new Error(result.message || 'Website Analysis API request failed.');
   }
 
   return result.report;
@@ -1804,15 +1822,15 @@ function renderBrandLanding(){
   document.getElementById('dateFilterWrap').style.display = 'none';
   document.getElementById('dataTypeTabs').innerHTML = '';
   document.getElementById('campaignNav').innerHTML = '';
-  document.getElementById('orgEyebrow').textContent = 'Analytics Portfolio';
-  document.getElementById('orgTitle').textContent = 'Choose a Brand';
+  document.getElementById('orgEyebrow').textContent = 'Analytics Hub';
+  document.getElementById('orgTitle').textContent = 'Choose a Portal';
 
   const app = document.getElementById('app');
   app.innerHTML = `
     <div class="brand-landing">
       <div class="brand-landing-head">
-        <h1>Which brand would you like to explore?</h1>
-        <p>Each brand covers Campaign, Website (GA4), and LinkedIn analytics — where available.</p>
+        <h1>Which portal would you like to explore?</h1>
+        <p>Each portal covers Campaign, Website (GA4), and LinkedIn analytics — where available.</p>
       </div>
       <div class="brand-grid" id="brandGrid"></div>
     </div>
@@ -2471,7 +2489,7 @@ function renderContacts(camp){
   draw();
 }
 
-/* ============== GA4 SUMMARY VIEW ============== */
+/* ============== Website Analysis SUMMARY VIEW ============== */
 function renderGA4Table(filtered){
   const rows = filtered.map(r=>({
     id:r.id, name:r.name, start:r.start, end:r.end, status:r.status,
@@ -2584,7 +2602,7 @@ function renderGA4Summary(){
   });
 }
 
-/* ============== GA4 REPORT VIEW ============== */
+/* ============== Website Analysis REPORT VIEW ============== */
 function renderGA4Report(report){
   const app = document.getElementById('app');
   const statusLabel = report.status==='completed' ? 'Completed' : 'In Progress';
@@ -2619,7 +2637,7 @@ function renderGA4Report(report){
       </button>` : ''}
       ${report.placeholder ? `<div class="placeholder-note">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
-        Sample placeholder report — swap in real GA4 data when available.
+        Sample placeholder report — swap in real Website Analysis data when available.
       </div>` : ''}
       <div class="camp-header">
         <div>
