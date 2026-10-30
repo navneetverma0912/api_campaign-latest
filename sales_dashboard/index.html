@@ -90,9 +90,9 @@ async function api(action, params = {}) {
   return body;
 }
 const fetchReps          = ()                       => api('reps');
-const fetchOpenLeads     = (rep)                    => api('openLeads',     { rep });
+const fetchOpenLeads     = (rep,from, to)                    => api('openLeads',     { rep,from, to });
 const fetchNewLeads      = (from, to, rep)          => api('newLeads',      { from, to, rep });
-const fetchOpenOpps      = (rep, stage)             => api('openOpps',      { rep, stage });
+const fetchOpenOpps      = (rep, stage,from, to)             => api('openOpps',      { rep, stage,from, to });
 const fetchNewOpps       = (from, to, rep)          => api('newOpps',       { from, to, rep });
 const fetchTasksDue      = (from, to, rep)          => api('tasksDue',      { from, to, rep });
 const fetchTasksDone     = (from, to, rep)          => api('tasksDone',     { from, to, rep });
@@ -100,20 +100,33 @@ const fetchOverdueTasks  = (today, rep)             => api('overdueTasks',  { to
 const fetchUpcomingTasks = (from, to, rep)          => api('upcomingTasks', { from, to, rep });
 const fetchNextActions   = (rep)                    => api('nextActions',   { rep });
 const fetchTeamSummary   = (from, to, today, stage) => api('teamSummary',   { from, to, today, stage });
-const fetchRecord        = (type, id)               => api('record',        { type, id });
+const fetchRecord        = (type, id,from, to)               => api('record',        { type, id,from, to });
 
 /* ---- normalizers: map api.php column names -> UI field names (edit keys here if your SQL aliases differ) ---- */
 const nRep=r=>({id:String(g(r,'id','user_id','rep_id')),name:g(r,'name','user_name','rep_name','userName')||String(g(r,'id'))});
 const nLead=r=>({id:String(g(r,'id')),name:g(r,'name','full_name','fullName')||[g(r,'first_name'),g(r,'last_name')].filter(Boolean).join(' ')||'(no name)',
   st:g(r,'status','st'),src:g(r,'source'),cr:dt(g(r,'created_at','createdAt','created')),la:dt(g(r,'last_activity','lastActivity','modified_at')),o:g(r,'rep','rep_name','assigned_user_name','assignedUserName')});
-const nOpp=r=>({id:String(g(r,'id')),name:g(r,'name'),acc:g(r,'account_name','account','accountName')||'',st:g(r,'stage','st'),amt:+(g(r,'amount','amt')||0),cur:g(r,'currency','amount_currency')||'USD',
-  cr:dt(g(r,'created_at','createdAt','created')),cl:dt(g(r,'close_date','closeDate','expected_close')),la:dt(g(r,'last_activity','lastActivity','modified_at')),o:g(r,'rep','rep_name','assigned_user_name','assignedUserName')});
+// const nOpp=r=>({id:String(g(r,'id')),name:g(r,'name'),acc:g(r,'account_name','account','accountName')||'',st:g(r,'stage','st'),amt:+(g(r,'amount','amt')||0),cur:g(r,'currency','amount_currency')||'USD',close_pipe:g(r,'close_pipeline','close_pipeline'||0),
+//   cr:dt(g(r,'created_at','createdAt','created')),cl:dt(g(r,'close_date','closeDate','expected_close')),la:dt(g(r,'last_activity','lastActivity','modified_at')),o:g(r,'rep','rep_name','assigned_user_name','assignedUserName')});
+const nOpp = r => ({
+  id: String(g(r, 'id')),
+  name: g(r, 'name'),
+  acc: g(r, 'account_name', 'account', 'accountName') || '',
+  st: g(r, 'stage', 'st'),
+  amt: +(g(r, 'amount', 'amt') || 0),
+  cur: g(r, 'currency', 'amount_currency') || 'USD',
+  close_pipe: g(r, 'close_pipeline') || 0,
+  cr: dt(g(r, 'created_at', 'createdAt', 'created')),
+  cl: dt(g(r, 'close_date', 'closeDate', 'expected_close')),
+  la: dt(g(r, 'last_activity', 'lastActivity', 'modified_at')),
+  o: g(r, 'rep', 'rep_name', 'assigned_user_name', 'assignedUserName')
+});
 const nTask=r=>({id:String(g(r,'id')),subj:g(r,'name','subject','subj'),type:g(r,'type','task_type')||'Task',st:g(r,'status','st'),
   due:dt(g(r,'due','date_end','dateEnd','due_date')),done:dt(g(r,'completed','date_completed','dateCompleted')),
   rel:g(r,'parent_name','related_name','rel')||'',relT:g(r,'parent_type','related_type','relT')||'',o:g(r,'rep','rep_name','assigned_user_name','assignedUserName')});
 const nRow=r=>({id:String(g(r,'rep_id','user_id','id')),r:g(r,'rep_name','name','user_name')||'—',
   tl:+g(r,'total_leads','open_leads','leads')||0,nl:+g(r,'new_leads')||0,oo:+g(r,'open_opps','open_opportunities')||0,no:+g(r,'new_opps','new_opportunities')||0,
-  pipe:+g(r,'pipeline','pipeline_value')||0,td:+g(r,'tasks_due')||0,tc:+g(r,'tasks_done','tasks_completed')||0,ov:+g(r,'overdue','overdue_tasks')||0,
+  pipe:+g(r,'pipeline','pipeline_value')||0,close_pipe:+g(r,'close_pipeline','close_pipeline_value')||0,td:+g(r,'tasks_due')||0,tc:+g(r,'tasks_done','tasks_completed')||0,ov:+g(r,'overdue','overdue_tasks')||0,
   oldest:+g(r,'oldest_overdue_days')||0,pc:+g(r,'past_close')||0,stale:+g(r,'stale_opps','stale')||0,soon:+g(r,'closing_soon')||0,nx:+g(r,'next_week_tasks','upcoming_tasks')||0});
 const nNext=r=>({key:String(g(r,'record_id','parent_id','lead_id','opportunity_id','id')),due:dt(g(r,'next_due','due','date_end','next_date','date')),type:g(r,'type','task_type')||''});
 
@@ -123,7 +136,7 @@ async function loadTeamData() {
 async function loadRepData(repId) {
   const nf = add(S.to, 1), nt = add(S.to, 7), stage = S.stage === 'all' ? '' : S.stage;
   const [openLeads, newLeads, openOpps, newOpps, due, done, overdue, upcoming, nextActions] = await Promise.all([
-    fetchOpenLeads(repId), fetchNewLeads(S.from, S.to, repId), fetchOpenOpps(repId, stage), fetchNewOpps(S.from, S.to, repId),
+    fetchOpenLeads(repId,S.from, S.to), fetchNewLeads(S.from, S.to, repId), fetchOpenOpps(repId, stage,S.from, S.to), fetchNewOpps(S.from, S.to, repId),
     fetchTasksDue(S.from, S.to, repId), fetchTasksDone(S.from, S.to, repId), fetchOverdueTasks(TODAY, repId),
     fetchUpcomingTasks(nf, nt, repId), fetchNextActions(repId)]);
   const NX = {}; arr(nextActions).map(nNext).forEach(n => { if (!NX[n.key] || (n.due && n.due < NX[n.key].due)) NX[n.key] = n; });
@@ -149,7 +162,7 @@ function flagsOf(x){
 
 function M(){ /* rep metrics from loaded rep data */
  const R=RD,openO=R.openOpps.filter(x=>!CLOSED.includes(x.st)),over=[...R.overdue].sort((a,b)=>a.due<b.due?-1:1);
- const m={openL:R.openLeads,newL:R.newLeads,openO,newO:R.newOpps,due:R.due,done:R.done,over,next:R.upcoming,pipe:openO.reduce((s,x)=>s+x.amt,0)};
+ const m={openL:R.openLeads,newL:R.newLeads,openO,newO:R.newOpps,due:R.due,done:R.done,over,next:R.upcoming,pipe:openO.reduce((s,x)=>s+x.amt,0),close_pipe: openO.length ? openO[0].close_pipe : 0};
  m.pastClose=openO.filter(x=>x.cl&&x.cl<TODAY);m.soon=openO.filter(x=>x.cl&&x.cl>=TODAY&&x.cl<=add(TODAY,7));m.stale=openO.filter(x=>x.la&&diff(TODAY,x.la)>S.STALE);
  Object.assign(m,flagsOf({ov:over.length,oldest:over.length&&over[0].due?diff(TODAY,over[0].due):0,pc:m.pastClose.length,stale:m.stale.length,soon:m.soon.length,nx:m.next.length}));
  return m}
@@ -161,19 +174,27 @@ function drawFilters(){
  $('#range').textContent=`${fd(S.from)} – ${fd(S.to)} ${d(S.to).getUTCFullYear()} · review date ${fd(TODAY)}`;
  $('#filters').innerHTML=`<button class="btn" data-a="prev">‹ Prev</button><button class="btn" data-a="now">This week</button><button class="btn" data-a="nxt">Next ›</button>
  <label>From<input type="date" id="f1" value="${S.from}"></label><label>To<input type="date" id="f2" value="${S.to}"></label>
- <label>Salesperson<select id="fr"><option value="">All</option>${REPS.map(r=>`<option value="${esc(r.id)}" ${S.rep===r.id?'selected':''}>${esc(r.name)}</option>`).join('')}</select></label>
- <label>Stage<select id="fs"><option value="all">All stages</option>${STAGES.map(s=>`<option ${S.stage===s?'selected':''}>${s}</option>`).join('')}</select></label>`}
+ <label>Salesperson<select id="fr"><option value="">All</option>${REPS.map(r=>`<option value="${esc(r.id)}" ${S.rep===r.id?'selected':''}>${esc(r.name)}</option>`).join('')}</select></label>`}
+//  <label>Stage<select id="fs"><option value="all">All stages</option>${STAGES.map(s=>`<option ${S.stage===s?'selected':''}>${s}</option>`).join('')}</select></label>`}
 
 /* ================= TEAM VIEW ================= */
 function team(){
- const rows=TD.filter(o=>o.tl||o.oo||o.td||o.ov||o.nx).map(o=>({...o,x:flagsOf(o)}));
+//  const rows=TD.filter(o=>o.tl||o.oo||o.cp||o.td||o.ov||o.nx).map(o=>({...o,x:flagsOf(o)}));
+ const rows = TD.filter(o =>
+  o.tl || o.oo || o.close_pipe || o.td || o.ov || o.nx
+).map(o=>({...o,x:flagsOf(o)}));;
  const sum=k=>rows.reduce((s,o)=>s+o[k],0);
  const{k,d:dir}=S.sort;rows.sort((a,b)=>(typeof a[k]==='string'?a[k].localeCompare(b[k]):a[k]-b[k])*dir);
  const H=(c,l,al)=>`<th class="${al||''}" data-s="${c}">${l}${S.sort.k===c?(S.sort.d>0?' ▲':' ▼'):''}</th>`;
- return `<div class="grid kpis">${kpi('Active salespeople',rows.length,'has open lead, opp or task')}${kpi('New leads',sum('nl'),'created this week')}${kpi('New opportunities',sum('no'),'created this week')}
- ${kpi('Tasks due',sum('td'),'due this week')}${kpi('Tasks completed',sum('tc'),'completed this week')}${kpi('Overdue open tasks',sum('ov'),'as of '+fd(TODAY),sum('ov')?'bad':'')}${kpi('Open pipeline',money(sum('pipe')),sum('oo')+' open opportunities')}</div>
+ return `<div class="grid kpis">${kpi('New leads',sum('nl'),'created this week')}${kpi('New opportunities',sum('no'),'created this week')}
+ ${kpi('Tasks due',sum('td'),'due this week')}${kpi('Tasks completed',sum('tc'),'completed this week')}${kpi('Overdue open tasks',sum('ov'),'as of '+fd(TODAY),sum('ov')?'bad':'')}${kpi('Open pipeline',money(sum('pipe')),sum('oo')+' open opportunities')}${kpi(
+      'Close Pipeline',
+      money(sum('close_pipe')),
+      'Closed Won opportunities'
+    )}
+    </div>
  <h2>Salespeople <span class="sub">click a row to review · weekly metrics follow the date range; leads and pipeline are current</span></h2>
- <div class="tw"><table><thead><tr>${H('r','Salesperson')}${H('tl','Total leads','r')}${H('nl','New leads','r')}${H('oo','Open opps','r')}${H('no','New opps','r')}${H('pipe','Pipeline value','r')}${H('td','Tasks due','r')}${H('tc','Completed','r')}${H('ov','Overdue','r')}<th>Review status</th></tr></thead><tbody>
+ <div class="tw"><table><thead><tr>${H('r','Salesperson')}${H('tl','Total leads','r')}${H('nl','New leads','r')}${H('oo','Open opps','r')}${H('no','New opps','r')}${H('pipe','Pipeline value','r')}${H('td','Tasks due','r')}${H('tc','Tasks Completed','r')}${H('ov','Tasks Overdue','r')}<th>Review status</th></tr></thead><tbody>
  ${rows.map(o=>`<tr class="row" data-rep="${esc(o.id)}"><td><b>${esc(o.r)}</b></td><td class="r">${o.tl}</td><td class="r">${o.nl}</td><td class="r">${o.oo}</td><td class="r">${o.no}</td><td class="r">${money(o.pipe)}</td><td class="r">${o.td}</td><td class="r">${o.tc}</td><td class="r ${o.ov?'bad':''}">${o.ov}</td>
  <td>${badge(o.x)}${o.x.flags.map(f=>`<div class="why">${f[1]}</div>`).join('')}</td></tr>`).join('')||'<tr><td colspan="10" class="mut">No data for this range</td></tr>'}</tbody></table></div>`}
 
@@ -183,42 +204,56 @@ const nextTask=id=>{const n=RD.NX[String(id)];return n?fd(n.due)+(n.type?' · '+
 const taskLi=t=>`<div class="li" data-rec="Task:${esc(t.id)}"><div>${esc(t.subj)}<small>${esc(t.type)} · ${esc(t.st)}${t.rel?' · '+esc(t.relT)+': '+esc(t.rel):''}</small></div><div class="r ${t.due<TODAY&&isOpenT(t)?'bad':''}">${fd(t.due)}</div></div>`;
 function rep(){
  const m=M(),q1=S.q1.toLowerCase(),q2=S.q2.toLowerCase(),byS={},byO={};
- m.openL.forEach(x=>byS[x.st]=(byS[x.st]||0)+1);m.openO.forEach(x=>byO[x.st]=(byO[x.st]||0)+1);
+ m.newL.forEach(x=>byS[x.st]=(byS[x.st]||0)+1);m.newO.forEach(x=>byO[x.st]=(byO[x.st]||0)+1);
  return `<button class="btn" data-a="back">← Team overview</button>
  <div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0"><h2 style="margin:0;font-size:20px">${esc(repName(S.rep))} ${badge(m)}</h2></div>
  ${m.flags.length?`<div class="card" style="margin-bottom:12px">${m.flags.map(f=>`<div class="${f[0]==='bad'?'bad':''}">● ${f[1]}</div>`).join('')}</div>`:''}
- <div class="grid kpis">${kpi('Current leads',m.openL.length,'open now')}${kpi('New leads',m.newL.length,'this week')}${kpi('Open opps',m.openO.length,'current')}${kpi('New opps',m.newO.length,'this week')}${kpi('Pipeline',money(m.pipe),'current open')}
- ${kpi('Tasks due',m.due.length,'this week')}${kpi('Completed',m.done.length,'this week')}${kpi('Overdue',m.over.length,'open',m.over.length?'bad':'')}${kpi('Next week',m.next.length,'tasks coming up')}</div>
-
+  <div class="grid kpis">
+      ${kpi('Current leads',    m.openL.length,                                   'open now')}
+      ${kpi('New leads',        m.newL.length,                                    'this week')}
+      ${kpi('Open opps',        m.openO.filter(x => x.name != null).length, 'current')}
+      ${kpi('New opps',         m.newO.length,                                    'this week')}
+      ${kpi('Current Pipeline', money(m.pipe),                                    'current open')}
+      ${kpi('New Pipeline',     money(m.newO.reduce((s, x) => s + (Number(x.amt) || 0), 0)), 'new opps this week')}
+      ${kpi('Close Pipeline',   money(m.close_pipe),                              'Closed Won opportunities')}
+      ${kpi('Tasks due',        m.due.length,                                     'this week')}
+      ${kpi('Tasks Completed',  m.done.length,                                    'this week')}
+      ${kpi('Tasks Overdue',    m.over.length,                                    'open', m.over.length ? 'bad' : '')}
+      ${kpi('Next week',        m.next.length,                                    'tasks coming up')}
+    </div>
  <h2>Tasks and follow-ups</h2><div class="grid cols">
- <div class="card"><h3>Completed this week (${m.done.length})</h3>${ls(m.done,t=>`<div class="li" data-rec="Task:${esc(t.id)}"><div>${esc(t.subj)}<small>${esc(t.type)}</small></div><div class="ok r">${fd(t.done)}</div></div>`)}</div>
- <div class="card"><h3>Due this week (${m.due.length})</h3>${ls(m.due,t=>`<div class="li" data-rec="Task:${esc(t.id)}"><div>${esc(t.subj)}<small>${esc(t.type)}${t.rel?' · '+esc(t.rel):''}</small></div><div class="r">${fd(t.due)}<small class="${isOpenT(t)?'':'ok'}">${isOpenT(t)?'open':'done'}</small></div></div>`)}</div>
- <div class="card"><h3 class="${m.over.length?'bad':''}">Overdue (${m.over.length})</h3>${ls(m.over,t=>`<div class="li" data-rec="Task:${esc(t.id)}"><div>${esc(t.subj)}<small>${esc(t.type)} · ${esc(t.st)}</small></div><div class="bad r">${fd(t.due)}<small>${t.due?diff(TODAY,t.due):'?'}d late</small></div></div>`)}</div>
- <div class="card"><h3>Coming up next week (${m.next.length})</h3>${ls(m.next,taskLi)}</div></div>
+ <div class="card"><h3>Tasks Completed this week (${m.done.length})</h3>${ls(m.done,t=>`<div class="li" data-rec="Task:${esc(t.id)}"><div>${esc(t.subj)}<small>${esc(t.type)}</small></div><div class="ok r">${fd(t.done)}</div></div>`)}</div>
+ <div class="card"><h3>Tasks Due this week (${m.due.length})</h3>${ls(m.due,t=>`<div class="li" data-rec="Task:${esc(t.id)}"><div>${esc(t.subj)}<small>${esc(t.type)}${t.rel?' · '+esc(t.rel):''}</small></div><div class="r">${fd(t.due)}<small class="${isOpenT(t)?'':'ok'}">${isOpenT(t)?'open':'done'}</small></div></div>`)}</div>
+ <div class="card"><h3 class="${m.over.length?'bad':''}">Tasks Overdue (${m.over.length})</h3>${ls(m.over,t=>`<div class="li" data-rec="Task:${esc(t.id)}"><div>${esc(t.subj)}<small>${esc(t.type)} · ${esc(t.st)}</small></div><div class="bad r">${fd(t.due)}<small>${t.due?diff(TODAY,t.due):'?'}d late</small></div></div>`)}</div>
+ <div class="card"><h3>Task Coming up next week (${m.next.length})</h3>${ls(m.next,taskLi)}</div></div>
 
  <h2>Opportunity pipeline <span class="sub">open = not Closed Won / Closed Lost</span></h2>
  <div class="chips">${Object.entries(byO).map(([a,b])=>`<span class="b n">${esc(a)}: ${b}</span>`).join('')||'<span class="mut">No open opportunities</span>'}</div>
  <input class="search" id="q2" placeholder="Search opportunities…" value="${esc(S.q2)}"><div class="tw"><table><thead><tr><th>Opportunity</th><th>Account</th><th>Stage</th><th class="r">Amount</th><th>Expected close</th><th>Last activity</th><th>Next action</th></tr></thead><tbody>
- ${m.openO.filter(x=>((x.name||'')+x.acc).toLowerCase().includes(q2)).sort((a,b)=>(a.cl||'9')<(b.cl||'9')?-1:1).map(x=>`<tr class="row" data-rec="Opportunity:${esc(x.id)}"><td><b>${esc(x.name)}</b></td><td>${esc(x.acc)}</td><td>${esc(x.st)}</td><td class="r">${money(x.amt)} ${esc(x.cur)}</td><td class="${x.cl&&x.cl<TODAY?'bad':''}">${fd(x.cl)}${x.cl&&x.cl<TODAY?' (overdue)':''}</td><td class="${m.stale.includes(x)?'bad':''}">${fd(x.la)}</td><td>${nextTask(x.id)}</td></tr>`).join('')}</tbody></table></div>
+ ${m.newO
+  .filter(x => x.name != null && x.name !== '' && ((x.name||'')+x.acc).toLowerCase().includes(q2))
+  .sort((a,b)=>(a.cl||'9')<(b.cl||'9')?-1:1)
+  .map(x=>`<tr class="row" data-rec="Opportunity:${esc(x.id)}"><td><b>${esc(x.name)}</b></td><td>${esc(x.acc)}</td><td>${esc(x.st)}</td><td class="r">${money(x.amt)} ${esc(x.cur)}</td><td class="${x.cl&&x.cl<TODAY?'bad':''}">${fd(x.cl)}${x.cl&&x.cl<TODAY?' (overdue)':''}</td><td class="${m.stale.includes(x)?'bad':''}">${fd(x.la)}</td><td>${nextTask(x.id)}</td></tr>`).join('')}</tbody></table></div>
 
+  
  <h2>Lead pipeline</h2>
  <div class="chips">${Object.entries(byS).map(([a,b])=>`<span class="b n">${esc(a)}: ${b}</span>`).join('')}</div>
  <input class="search" id="q1" placeholder="Search leads…" value="${esc(S.q1)}"><div class="tw"><table><thead><tr><th>Lead</th><th>Status</th><th>Source</th><th>Created</th><th>Last activity</th><th>Next follow-up</th></tr></thead><tbody>
- ${m.openL.filter(x=>(x.name||'').toLowerCase().includes(q1)).sort((a,b)=>(a.cr||'')<(b.cr||'')?1:-1).map(x=>`<tr class="row" data-rec="Lead:${esc(x.id)}"><td><b>${esc(x.name)}</b>${inR(x.cr,S.from,S.to)?' <span class="b ok">new</span>':''}</td><td>${esc(x.st)}</td><td>${esc(x.src)}</td><td>${fd(x.cr)}</td><td>${fd(x.la)}</td><td>${nextTask(x.id)}</td></tr>`).join('')}</tbody></table></div>`}
+ ${m.newL.filter(x=>(x.name||'').toLowerCase().includes(q1)).sort((a,b)=>(a.cr||'')<(b.cr||'')?1:-1).map(x=>`<tr class="row" data-rec="Lead:${esc(x.id)}"><td><b>${esc(x.name)}</b>${inR(x.cr,S.from,S.to)?' <span class="b ok">new</span>':''}</td><td>${esc(x.st)}</td><td>${esc(x.src)}</td><td>${fd(x.cr)}</td><td>${fd(x.la)}</td><td>${nextTask(x.id)}</td></tr>`).join('')}</tbody></table></div>`}
 
 /* ================= RECORD PANEL (fetchRecord) ================= */
 async function openRec(k){
  const i=k.indexOf(':'),t=k.slice(0,i),id=k.slice(i+1),pan=$('#pan');
  pan.innerHTML=`<div><button class="btn" data-a="x">✕ Close</button><p class="mut">Loading…</p></div>`;pan.classList.add('on');
  try{
-  const raw=await fetchRecord(t,id),r=Array.isArray(raw)?raw[0]:(raw.record||raw.data||raw);
+  const raw=await fetchRecord(t,id,S.from,S.to),r=Array.isArray(raw)?raw[0]:(raw.record||raw.data||raw);
   const n=t==='Lead'?nLead(r):t==='Opportunity'?nOpp(r):nTask(r);
   const F=t==='Lead'?[['Status',n.st],['Source',n.src],['Assigned to',n.o],['Created',fd(n.cr)],['Last activity',fd(n.la)],['Next follow-up',nextTask(id)]]
    :t==='Opportunity'?[['Account',n.acc],['Stage',n.st],['Amount',money(n.amt)+' '+n.cur],['Expected close',fd(n.cl)],['Assigned to',n.o],['Created',fd(n.cr)],['Last activity',fd(n.la)]]
-   :[['Type',n.type],['Status',n.st],['Due',fd(n.due)],['Completed',fd(n.done)],['Assigned to',n.o],['Related to',n.rel?n.relT+': '+n.rel:'—']];
+   :[['Type',n.type],['Status',n.st],['Due',fd(n.due)],['Task Completed',fd(n.done)],['Assigned to',n.o],['Related to',n.rel?n.relT+': '+n.rel:'—']];
   pan.innerHTML=`<div><button class="btn" data-a="x">✕ Close</button><div class="tag" style="margin-top:14px">${t} · ${esc(id)}</div><h2 style="margin:4px 0">${esc(n.name||n.subj)}</h2>
   <dl>${F.map(f=>`<dt>${f[0]}</dt><dd>${esc(f[1]||'—')}</dd>`).join('')}</dl>
-  <a class="btn pri" target="_blank" rel="noopener" href="${esc(ESPO_URL)}/#${t}/view/${encodeURIComponent(id)}">Open in EspoCRM ↗</a></div>`;
+  <a class="btn pri" target="_blank" rel="noopener" href="${esc(ESPO_URL)}/#${t}/view/${encodeURIComponent(id)}">Open in CRM ↗</a></div>`;
  }catch(e){pan.innerHTML=`<div><button class="btn" data-a="x">✕ Close</button><div class="note err" style="margin-top:14px">Failed to load record: ${esc(e.message)}</div></div>`}}
 
 /* ================= LOAD + RENDER ================= */

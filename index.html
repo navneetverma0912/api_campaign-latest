@@ -514,7 +514,7 @@
             All portals
           </button>
           <p class="eyebrow" id="orgEyebrow">Analytics Hub</p>
-          <h1 class="brand-title" id="orgTitle">Choose a Portal</h1>
+          <h1 class="brand-title" id="orgTitle"></h1>
         </div>
       </div>
       <form class="dashboard-logout-form" method="post" action="logout.php">
@@ -1748,9 +1748,9 @@ const DATA_TYPE_SUBS = { campaign:'Campaign Analytics', ga4:'Website Analytics',
 
 // const SALES_URL = 'https://triviumedu.com/api-campaign/sales-trivium';
 const SALES_URLS = {
-  trivium: 'https://triviumedu.com/api-campaign/sales-trivium',
-  eurekii: 'https://triviumedu.com/api-campaign/sales-eurekii',    // TODO: confirm
-  cte:     'https://triviumedu.com/api-campaign/sales'  // TODO: confirm
+  trivium: 'https://triviumedu.com/api-campaign/sales-trivium/index.php',
+  eurekii: 'https://triviumedu.com/api-campaign/sales-eurekii/index.php',    // TODO: confirm
+  cte:     'https://triviumedu.com/api-campaign/sales/index.php'  // TODO: confirm
 };
 function orgKeyFor(brand, dataType){
   if(dataType === 'campaign' || dataType === 'sales') return brand;
@@ -1890,6 +1890,7 @@ function renderDataTypeTabs(){
 
   const el = document.getElementById('dataTypeTabs');
   el.innerHTML = '';
+  orgTitle.innerHTML = '';
   BRANDS[state.brand].dataTypes.forEach(dt=>{
     const tab = document.createElement('button');
     tab.className = 'org-tab' + (state.dataType===dt ? ' active' : '');
@@ -1901,6 +1902,7 @@ function renderDataTypeTabs(){
     // };
     tab.onclick = ()=>{
       if(dt === 'sales'){
+          
         const url = SALES_URLS[state.brand];
         if(url) window.location.href = url;
         return;

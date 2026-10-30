@@ -1,0 +1,62 @@
+[16-Oct-2026 08:06:49 UTC] PHP Warning:  require_once(/home/jtrivium/public_html/api-campaign/sales/dashboard-auth.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/sales/index.php on line 3
+[16-Oct-2026 08:06:49 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jtrivium/public_html/api-campaign/sales/dashboard-auth.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/sales/index.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/sales/index.php on line 3
+[16-Oct-2026 08:07:42 UTC] PHP Warning:  require_once(/home/jtrivium/public_html/api-campaign/sales/dashboard-auth.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/sales/index.php on line 3
+[16-Oct-2026 08:07:42 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jtrivium/public_html/api-campaign/sales/dashboard-auth.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/sales/index.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/sales/index.php on line 3
+[18-Oct-2026 09:57:48 UTC] Sales dashboard API error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND l.c_parent = 'TriviumCTE',
+        (SELECT COUNT(*) FROM lead l WHERE l....' at line 3
+[18-Oct-2026 09:57:50 UTC] Sales dashboard API error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND l.c_parent = 'TriviumCTE',
+        (SELECT COUNT(*) FROM lead l WHERE l....' at line 3
+[18-Oct-2026 09:57:59 UTC] Sales dashboard API error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND l.c_parent = 'TriviumCTE',
+        (SELECT COUNT(*) FROM lead l WHERE l....' at line 3
+[18-Oct-2026 09:59:48 UTC] Sales dashboard API error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND l.c_parent = 'TriviumCTE',
+        (SELECT COUNT(*) FROM lead l WHERE l....' at line 3
+[18-Oct-2026 10:01:12 UTC] Sales dashboard API error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'l.c_parent' in 'SELECT'
+[19-Oct-2026 05:09:45 UTC] PHP Warning:  require_once(/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:09:45 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/sales/index.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:09:56 UTC] PHP Warning:  require_once(/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:09:56 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/sales/index.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:10:35 UTC] PHP Warning:  require_once(/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:10:35 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/sales/index.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:11:41 UTC] PHP Warning:  require_once(/home/jtrivium/public_html/api-campaign/sales/dashboard-auth.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:11:41 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jtrivium/public_html/api-campaign/sales/dashboard-auth.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/sales/index.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:12:34 UTC] PHP Warning:  require_once(/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:12:34 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/sales/index.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:12:48 UTC] PHP Warning:  require_once(/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:12:48 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/sales/index.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:12:50 UTC] PHP Warning:  require_once(/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php): Failed to open stream: No such file or directory in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[19-Oct-2026 05:12:50 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/jtrivium/public_html/api-campaign/sales../dashboard-auth.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /home/jtrivium/public_html/api-campaign/sales/index.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/jtrivium/public_html/api-campaign/sales/index.php on line 2
+[21-Oct-2026 05:47:31 UTC] Sales dashboard API error: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+[21-Oct-2026 05:47:31 UTC] Sales dashboard API error: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+[21-Oct-2026 05:47:31 UTC] Sales dashboard API error: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+[21-Oct-2026 05:47:31 UTC] Sales dashboard API error: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+[30-Oct-2026 11:58:54 UTC] Sales dashboard API error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'l.c_lead_value' in 'SELECT'
+[30-Oct-2026 11:59:06 UTC] Sales dashboard API error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'l.c_lead_value' in 'SELECT'
+[30-Oct-2026 11:59:37 UTC] Sales dashboard API error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'l.c_lead_value' in 'SELECT'
+[30-Oct-2026 11:59:37 UTC] Sales dashboard API error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'l.c_lead_value' in 'SELECT'

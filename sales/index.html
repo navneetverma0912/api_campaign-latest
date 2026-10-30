@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" data-org="cte">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title> Sales Dashboard</title>
+<!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">-->
+<link rel="icon" href="/images/favicons/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F2F8;--card:#fff;--ink:#241F3F;--mut:#6B7085;--line:#E7E5F0;--ac:#EF4060;--ac2:#F4813E;--dk:#2E2260;--ok:#1F9D55;--warn:#B7791F;--bad:#D93F3F;--tint:#EFEDFA;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14121F;--card:#1E1A33;--ink:#EDEBFA;--mut:#A19DBD;--line:#332E4F;--tint:#2A2548;--ok:#4CC38A;--warn:#E0A94A;--bad:#FF6B6B}}
+:root[data-theme="dark"]{--bg:#14121F;--card:#1E1A33;--ink:#EDEBFA;--mut:#A19DBD;--line:#332E4F;--tint:#2A2548;--ok:#4CC38A;--warn:#E0A94A;--bad:#FF6B6B}
+/*Sales Dashboard*/
+/* ---------- THEME VARIABLES ---------- */
+:root, [data-org="trivium"]{
+  --c1:orange; --c2:orange;
+  --dark1:#2E2260; --dark2:#1E1745; --dark3:#3A2E7A;
+  --font-display:'Poppins', sans-serif;
+}
+[data-org="eurekii"]{
+  --c1:#F0640A; --c2:#F2B705;
+  --dark1:#0B1E5C; --dark2:#000E3E; --dark3:#30A7CF;
+  --font-display:'Quicksand', sans-serif;
+}
+[data-org="cte"]{
+  --c1:#6E9A1B; --c2:#0E8FB5;
+  --dark1:#0B0B0C; --dark2:#000000; --dark3:#E0A62E;
+  --font-display:'Poppins', sans-serif;
+}
+:root{ --grad:linear-gradient(90deg, var(--c1) 0%, var(--c2) 100%); }
+*{ box-sizing:border-box; }
+body{ margin:0; font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; }
+h1{ font-family:var(--font-display); }
+
+/* ---------- TAB BAR ---------- */
+.org-switcher{ background:#17151C; display:flex; align-items:center; gap:6px; padding:10px 32px; }
+.org-tab{
+  display:flex; align-items:center; gap:8px; background:transparent; border:1px solid transparent;
+  border-radius:10px; padding:8px 16px; transition:.15s; text-decoration:none; cursor:pointer;
+}
+.org-tab .org-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; background:var(--c1); }
+.org-tab .org-name{ color:#8B87A0; font-family:'Inter'; font-weight:600; font-size:13px; }
+.org-tab.active{ background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.16); box-shadow:inset 0 -2px 0 var(--c1); }
+.org-tab.active .org-name{ color:#fff; }
+.org-tab:not(.active):hover{ background:rgba(255,255,255,0.04); }
+.org-tab:not(.active) .org-dot{ opacity:.5; }
+
+/* ---------- TOP BANNER ---------- */
+header.topbar{
+  background:radial-gradient(1100px 420px at 85% -10%, color-mix(in srgb, var(--c2) 35%, transparent), transparent 60%),
+             linear-gradient(160deg, var(--dark1) 0%, var(--dark2) 100%);
+  color:#fff; padding:26px 32px 22px; position:relative; overflow:hidden;
+}
+header.topbar::before{
+  content:""; position:absolute; left:-80px; bottom:-120px; width:320px; height:320px;
+  border-radius:50%; background:radial-gradient(circle, color-mix(in srgb, var(--c1) 30%, transparent), transparent 70%);
+}
+header.topbar::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background:var(--grad); }
+[data-org="eurekii"] header.topbar{ background:linear-gradient(90deg, #001576 0%, #003c8e 45%, #0150B2 100%); }
+[data-org="eurekii"] header.topbar::before{ display:none; }
+
+.topbar-inner{ max-width:1180px; margin:0 auto; position:relative; z-index:2; }
+.topbar-row{ display:flex; align-items:center; justify-content:space-between; gap:18px; }
+.brand-block{ display:flex; align-items:center; gap:16px; flex:1 1 auto; min-width:0; }
+
+.header-logo-chip{ background:transparent; border-radius:12px; padding:0; display:inline-flex; align-items:center; flex-shrink:0; }
+[data-org="trivium"] .header-logo-chip,
+[data-org="cte"] .header-logo-chip{ background:#fff; padding:9px 16px; box-shadow:0 8px 20px rgba(0,0,0,0.18); }
+.header-logo{ height:30px; display:block; }
+[data-org="trivium"] .header-logo{ height:26px; }
+[data-org="cte"] .header-logo{ height:22px; }
+
+.eyebrow{ font-family:var(--font-display); font-weight:600; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#C9C3E8; margin:0 0 8px; }
+h1.brand-title{
+  font-weight:800; font-size:clamp(24px,3.4vw,34px); margin:0;
+  background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.back-link{
+  display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:#C9C3E8;
+  text-decoration:none; margin-bottom:6px;
+}
+.back-link svg{ width:14px; height:14px; }
+
+.dashboard-logout-form{ flex:0 0 auto; margin:0; }
+.dashboard-logout-button{
+  border:1px solid rgba(255,255,255,.42); border-radius:9px; padding:9px 14px;
+  background:rgba(255,255,255,.12); color:#fff; font:600 13px 'Inter',sans-serif;
+  cursor:pointer; transition:background .15s,border-color .15s;
+}
+.dashboard-logout-button:hover{ background:rgba(255,255,255,.22); border-color:rgba(255,255,255,.7); }
+.dashboard-logout-button:focus-visible{ outline:3px solid #fff; outline-offset:3px; }
+
+/* ---------- MOBILE ---------- */
+@media(max-width:640px){
+  .org-switcher{ gap:4px; padding:8px 12px; overflow-x:auto; }
+  .org-tab{ flex:0 0 auto; padding:8px 12px; }
+  header.topbar{ padding:20px 16px 18px; }
+  .topbar-row{ align-items:flex-start; flex-wrap:wrap; gap:14px 10px; }
+  .brand-block{ flex:1 1 calc(100% - 92px); gap:10px; }
+  .header-logo-chip{ max-width:100px; }
+  .header-logo{ max-width:100%; height:auto; }
+  .eyebrow{ font-size:9px; margin-bottom:5px; }
+  h1.brand-title{ font-size:clamp(21px,6vw,28px); overflow-wrap:anywhere; }
+  .dashboard-logout-form{ margin-left:auto; }
+}
+@media(max-width:380px){
+  .org-tab{ padding:7px 9px; }
+  .org-tab .org-name{ font-size:11px; }
+  .header-logo-chip{ padding:6px 8px !important; }
+  .dashboard-logout-button{ padding:8px 10px; }
+}
+.topbar-right{
+  display:flex; flex-direction:column; align-items:flex-end; gap:12px;
+  flex:0 1 auto; min-width:0;
+}
+.topbar-actions{ display:flex; align-items:center; gap:8px; }
+.topbar-actions .btn{
+  background:rgba(255,255,255,.12); color:#fff;
+  border:1px solid rgba(255,255,255,.42); border-radius:9px;
+  padding:9px 14px; font:600 13px 'Inter',sans-serif; cursor:pointer;
+  transition:background .15s,border-color .15s;
+}
+.topbar-actions .btn:hover{ background:rgba(255,255,255,.22); border-color:rgba(255,255,255,.7); }
+
+.topbar-filters{
+  display:flex; flex-direction:column; align-items:flex-end; gap:6px;
+}
+.topbar-filters .filters{
+  display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:flex-end;
+  margin:0; max-width:none;
+}
+.topbar-filters #range{ color:#BDB8DD; font-size:12px; }
+
+/* top row should align to the top of the banner, not the centre */
+.topbar-row{ align-items:flex-start; }
+
+@media(max-width:900px){
+  .topbar-row{ flex-wrap:wrap; }
+  .topbar-right{ width:100%; align-items:flex-start; }
+  .topbar-filters{ align-items:flex-start; }
+  .topbar-filters .filters{ justify-content:flex-start; }
+}
+
+/*Sales Dashboard*/
+
+
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.45 Inter,system-ui,sans-serif}
+h1,h2,h3{font-family:Poppins,Inter,sans-serif;margin:0}
+header{background:linear-gradient(135deg,#2E2260,#1E1745);color:#fff;padding:16px 20px}
+.top{max-width:1240px;margin:auto;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+header h1{font-size:19px;background:linear-gradient(90deg,#EF4060,#F4813E);-webkit-background-clip:text;background-clip:text;color:transparent}
+header small{color:#BDB8DD;display:block}
+.filters{max-width:1240px;margin:12px auto 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters label{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#BDB8DD;font-weight:700;display:flex;flex-direction:column;gap:3px}
+select,input,button,.filters select,.filters input{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:8px;padding:6px 8px;color-scheme:dark}
+.filters option{color:#000}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:6px 11px;cursor:pointer;font-weight:600}
+.filters .btn{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);color:#fff;align-self:flex-end}
+.btn.pri{background:linear-gradient(90deg,var(--ac),var(--ac2));color:#fff;border-color:transparent;text-decoration:none;display:inline-block}
+main{max-width:1240px;margin:16px auto;padding:0 16px 40px}
+.note{background:#FBF0DC;color:#7A5410;border-radius:8px;padding:8px 12px;font-size:12px;margin-bottom:14px}
+.note.err{background:#FBE4E4;color:#B02A2A}
+.grid{display:grid;gap:12px}.kpis{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.k .l{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);font-weight:700}
+.k .n{font:800 22px Poppins,sans-serif;margin-top:4px}.k .s{font-size:11px;color:var(--mut)}
+.k.bad .n{color:var(--bad)}
+h2{font-size:15px;margin:18px 0 8px}h3{font-size:13px;margin-bottom:8px}
+.sub{color:var(--mut);font-weight:400;font-size:11.5px;font-family:Inter}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);text-align:left;padding:9px 10px;background:var(--tint);white-space:nowrap;cursor:pointer;user-select:none}
+td{padding:9px 10px;border-top:1px solid var(--line);vertical-align:top}
+tr.row{cursor:pointer}tr.row:hover td{background:var(--tint)}
+.r{text-align:right}.mut{color:var(--mut)}.bad{color:var(--bad)}.ok{color:var(--ok)}
+.b{display:inline-block;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:700}
+.b.ok{background:#E3F4EA;color:#1F7A46}.b.warn{background:#FBF0DC;color:#8A5A0E}.b.bad{background:#FBE4E4;color:#B02A2A}.b.n{background:var(--tint);color:var(--mut)}
+.why{font-size:11px;color:var(--mut);margin-top:3px}
+.cols{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.li{padding:7px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:8px;cursor:pointer}.li:first-of-type{border-top:0}
+.li small{display:block;color:var(--mut)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.search{width:100%;max-width:300px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);margin-bottom:8px}
+#pan{position:fixed;inset:0;background:rgba(10,8,25,.5);display:none;justify-content:flex-end;z-index:9}
+#pan.on{display:flex}#pan>div{width:min(420px,100%);background:var(--card);padding:20px;overflow:auto}
+dl{display:grid;grid-template-columns:120px 1fr;gap:6px 10px;margin:12px 0}dt{color:var(--mut)}dd{margin:0;font-weight:600}
+.tag{font-size:10px;color:var(--mut);text-transform:uppercase;font-weight:700}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+    <div class="org-switcher" id="dataTypeTabs"></div>
+
+    <!--<header class="topbar">-->
+    <!--  <div class="topbar-inner">-->
+    <!--    <div class="topbar-row">-->
+    <!--      <div class="brand-block">-->
+    <!--        <div class="header-logo-chip"><img class="header-logo" id="headerLogo" src="" alt="Org logo"></div>-->
+    <!--        <div>-->
+    <!--          <a class="back-link" id="backToPortals" href="index.php">-->
+    <!--            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>-->
+    <!--            All portals-->
+    <!--          </a>-->
+    <!--          <p class="eyebrow" id="orgEyebrow"></p>-->
+    <!--          <h1 class="brand-title" id="orgTitle"></h1>-->
+    <!--        </div>-->
+    <!--      </div>-->
+          
+    <!--      <div class="filters" id="filters"></div>-->
+          
+    <!--      <small id="range"></small>-->
+    <!--      <form class="dashboard-logout-form" method="post" action="logout.php">-->
+    <!--        <input type="hidden" name="csrf_token" value="__DASHBOARD_CSRF_TOKEN__">-->
+    <!--        <button class="dashboard-logout-button" type="submit">Log out</button>-->
+    <!--      </form>-->
+    <!--        <div>-->
+    <!--            <button class="btn" id="theme" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.25)">◐ Theme-->
+    <!--            </button>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--</header>-->
+    <header class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-row">
+
+      <!-- LEFT: unchanged -->
+      <div class="brand-block">
+        <div class="header-logo-chip"><img class="header-logo" id="headerLogo" src="" alt="Org logo"></div>
+        <div>
+          <a class="back-link" id="backToPortals" href="index.php">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            All portals
+          </a>
+          <p class="eyebrow" id="orgEyebrow"></p>
+          <h1 class="brand-title" id="orgTitle"></h1>
+        </div>
+      </div>
+
+      <!-- RIGHT: two rows -->
+      <div class="topbar-right">
+        <div class="topbar-actions">
+          <button class="btn" id="theme" type="button">◐ Theme</button>
+          <form class="dashboard-logout-form" method="post" action="logout.php">
+            <input type="hidden" name="csrf_token" value="__DASHBOARD_CSRF_TOKEN__">
+            <button class="dashboard-logout-button" type="submit">Log out</button>
+          </form>
+        </div>
+        <div class="topbar-filters">
+          <div class="filters" id="filters"></div>
+          <small id="range"></small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+<!--<header>-->
+<!-- <div class="top"><div><h1>Weekly Sales Review</h1><small id="range"></small></div>-->
+<!--  <div><button class="btn" id="theme" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.25)">◐ Theme</button></div></div>-->
+<!-- <div class="filters" id="filters"></div>-->
+<!--</header>-->
+<main id="app"></main>
+<div id="pan"></div>
+<!--SAles Dashboard-->
+<script>
+const qp = new URLSearchParams(location.search);
+if (qp.get('brand') && BRANDS[qp.get('brand')]) {
+  selectBrandDataType(qp.get('brand'), qp.get('type') || 'campaign');
+}
+const PAGE = {
+  brand:  'cte',          // trivium | eurekii | cte
+  active: 'sales',            // campaign | ga4 | linkedin | sales
+  title:  'Sales Analytics'   // big heading in the banner
+};
+
+const DASHBOARD_URL = '../index.php';   // the main dashboard page
+const BRAND_LABELS  = { trivium:'Trivium', eurekii:'Eurekii', cte:'Trivium CTE' };
+const LOGOS = {
+  trivium:'../assets/trivium-logo.png',
+  eurekii:'../assets/eurekii-logo.png',
+  cte:    '../assets/triviumCTE.png'
+};
+const SALES_URLS = {
+  trivium:'https://triviumedu.com/api-campaign/sales-trivium',
+  eurekii:'https://triviumedu.com/api-campaign/sales-eurekii',
+  cte:    'https://triviumedu.com/api-campaign/sales'
+};
+const TABS = [
+  { key:'campaign', label:'Campaign' },
+  { key:'ga4',      label:'Website Analytics' },
+  { key:'linkedin', label:'LinkedIn' },
+  { key:'sales',    label:'Sales' }
+];
+const tabUrl = (brand, key) =>
+  key === 'sales' ? SALES_URLS[brand] : `${DASHBOARD_URL}?brand=${brand}&type=${key}`;
+
+document.documentElement.setAttribute('data-org', PAGE.brand);
+document.getElementById('headerLogo').src = LOGOS[PAGE.brand];
+document.getElementById('orgEyebrow').textContent = BRAND_LABELS[PAGE.brand] + ' · ' + PAGE.title;
+document.getElementById('orgTitle').textContent = PAGE.title;
+document.getElementById('backToPortals').href = DASHBOARD_URL;
+document.getElementById('dataTypeTabs').innerHTML = TABS.map(t => `
+  <a class="org-tab${t.key === PAGE.active ? ' active' : ''}" href="${tabUrl(PAGE.brand, t.key)}">
+    <span class="org-dot"></span><span class="org-name">${t.label}</span>
+  </a>`).join('');
+</script>
+<!--SAles Dashboard-->
+<script>
+/* ================= CONFIG ================= */
+const API_URL  = 'api.php';
+const ESPO_URL = '';            // e.g. 'https://crm.example.com' – used for "Open in EspoCRM"
+
+const TODAY = new Date().toISOString().slice(0,10);   // or fix a date: '2026-10-12'
+
+/* ================= HELPERS ================= */
+const d=s=>new Date(s+'T00:00:00Z'),iso=x=>x.toISOString().slice(0,10),add=(s,n)=>iso(new Date(d(s).getTime()+n*864e5));
+const wk=s=>add(s,-((d(s).getUTCDay()+6)%7)),diff=(a,b)=>Math.round((d(a)-d(b))/864e5);
+const fd=s=>s?new Date(s+'T00:00:00Z').toLocaleDateString('en-GB',{day:'2-digit',month:'short',timeZone:'UTC'}):'—';
+const $=s=>document.querySelector(s),money=n=>'$'+Math.round(n||0).toLocaleString();
+const inR=(x,a,b)=>x&&x>=a&&x<=b;
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const g=(r,...k)=>{for(const x of k)if(r&&r[x]!==undefined&&r[x]!==null&&r[x]!=='')return r[x]};
+const dt=v=>v?String(v).slice(0,10):null;
+const arr=b=>Array.isArray(b)?b:(b&&(b.list||b.data||b.rows||b.items))||[];
+
+/* ================= DATA LAYER (api.php) ================= */
+async function api(action, params = {}) {
+  const qs = new URLSearchParams({ action });
+  Object.entries(params).forEach(([k, v]) => { if (v !== null && v !== undefined && v !== '') qs.append(k, v); });
+  const res = await fetch(`${API_URL}?${qs}`, { credentials: 'same-origin' });
+  let body; try { body = await res.json(); } catch { throw new Error(`Invalid JSON from api.php (${res.status})`); }
+  if (!res.ok) throw new Error(body.error || `Request failed (${res.status})`);
+  return body;
+}
+const fetchReps          = ()                       => api('reps');
+const fetchOpenLeads     = (rep,from, to)                    => api('openLeads',     { rep,from, to });
+const fetchNewLeads      = (from, to, rep)          => api('newLeads',      { from, to, rep });
+const fetchOpenOpps      = (rep, stage,from, to)             => api('openOpps',      { rep, stage,from, to });
+const fetchNewOpps       = (from, to, rep)          => api('newOpps',       { from, to, rep });
+const fetchTasksDue      = (from, to, rep)          => api('tasksDue',      { from, to, rep });
+const fetchTasksDone     = (from, to, rep)          => api('tasksDone',     { from, to, rep });
+const fetchOverdueTasks  = (today, rep)             => api('overdueTasks',  { today, rep });
+const fetchUpcomingTasks = (from, to, rep)          => api('upcomingTasks', { from, to, rep });
+const fetchNextActions   = (rep)                    => api('nextActions',   { rep });
+const fetchTeamSummary   = (from, to, today, stage) => api('teamSummary',   { from, to, today, stage });
+const fetchRecord        = (type, id,from, to)               => api('record',        { type, id,from, to });
+
+/* ---- normalizers: map api.php column names -> UI field names (edit keys here if your SQL aliases differ) ---- */
+const nRep=r=>({id:String(g(r,'id','user_id','rep_id')),name:g(r,'name','user_name','rep_name','userName')||String(g(r,'id'))});
+// const nLead=r=>({id:String(g(r,'id')),name:g(r,'name','full_name','fullName')||[g(r,'first_name'),g(r,'last_name')].filter(Boolean).join(' ')||'(no name)',
+//   st:g(r,'status','st'),src:g(r,'source'),cr:dt(g(r,'created_at','createdAt','created')),la:dt(g(r,'last_activity','lastActivity','modified_at')),o:g(r,'rep','rep_name','assigned_user_name','assignedUserName')});
+const nLead = r => ({
+  id: String(g(r,'id')),
+  name: g(r,'name','full_name','fullName') || [g(r,'first_name'),g(r,'last_name')].filter(Boolean).join(' ') || '(no name)',
+  st: g(r,'status','st'),
+  src: g(r,'source'),
+  cr: dt(g(r,'created_at','createdAt','created')),
+  la: dt(g(r,'last_activity','lastActivity','modified_at')),
+  o: g(r,'rep','rep_name','assigned_user_name','assignedUserName'),
+  total_lead_value: +g(r,'total_lead_value') || 0,
+  c_lead_value: +g(r,'c_lead_value') || 0
+
+});
+// const nOpp=r=>({id:String(g(r,'id')),name:g(r,'name'),acc:g(r,'account_name','account','accountName')||'',st:g(r,'stage','st'),amt:+(g(r,'amount','amt')||0),cur:g(r,'currency','amount_currency')||'USD',close_pipe:g(r,'close_pipeline','close_pipeline'||0),
+//   cr:dt(g(r,'created_at','createdAt','created')),cl:dt(g(r,'close_date','closeDate','expected_close')),la:dt(g(r,'last_activity','lastActivity','modified_at')),o:g(r,'rep','rep_name','assigned_user_name','assignedUserName')});
+const nOpp = r => ({
+  id: String(g(r, 'id')),
+  name: g(r, 'name'),
+  acc: g(r, 'account_name', 'account', 'accountName') || '',
+  st: g(r, 'stage', 'st'),
+  amt: +(g(r, 'amount', 'amt') || 0),
+  cur: g(r, 'currency', 'amount_currency') || 'USD',
+  close_pipe: g(r, 'close_pipeline') || 0,
+  cr: dt(g(r, 'created_at', 'createdAt', 'created')),
+  cl: dt(g(r, 'close_date', 'closeDate', 'expected_close')),
+  la: dt(g(r, 'last_activity', 'lastActivity', 'modified_at')),
+  o: g(r, 'rep', 'rep_name', 'assigned_user_name', 'assignedUserName')
+});
+const nTask=r=>({id:String(g(r,'id')),subj:g(r,'name','subject','subj'),type:g(r,'type','task_type')||'Task',st:g(r,'status','st'),
+  due:dt(g(r,'due','date_end','dateEnd','due_date')),done:dt(g(r,'completed','date_completed','dateCompleted')),
+  rel:g(r,'parent_name','related_name','rel')||'',relT:g(r,'parent_type','related_type','relT')||'',o:g(r,'rep','rep_name','assigned_user_name','assignedUserName'),
+    lead:g(r,'lead_name')||'',
+  desg:g(r,'designation')||'',
+  cat:g(r,'school_category')||'',
+  co:g(r,'company_name')||'',
+  src:g(r,'source')||''
+});
+const nRow=r=>({id:String(g(r,'rep_id','user_id','id')),r:g(r,'rep_name','name','user_name')||'—',
+  tl:+g(r,'total_leads','open_leads','leads')||0,nl:+g(r,'new_leads')||0,oo:+g(r,'open_opps','open_opportunities')||0,no:+g(r,'new_opps','new_opportunities')||0,
+  total_lead_value: +g(r,'total_lead_value') || 0,
+  pipe:+g(r,'pipeline','pipeline_value')||0,close_pipe:+g(r,'close_pipeline','close_pipeline_value')||0,td:+g(r,'tasks_due')||0,tc:+g(r,'tasks_done','tasks_completed')||0,ov:+g(r,'overdue','overdue_tasks')||0,
+  oldest:+g(r,'oldest_overdue_days')||0,pc:+g(r,'past_close')||0,stale:+g(r,'stale_opps','stale')||0,soon:+g(r,'closing_soon')||0,nx:+g(r,'next_week_tasks','upcoming_tasks')||0});
+const nNext=r=>({key:String(g(r,'record_id','parent_id','lead_id','opportunity_id','id')),due:dt(g(r,'next_due','due','date_end','next_date','date')),type:g(r,'type','task_type')||''});
+
+async function loadTeamData() {
+  return arr(await fetchTeamSummary(S.from, S.to, TODAY, S.stage === 'all' ? '' : S.stage)).map(nRow);
+}
+async function loadRepData(repId) {
+  const nf = add(S.to, 1), nt = add(S.to, 7), stage = S.stage === 'all' ? '' : S.stage;
+  const [openLeads, newLeads, openOpps, newOpps, due, done, overdue, upcoming, nextActions] = await Promise.all([
+    fetchOpenLeads(repId,S.from, S.to), fetchNewLeads(S.from, S.to, repId), fetchOpenOpps(repId, stage,S.from, S.to), fetchNewOpps(S.from, S.to, repId),
+    fetchTasksDue(S.from, S.to, repId), fetchTasksDone(S.from, S.to, repId), fetchOverdueTasks(TODAY, repId),
+    fetchUpcomingTasks(nf, nt, repId), fetchNextActions(repId)]);
+  const NX = {}; arr(nextActions).map(nNext).forEach(n => { if (!NX[n.key] || (n.due && n.due < NX[n.key].due)) NX[n.key] = n; });
+  return { openLeads: arr(openLeads).map(nLead), newLeads: arr(newLeads).map(nLead), openOpps: arr(openOpps).map(nOpp), newOpps: arr(newOpps).map(nOpp),
+    due: arr(due).map(nTask), done: arr(done).map(nTask), overdue: arr(overdue).map(nTask), upcoming: arr(upcoming).map(nTask), NX };
+}
+
+/* ================= STATE ================= */
+const STAGES=['Prospecting','Qualification','Needs Analysis','Proposal','Negotiation','Closed Won','Closed Lost'],CLOSED=['Closed Won','Closed Lost'];
+let REPS=[],TD=[],RD=null,TK=0;
+const S={view:'team',rep:null,from:wk(TODAY),to:add(wk(TODAY),6),stage:'all',sort:{k:'pipe',d:-1},q1:'',q2:'',STALE:14,loading:true,error:null};
+const repName=id=>(REPS.find(r=>r.id===String(id))||{}).name||id;
+const isOpenT=t=>t.st!=='Completed'&&t.st!=='Canceled';
+
+function flagsOf(x){
+ const fl=[];
+ if(x.ov)fl.push(['bad',`${x.ov} overdue task${x.ov>1?'s':''}${x.oldest?` (oldest ${x.oldest}d late)`:''}`]);
+ if(x.pc)fl.push(['bad',`${x.pc} opp${x.pc>1?'s':''} past expected close date`]);
+ if(x.stale)fl.push(['bad',`${x.stale} opp${x.stale>1?'s':''} with no activity in ${S.STALE}+ days`]);
+ if(x.soon)fl.push(['warn',`${x.soon} opp${x.soon>1?'s':''} closing within 7 days`]);
+ if(x.nx)fl.push(['warn',`${x.nx} follow-up${x.nx>1?'s':''} due next week`]);
+ return{flags:fl,status:fl.some(f=>f[0]==='bad')?'bad':fl.length?'warn':'ok'}}
+
+function M(){ /* rep metrics from loaded rep data */
+ const R=RD,openO=R.openOpps.filter(x=>!CLOSED.includes(x.st)),over=[...R.overdue].sort((a,b)=>a.due<b.due?-1:1);
+ const m={openL:R.openLeads,newL:R.newLeads,openO,newO:R.newOpps,due:R.due,done:R.done,over,next:R.upcoming,pipe:openO.reduce((s,x)=>s+x.amt,0),
+ close_pipe: openO.length ? openO[0].close_pipe : 0,
+    total_lead_value: R.newLeads.length ? R.newLeads[0].total_lead_value : 0,
+    total_lead_valuee: R.newLeads.reduce((s, x) => s + x.c_lead_value, 0)
+ };
+ m.pastClose=openO.filter(x=>x.cl&&x.cl<TODAY);m.soon=openO.filter(x=>x.cl&&x.cl>=TODAY&&x.cl<=add(TODAY,7));m.stale=openO.filter(x=>x.la&&diff(TODAY,x.la)>S.STALE);
+ Object.assign(m,flagsOf({ov:over.length,oldest:over.length&&over[0].due?diff(TODAY,over[0].due):0,pc:m.pastClose.length,stale:m.stale.length,soon:m.soon.length,nx:m.next.length}));
+ return m}
+const badge=m=>`<span class="b ${m.status}">${{bad:'Needs attention',warn:'Watch',ok:'On track'}[m.status]}</span>`;
+const kpi=(l,n,s,c)=>`<div class="card k ${c||''}"><div class="l">${l}</div><div class="n">${n}</div><div class="s">${s||''}</div></div>`;
+
+/* ================= FILTERS ================= */
+function drawFilters(){
+ $('#range').textContent=`${fd(S.from)} – ${fd(S.to)} ${d(S.to).getUTCFullYear()} · review date ${fd(TODAY)}`;
+ $('#filters').innerHTML=`<button class="btn" data-a="prev">‹ Prev</button><button class="btn" data-a="now">This week</button><button class="btn" data-a="nxt">Next ›</button>
+ <label>From<input type="date" id="f1" value="${S.from}"></label><label>To<input type="date" id="f2" value="${S.to}"></label>
+ <label>Salesperson<select id="fr"><option value="">All</option>${REPS.map(r=>`<option value="${esc(r.id)}" ${S.rep===r.id?'selected':''}>${esc(r.name)}</option>`).join('')}</select></label>`}
+//  <label>Stage<select id="fs"><option value="all">All stages</option>${STAGES.map(s=>`<option ${S.stage===s?'selected':''}>${s}</option>`).join('')}</select></label>`}
+
+/* ================= TEAM VIEW ================= */
+function team(){
+ const rows = TD.filter(o =>
+  o.tl || o.oo || o.close_pipe || o.td || o.ov || o.nx || o.total_lead_value
+).map(o=>({...o,x:flagsOf(o)}));;
+ const sum=k=>rows.reduce((s,o)=>s+o[k],0);
+ const{k,d:dir}=S.sort;rows.sort((a,b)=>(typeof a[k]==='string'?a[k].localeCompare(b[k]):a[k]-b[k])*dir);
+ const H=(c,l,al)=>`<th class="${al||''}" data-s="${c}">${l}${S.sort.k===c?(S.sort.d>0?' ▲':' ▼'):''}</th>`;
+ return `<div class="grid kpis">${kpi('New leads',sum('nl'),'created this week')}
+ ${kpi('Total Lead Value', money(sum('total_lead_value')), 'as on selected date')}
+ ${kpi('New opportunities',sum('no'),'created this week')}
+ ${kpi('Tasks due',sum('td'),'due this week')}${kpi('Tasks completed',sum('tc'),'completed this week')}${kpi('Overdue open tasks',sum('ov'),'as of '+fd(TODAY),sum('ov')?'bad':'')}
+ ${kpi('Open pipeline',money(sum('pipe')),sum('oo')+' open opportunities')}
+
+ ${kpi(
+      'Close Pipeline',
+      money(sum('close_pipe')),
+      'Closed Won opportunities'
+    )}
+    </div>
+ <h2>Salespeople <span class="sub">click a row to review · weekly metrics follow the date range; leads and pipeline are current</span></h2>
+<div class="tw"><table><thead><tr>
+  ${H('r','Salesperson')}
+  ${H('tl','Total leads','r')}
+  ${H('nl','New leads','r')}
+  ${H('total_lead_value','Lead value','r')}
+  ${H('oo','Open opps','r')}
+  ${H('no','New opps','r')}
+  ${H('pipe','Pipeline value','r')}
+  ${H('td','Tasks due','r')}
+  ${H('tc','Tasks Completed','r')}
+  ${H('ov','Tasks Overdue','r')}
+  <th>Review status</th>
+</tr></thead><tbody>
+ ${rows.map(o=>`<tr class="row" data-rep="${esc(o.id)}">
+   <td><b>${esc(o.r)}</b></td>
+   <td class="r">${o.tl}</td>
+   <td class="r">${o.nl}</td>
+   <td class="r">${money(o.total_lead_value)}</td>
+   <td class="r">${o.oo}</td>
+   <td class="r">${o.no}</td>
+   <td class="r">${money(o.pipe)}</td>
+   <td class="r">${o.td}</td>
+   <td class="r">${o.tc}</td>
+   <td class="r ${o.ov?'bad':''}">${o.ov}</td>
+   <td>${badge(o.x)}${o.x.flags.map(f=>`<div class="why">${f[1]}</div>`).join('')}</td>
+ </tr>`).join('')||'<tr><td colspan="11" class="mut">No data for this range</td></tr>'}</tbody></table></div>`}
+
+/* ================= REP VIEW ================= */
+const ls=(a,fn)=>a.length?a.map(fn).join(''):'<div class="mut" style="padding:6px 0">Nothing here</div>';
+const nextTask=id=>{const n=RD.NX[String(id)];return n?fd(n.due)+(n.type?' · '+n.type:''):'—'};
+// const taskLi=t=>`<div class="li" data-rec="Task:${esc(t.id)}"><div>${esc(t.subj)}<small>${esc(t.type)} · ${esc(t.st)}${t.rel?' · '+esc(t.relT)+': '+esc(t.rel):''}</small></div><div class="r ${t.due<TODAY&&isOpenT(t)?'bad':''}">${fd(t.due)}</div></div>`;
+const leadInfo=t=>{
+  const a=[t.desg,t.co].filter(Boolean).join(' · ');
+  const b=[t.cat,t.src?'Source: '+t.src:''].filter(Boolean).join(' · ');
+  return (t.lead?`<small><b>${esc(t.lead)}</b></small>`:'')
+       + (a?`<small>${esc(a)}</small>`:'')
+       + (b?`<small>${esc(b)}</small>`:'');
+};
+const taskLi=(t,right)=>`<div class="li" data-rec="Task:${esc(t.id)}">
+  <div>${esc(t.subj)}<small>${esc(t.type)} · ${esc(t.st)}${!t.lead&&t.rel?' · '+esc(t.relT)+': '+esc(t.rel):''}</small>${leadInfo(t)}</div>
+  ${right}
+</div>`;
+
+function rep(){
+ const m=M(),q1=S.q1.toLowerCase(),q2=S.q2.toLowerCase(),byS={},byO={};
+ m.newL.forEach(x=>byS[x.st]=(byS[x.st]||0)+1);m.newO.forEach(x=>byO[x.st]=(byO[x.st]||0)+1);
+ return `<button class="btn" data-a="back">← Team overview</button>
+ <div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0"><h2 style="margin:0;font-size:20px">${esc(repName(S.rep))} ${badge(m)}</h2></div>
+ ${m.flags.length?`<div class="card" style="margin-bottom:12px">${m.flags.map(f=>`<div class="${f[0]==='bad'?'bad':''}">● ${f[1]}</div>`).join('')}</div>`:''}
+     <div class="grid kpis">
+      ${kpi('Current leads',    m.openL.length,                                   'open now')}
+      ${kpi('New leads',        m.newL.length,                                    'this week')}
+      ${kpi('Lead value', money(m.total_lead_valuee), 'as on selected date')}
+      ${kpi('Open opps',        m.openO.filter(x => x.name != null).length,       'current')}
+      ${kpi('New opps',         m.newO.length,                                    'this week')}
+      ${kpi('Current Pipeline', money(m.pipe),                                    'current open')}
+      ${kpi('New Pipeline',     money(m.newO.reduce((s, x) => s + (Number(x.amt) || 0), 0)), 'new opps this week')}
+      ${kpi('Close Pipeline',   money(m.close_pipe),                              'Closed Won opportunities')}
+      ${kpi('Tasks due',        m.due.length,                                     'this week')}
+      ${kpi('Tasks Completed',  m.done.length,                                    'this week')}
+      ${kpi('Tasks Overdue',    m.over.length,                                    'open', m.over.length ? 'bad' : '')}
+      ${kpi('Next week',        m.next.length,                                    'tasks coming up')}
+    </div>
+ 
+ 
+<h2>Tasks and follow-ups</h2><div class="grid cols">
+  <div class="card"><h3>Tasks Completed this week (${m.done.length})</h3>
+    ${ls(m.done,t=>taskLi(t,`<div class="ok r">${fd(t.done)}</div>`))}</div>
+
+  <div class="card"><h3>Tasks Due this week (${m.due.length})</h3>
+    ${ls(m.due,t=>taskLi(t,`<div class="r">${fd(t.due)}<small class="${isOpenT(t)?'':'ok'}">${isOpenT(t)?'open':'done'}</small></div>`))}</div>
+
+  <div class="card"><h3 class="${m.over.length?'bad':''}">Tasks Overdue (${m.over.length})</h3>
+    ${ls(m.over,t=>taskLi(t,`<div class="bad r">${fd(t.due)}<small>${t.due?diff(TODAY,t.due):'?'}d late</small></div>`))}</div>
+
+  <div class="card"><h3>Task Coming up next week (${m.next.length})</h3>
+    ${ls(m.next,t=>taskLi(t,`<div class="r ${t.due<TODAY&&isOpenT(t)?'bad':''}">${fd(t.due)}</div>`))}</div>
+</div>
+ <h2>Opportunity pipeline <span class="sub">open = not Closed Won / Closed Lost</span></h2>
+ <div class="chips">${Object.entries(byO).map(([a,b])=>`<span class="b n">${esc(a)}: ${b}</span>`).join('')||'<span class="mut">No open opportunities</span>'}</div>
+ <input class="search" id="q2" placeholder="Search opportunities…" value="${esc(S.q2)}"><div class="tw"><table><thead><tr><th>Opportunity</th><th>Account</th><th>Stage</th><th class="r">Amount</th><th>Expected close</th><th>Last activity</th><th>Next action</th></tr></thead><tbody>
+ ${m.newO
+  .filter(x => x.name != null && x.name !== '' && ((x.name||'')+x.acc).toLowerCase().includes(q2))
+  .sort((a,b)=>(a.cl||'9')<(b.cl||'9')?-1:1)
+  .map(x=>`<tr class="row" data-rec="Opportunity:${esc(x.id)}"><td><b>${esc(x.name)}</b></td><td>${esc(x.acc)}</td><td>${esc(x.st)}</td><td class="r">${money(x.amt)} ${esc(x.cur)}</td><td class="${x.cl&&x.cl<TODAY?'bad':''}">${fd(x.cl)}${x.cl&&x.cl<TODAY?' (overdue)':''}</td><td class="${m.stale.includes(x)?'bad':''}">${fd(x.la)}</td><td>${nextTask(x.id)}</td></tr>`).join('')}</tbody></table></div>
+
+  
+<h2>Lead pipeline</h2>
+<div class="chips">${Object.entries(byS).map(([a,b])=>`<span class="b n">${esc(a)}: ${b}</span>`).join('')}</div>
+<input class="search" id="q1" placeholder="Search leads…" value="${esc(S.q1)}">
+<div class="tw"><table><thead><tr>
+  <th>Lead</th><th>Status</th><th class="r">Lead Value</th><th>Source</th><th>Created</th><th>Last activity</th><th>Next follow-up</th>
+</tr></thead><tbody>
+${m.newL
+  .filter(x => (x.name||'').toLowerCase().includes(q1))
+  .sort((a,b) => (a.cr||'') < (b.cr||'') ? 1 : -1)
+  .map(x => `<tr class="row" data-rec="Lead:${esc(x.id)}">
+    <td><b>${esc(x.name)}</b>${inR(x.cr,S.from,S.to) ? ' <span class="b ok">new</span>' : ''}</td>
+    <td>${esc(x.st)}</td>
+    <td class="r">${money(x.c_lead_value)}</td>
+    <td>${esc(x.src)}</td>
+    <td>${fd(x.cr)}</td>
+    <td>${fd(x.la)}</td>
+    <td>${nextTask(x.id)}</td>
+  </tr>`).join('')}
+</tbody></table></div>`}
+
+/* ================= RECORD PANEL (fetchRecord) ================= */
+async function openRec(k){
+ const i=k.indexOf(':'),t=k.slice(0,i),id=k.slice(i+1),pan=$('#pan');
+ pan.innerHTML=`<div><button class="btn" data-a="x">✕ Close</button><p class="mut">Loading…</p></div>`;pan.classList.add('on');
+ try{
+  const raw=await fetchRecord(t,id,S.from,S.to),r=Array.isArray(raw)?raw[0]:(raw.record||raw.data||raw);
+  const n=t==='Lead'?nLead(r):t==='Opportunity'?nOpp(r):nTask(r);
+  const F=t==='Lead'?[['Status',n.st],['Source',n.src],['Assigned to',n.o],['Created',fd(n.cr)],['Last activity',fd(n.la)],['Next follow-up',nextTask(id)]]
+   :t==='Opportunity'?[['Account',n.acc],['Stage',n.st],['Amount',money(n.amt)+' '+n.cur],['Expected close',fd(n.cl)],['Assigned to',n.o],['Created',fd(n.cr)],['Last activity',fd(n.la)]]
+//   :[['Type',n.type],['Status',n.st],['Due',fd(n.due)],['Task Completed',fd(n.done)],['Assigned to',n.o],['Related to',n.rel?n.relT+': '+n.rel:'—']];
+:[['Type',n.type],['Status',n.st],['Due',fd(n.due)],['Task Completed',fd(n.done)],['Assigned to',n.o],
+  ['Lead',n.lead],['Designation',n.desg],['Company',n.co],['School category',n.cat],['Source',n.src],
+  ['Related to',n.rel?n.relT+': '+n.rel:'—']];
+  pan.innerHTML=`<div><button class="btn" data-a="x">✕ Close</button><div class="tag" style="margin-top:14px">${t} · ${esc(id)}</div><h2 style="margin:4px 0">${esc(n.name||n.subj)}</h2>
+  <dl>${F.map(f=>`<dt>${f[0]}</dt><dd>${esc(f[1]||'—')}</dd>`).join('')}</dl>
+  </div>`;
+//   <a class="btn pri" target="_blank" rel="noopener" href="${esc(ESPO_URL)}/leadManagement/#${t}/view/${encodeURIComponent(id)}">Open in CRM ↗</a>
+ }catch(e){pan.innerHTML=`<div><button class="btn" data-a="x">✕ Close</button><div class="note err" style="margin-top:14px">Failed to load record: ${esc(e.message)}</div></div>`}}
+
+/* ================= LOAD + RENDER ================= */
+async function load(){
+ const tk=++TK;S.loading=true;S.error=null;render();
+ try{
+  if(S.view==='rep'&&S.rep)RD=await loadRepData(S.rep);
+  else TD=await loadTeamData();
+ }catch(e){if(tk!==TK)return;S.error=e.message}
+ if(tk!==TK)return;S.loading=false;render()}
+
+function render(){
+ drawFilters();const app=$('#app');
+ if(S.error){app.innerHTML=`<div class="note err"><b>Failed to load data:</b> ${esc(S.error)} <button class="btn" data-a="retry" style="margin-left:8px">Retry</button></div>`;return}
+ if(S.loading){app.innerHTML='<div class="note">Loading…</div>';return}
+ app.innerHTML=(S.view==='rep'&&S.rep&&RD?rep():team())}
+
+const step=n=>{S.from=add(S.from,n);S.to=add(S.to,n);load()};
+document.addEventListener('click',e=>{
+ const t=e.target.closest('[data-a],[data-rep],[data-rec],[data-s]');if(!t){if(e.target.id==='pan')$('#pan').classList.remove('on');return}
+ const a=t.dataset.a;
+ if(t.dataset.rec){openRec(t.dataset.rec);return}
+ if(t.dataset.s){const k=t.dataset.s;S.sort=S.sort.k===k?{k,d:-S.sort.d}:{k,d:k==='r'?1:-1};render();return}
+ if(t.dataset.rep){S.rep=t.dataset.rep;S.view='rep';S.q1=S.q2='';load();scrollTo(0,0);return}
+ if(a==='prev')step(-7);else if(a==='nxt')step(7);else if(a==='now'){S.from=wk(TODAY);S.to=add(S.from,6);load()}
+ else if(a==='back'){S.view='team';S.rep=null;load()}else if(a==='retry')load();else if(a==='x')$('#pan').classList.remove('on');
+});
+document.addEventListener('change',e=>{
+ if(e.target.id==='f1'||e.target.id==='f2'){S.from=$('#f1').value||S.from;S.to=$('#f2').value||S.to;if(S.to<S.from)S.to=S.from;load()}
+ else if(e.target.id==='fr'){S.rep=e.target.value||null;S.view=S.rep?'rep':'team';load()}
+ else if(e.target.id==='fs'){S.stage=e.target.value;load()}
+});
+document.addEventListener('input',e=>{
+ if(e.target.id==='q1'||e.target.id==='q2'){const id=e.target.id,p=e.target.selectionStart;S[id]=e.target.value;render();const n=$('#'+id);n.focus();n.setSelectionRange(p,p)}
+});
+$('#theme').onclick=()=>{const r=document.documentElement,dk=getComputedStyle(r).getPropertyValue('--bg').trim()==='#14121F';r.setAttribute('data-theme',dk?'light':'dark')};
+
+/* ================= BOOT ================= */
+(async function boot(){
+ try{REPS=arr(await fetchReps()).map(nRep)}catch(e){S.error='Could not load salespeople: '+e.message;S.loading=false;render();return}
+ load();
+})();
+</script>
+</body>
+</html>

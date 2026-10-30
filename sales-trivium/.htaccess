@@ -1,0 +1,6 @@
+DirectoryIndex index.php
+
+RewriteEngine On
+RewriteBase /api-campaign/sales/
+
+RewriteRule ^$ index.php [L]
